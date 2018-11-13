@@ -1,5 +1,5 @@
 apply plugin: 'com.android.application'
-
+apply plugin: 'org.greenrobot.greendao'
 android {
     compileSdkVersion 26
     defaultConfig {
@@ -16,6 +16,11 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    greendao {
+        schemaVersion 1
+        daoPackage 'greendao.gen'
+        targetGenDir 'src/main/java'
+    }
 }
 
 dependencies {
@@ -31,4 +36,7 @@ dependencies {
     compile 'com.github.bumptech.glide:glide:3.7.0'
     //高斯模糊
     compile 'jp.wasabeef:glide-transformations:2.0.1'
+    //greenDao数据库
+    compile 'org.greenrobot:greendao:3.0.1'
+    compile 'org.greenrobot:greendao-generator:3.0.0'
 }
