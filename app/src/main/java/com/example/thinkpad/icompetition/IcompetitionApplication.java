@@ -1,8 +1,9 @@
+package com.example.thinkpad.icompetition;
+
 import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.os.Environment;
 import android.support.multidex.MultiDexApplication;
 
 import greendao.GreenDaoHelper;
@@ -12,7 +13,6 @@ import greendao.gen.DaoSession;
 /**
  * Created by a'su's on 2018/11/13.
  */
-
 public class IcompetitionApplication extends MultiDexApplication {
     private String session;//session,登陆时服务器返回该值,有效期内不需要重复获取,存储于sharedPreferences
     private DaoSession daoSession; //greenDao数据库DaoSession

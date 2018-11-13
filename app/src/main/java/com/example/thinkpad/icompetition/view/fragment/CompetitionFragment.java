@@ -1,4 +1,4 @@
-package com.example.thinkpad.icompetition.view.Fragment;
+package com.example.thinkpad.icompetition.view.fragment;
 
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;

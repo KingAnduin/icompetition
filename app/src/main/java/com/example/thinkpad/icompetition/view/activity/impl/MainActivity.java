@@ -14,8 +14,8 @@ import android.widget.TextView;
 
 import com.example.thinkpad.icompetition.view.adapter.MainFragmentAdapter;
 import com.example.thinkpad.icompetition.view.widget.BottomImageView;
-import com.example.thinkpad.icompetition.view.Fragment.CompetitionFragment;
-import com.example.thinkpad.icompetition.view.Fragment.MeFragment;
+import com.example.thinkpad.icompetition.view.fragment.CompetitionFragment;
+import com.example.thinkpad.icompetition.view.fragment.MeFragment;
 import com.example.thinkpad.icompetition.R;
 
 import java.util.ArrayList;
