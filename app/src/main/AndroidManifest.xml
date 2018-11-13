@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".LoginActivity"
+            android:name=".view.activity.impl.LoginActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan|stateHidden">
             <intent-filter>
@@ -19,11 +19,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MainActivity"
+        <activity android:name=".view.activity.impl.MainActivity"
             android:screenOrientation="portrait"/>
-        <activity android:name=".SearchActivity"
+        <activity android:name=".view.activity.impl.SearchActivity"
             android:screenOrientation="portrait"/>
-        <activity android:name=".CompetitionInforActivity"
+        <activity android:name=".view.activity.impl.CompetitionInforActivity"
             android:screenOrientation="portrait"/>
     </application>
 

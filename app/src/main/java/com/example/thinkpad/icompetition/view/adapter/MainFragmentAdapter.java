@@ -1,4 +1,4 @@
-package com.example.thinkpad.icompetition.Adapter;
+package com.example.thinkpad.icompetition.view.adapter;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;

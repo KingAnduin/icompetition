@@ -1,21 +1,16 @@
-package com.example.thinkpad.icompetition;
+package com.example.thinkpad.icompetition.view.activity.impl;
 
-import android.animation.AnimatorInflater;
-import android.animation.AnimatorSet;
-import android.animation.ObjectAnimator;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.view.animation.AlphaAnimation;
-import android.view.animation.Animation;
-import android.view.animation.ScaleAnimation;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
 import com.bumptech.glide.Glide;
+import com.example.thinkpad.icompetition.R;
 
 import jp.wasabeef.glide.transformations.BlurTransformation;
 

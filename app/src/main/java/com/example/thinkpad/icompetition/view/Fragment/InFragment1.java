@@ -1,4 +1,4 @@
-package com.example.thinkpad.icompetition.Fragment;
+package com.example.thinkpad.icompetition.view.Fragment;
 
 
 import android.content.Intent;
@@ -10,8 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
-import com.example.thinkpad.icompetition.CompetitionInforActivity;
-import com.example.thinkpad.icompetition.MainActivity;
+import com.example.thinkpad.icompetition.view.activity.impl.CompetitionInforActivity;
 import com.example.thinkpad.icompetition.R;
 
 /**

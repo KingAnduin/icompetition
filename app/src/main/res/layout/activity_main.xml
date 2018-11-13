@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
     android:orientation="vertical"
-    tools:context="com.example.thinkpad.icompetition.MainActivity">
+    tools:context="com.example.thinkpad.icompetition.view.activity.impl.MainActivity">
     <include layout="@layout/toolbar_tab"/>
     <android.support.v4.view.ViewPager
         android:id="@+id/vp_activity_main"
@@ -26,7 +26,7 @@
             android:layout_weight="1"
             android:orientation="vertical">
 
-            <com.example.thinkpad.icompetition.CustomView.BottomImageView
+            <com.example.thinkpad.icompetition.view.widget.BottomImageView
                 android:id="@+id/bv_competition"
                 android:src="@mipmap/competition"
                 android:layout_width="30dp"
@@ -46,7 +46,7 @@
             android:layout_weight="1"
             android:orientation="vertical">
 
-            <com.example.thinkpad.icompetition.CustomView.BottomImageView
+            <com.example.thinkpad.icompetition.view.widget.BottomImageView
                 android:id="@+id/bv_me"
                 android:src="@mipmap/me"
                 android:layout_width="30dp"

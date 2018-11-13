@@ -1,4 +1,4 @@
-package com.example.thinkpad.icompetition.CustomView;
+package com.example.thinkpad.icompetition.view.widget;
 
 import android.content.Context;
 import android.graphics.Bitmap;
