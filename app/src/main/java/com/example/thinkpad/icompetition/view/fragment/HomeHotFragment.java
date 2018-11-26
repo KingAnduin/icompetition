@@ -11,14 +11,15 @@ import com.example.thinkpad.icompetition.R;
 
 /**
  * Created by a'su's on 2018/7/12.
+ * 首页热门Fragment
  */
 
-public class InFragment2 extends Fragment{
+public class HomeHotFragment extends Fragment{
     private View view;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
-        view=inflater.inflate(R.layout.in_fragment2,container,false);
+        view=inflater.inflate(R.layout.home_hot_fragment,container,false);
         return view;
     }
 }

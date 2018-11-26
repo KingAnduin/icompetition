@@ -16,14 +16,15 @@ import java.util.ArrayList;
 
 /**
  * Created by a'su's on 2018/7/12.
+ * 首页主Fragment
  */
 
 public class CompetitionFragment extends android.support.v4.app.Fragment {
     private View view;
     private TabLayout tabLayout;
     private ViewPager viewPager;
-    private InFragment1 inFragment1;
-    private InFragment2 inFragment2;
+    private HomeRecommendFragment homeRecommendFragment;
+    private HomeHotFragment homeHotFragment;
     private ArrayList<Fragment> fragments;
     @Nullable
     @Override
@@ -38,10 +39,10 @@ public class CompetitionFragment extends android.support.v4.app.Fragment {
     private void init() {
         tabLayout.setupWithViewPager(viewPager);
         fragments=new ArrayList<>();
-        inFragment1=new InFragment1();
-        inFragment2=new InFragment2();
-        fragments.add(inFragment1);
-        fragments.add(inFragment2);
+        homeRecommendFragment =new HomeRecommendFragment();
+        homeHotFragment =new HomeHotFragment();
+        fragments.add(homeRecommendFragment);
+        fragments.add(homeHotFragment);
         viewPager.setAdapter(new InFragmentAdapter(getFragmentManager(),fragments));
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override

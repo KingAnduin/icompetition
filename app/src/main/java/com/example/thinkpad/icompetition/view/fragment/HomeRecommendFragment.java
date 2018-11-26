@@ -15,15 +15,16 @@ import com.example.thinkpad.icompetition.R;
 
 /**
  * Created by a'su's on 2018/7/12.
+ * 首页推荐Fragment
  */
 
-public class InFragment1 extends Fragment {
+public class HomeRecommendFragment extends Fragment {
     private View view;
     private Button button;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
-        view=inflater.inflate(R.layout.in_fragment1,container,false);
+        view=inflater.inflate(R.layout.home_recommend_fragment,container,false);
         button=view.findViewById(R.id.btn_infor);
         button.setOnClickListener(new View.OnClickListener() {
             @Override

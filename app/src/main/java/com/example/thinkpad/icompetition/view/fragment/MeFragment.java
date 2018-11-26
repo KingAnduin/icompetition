@@ -12,6 +12,7 @@ import com.example.thinkpad.icompetition.R;
 
 /**
  * Created by a'su's on 2018/7/12.
+ * 我的Fragment
  */
 
 public class MeFragment extends Fragment{
