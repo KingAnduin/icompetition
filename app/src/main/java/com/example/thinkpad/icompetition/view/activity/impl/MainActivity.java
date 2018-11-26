@@ -46,8 +46,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void initSelectIcon() {
-        mCompetitionBV.setImages(R.mipmap.competition, R.mipmap.competition_select);
-        mMeBV.setImages(R.mipmap.me, R.mipmap.me_select);
+        mCompetitionBV.setImages(R.mipmap.cup, R.mipmap.cup_select);
+        mMeBV.setImages(R.mipmap.man, R.mipmap.man_select);
     }
 
     private void init() {

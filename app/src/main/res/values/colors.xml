@@ -5,6 +5,7 @@
     <color name="colorAccent">#FF4081</color>
     <color name="main_bottom_tab_textcolor_normal">#999999</color>
     <color name="main_bottom_tab_textcolor_selected">#1296db</color>
-    <dimen name="tab_image_weith">30dp</dimen>
-    <dimen name="tab_image_heigh">30dp</dimen>
+    <!-- 底部导航栏图标大小 -->
+    <dimen name="tab_image_weith">24dp</dimen>
+    <dimen name="tab_image_heigh">24dp</dimen>
 </resources>
