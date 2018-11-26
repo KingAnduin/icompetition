@@ -13,7 +13,7 @@
         android:name=".IcompetitionApplication"
         tools:ignore="GoogleAppIndexingWarning">
         <activity
-            android:name=".view.activity.impl.LoginActivity"
+            android:name=".view.activity.impl.SplashActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan|stateHidden">
             <intent-filter>
@@ -22,11 +22,15 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".view.activity.impl.LoginActivity"
+            android:screenOrientation="portrait"/>
         <activity android:name=".view.activity.impl.MainActivity"
             android:screenOrientation="portrait"/>
         <activity android:name=".view.activity.impl.SearchActivity"
             android:screenOrientation="portrait"/>
         <activity android:name=".view.activity.impl.CompetitionInforActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".view.activity.impl.UserInforActivity"
             android:screenOrientation="portrait"/>
     </application>
 

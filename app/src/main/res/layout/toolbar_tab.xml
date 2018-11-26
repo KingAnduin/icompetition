@@ -1,16 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="55dp"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
 <android.support.v7.widget.Toolbar
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/toolbar_main"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    app:title="竞赛"
+    android:layout_height="wrap_content"
+    android:minHeight="?attr/actionBarSize"
+    app:title=" "
     android:background="#00b7ee "
     app:titleMarginStart="10dp"
     app:titleMarginTop="2dp"
     app:titleTextColor="#fff">
+    <TextView
+        android:id="@+id/toolbar_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="竞赛"
+        android:layout_gravity="center"
+        android:textColor="#fff"
+        android:textSize="20sp" />
 </android.support.v7.widget.Toolbar>
-</LinearLayout>

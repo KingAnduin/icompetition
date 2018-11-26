@@ -10,6 +10,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.thinkpad.icompetition.view.adapter.MainFragmentAdapter;
@@ -21,6 +22,9 @@ import com.example.thinkpad.icompetition.R;
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+    private TextView mToolbarTitleTV;
+    private LinearLayout mCompetitionLayout;
+    private LinearLayout mMeLayout;
     private Toolbar mToolbar;
     private BottomImageView mCompetitionBV;
     private BottomImageView mMeBV;
@@ -39,7 +43,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        init();
+        findView();
         initSelectIcon();//初始化底部导航栏Icon
         initColor();//初始化底部导航栏字体颜色
         setListener();
@@ -50,7 +54,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mMeBV.setImages(R.mipmap.man, R.mipmap.man_select);
     }
 
-    private void init() {
+    private void findView() {
+        mToolbarTitleTV = findViewById(R.id.toolbar_title);
+        mCompetitionLayout = findViewById(R.id.layout_competion);
+        mMeLayout = findViewById(R.id.layout_me);
         mToolbar = findViewById(R.id.toolbar_main);
         mCompetitionTV = findViewById(R.id.tv_competition);
         mMeTV = findViewById(R.id.tv_me);
@@ -70,21 +77,20 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
-            case R.id.bv_competition:
+            case R.id.layout_competion:
                 mViewPager.setCurrentItem(0);
-                mToolbar.setTitle("竞赛");
+                mToolbarTitleTV.setText("竞赛汇聚地");
                 break;
-            case R.id.bv_me:
+            case R.id.layout_me:
                 mViewPager.setCurrentItem(1);
-                mToolbar.setTitle("我的");
-
+                mToolbarTitleTV.setText("我的地盘");
                 break;
         }
     }
 
     private void setListener() {
-        mCompetitionBV.setOnClickListener(this);
-        mMeBV.setOnClickListener(this);
+        mCompetitionLayout.setOnClickListener(this);
+        mMeLayout.setOnClickListener(this);
         mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
@@ -95,10 +101,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             public void onPageSelected(int position) {
                 switch (position) {
                     case 0:
-                        mToolbar.setTitle("竞赛");
+                        mToolbarTitleTV.setText("竞赛汇聚地");
+                        mToolbar.getMenu().setGroupVisible(R.id.group_search,true);
                         break;
                     case 1:
-                        mToolbar.setTitle("我的");
+                        mToolbarTitleTV.setText("我的地盘");
+                        mToolbar.getMenu().setGroupVisible(R.id.group_search,false);
                         break;
                 }
             }
@@ -147,7 +155,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         if (item.getItemId() == R.id.action_search)
         {
             startActivity(new Intent(MainActivity.this, SearchActivity.class));
-            finish();
         }
         return super.onOptionsItemSelected(item);
     }

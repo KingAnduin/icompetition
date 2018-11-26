@@ -3,10 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".view.activity.impl.MainActivity">
-    <item
-        android:id="@+id/action_search"
-        android:icon="@mipmap/ic_search"
-        android:orderInCategory="80"
-        android:title="search"
-        app:showAsAction="ifRoom"/>
+    <group
+        android:id="@+id/group_search">
+        <item
+            android:id="@+id/action_search"
+            android:icon="@mipmap/ic_search"
+            android:orderInCategory="80"
+            android:title="search"
+            app:showAsAction="ifRoom"/>
+    </group>
 </menu>

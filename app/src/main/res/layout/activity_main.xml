@@ -21,11 +21,13 @@
         android:orientation="horizontal">
 
         <LinearLayout
+            android:id="@+id/layout_competion"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
+            android:layout_marginLeft="60dp"
+            android:layout_marginRight="60dp"
             android:orientation="vertical">
-
             <com.example.thinkpad.icompetition.view.widget.BottomImageView
                 android:id="@+id/bv_competition"
                 android:src="@mipmap/cup"
@@ -42,6 +44,9 @@
                 android:text="比赛" />
         </LinearLayout>
         <LinearLayout
+            android:id="@+id/layout_me"
+            android:layout_marginLeft="60dp"
+            android:layout_marginRight="60dp"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"

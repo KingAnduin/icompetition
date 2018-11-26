@@ -19,7 +19,7 @@ import java.util.ArrayList;
  * 首页主Fragment
  */
 
-public class CompetitionFragment extends android.support.v4.app.Fragment {
+public class CompetitionFragment extends Fragment {
     private View view;
     private TabLayout tabLayout;
     private ViewPager viewPager;
