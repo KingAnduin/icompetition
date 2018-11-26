@@ -77,6 +77,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.bv_me:
                 mViewPager.setCurrentItem(1);
                 mToolbar.setTitle("我的");
+
                 break;
         }
     }
