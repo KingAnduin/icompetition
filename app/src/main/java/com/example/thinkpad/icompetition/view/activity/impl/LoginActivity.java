@@ -1,16 +1,19 @@
 package com.example.thinkpad.icompetition.view.activity.impl;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
 import com.bumptech.glide.Glide;
 import com.example.thinkpad.icompetition.R;
+import com.example.thinkpad.icompetition.model.event.LoginEvent;
+import com.example.thinkpad.icompetition.presenter.impl.LoginPresenter;
+import com.example.thinkpad.icompetition.view.activity.i.ILoginActivity;
 
 import jp.wasabeef.glide.transformations.BlurTransformation;
 
@@ -18,31 +21,43 @@ import jp.wasabeef.glide.transformations.BlurTransformation;
  * Created by a'su's on 2018/7/12.
  */
 
-public class LoginActivity extends AppCompatActivity implements View.OnClickListener{
-    private Button mLoginBT;
+public class LoginActivity extends BaseActivity<LoginPresenter>
+        implements ILoginActivity, View.OnClickListener{
+
+    private EditText mUserNameEt;
+    private EditText mUserPassWordEt;
+    private Button mLoginBt;
     private RelativeLayout relativeLayout;
     private ImageView mImageView;
+
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
+    public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         init();
         setListener();
     }
 
+    @Override
+    protected LoginPresenter getPresenter() {
+        return new LoginPresenter(this);
+    }
+
     private void setListener() {
-        mLoginBT.setOnClickListener(this);
+        mLoginBt.setOnClickListener(this);
     }
 
     private void init() {
+        mUserNameEt = findViewById(R.id.et_username);
+        mUserPassWordEt = findViewById(R.id.et_password);
         relativeLayout=findViewById(R.id.mRelativeLayout);
-        mLoginBT =findViewById(R.id.btn_login);
+        mLoginBt =findViewById(R.id.btn_login);
         mImageView=findViewById(R.id.bg_login);
         loadBackground();
     }
 
+    //Glide高斯模糊加载背景图
     private void loadBackground() {
-        //Glide高斯模糊加载背景图
         Glide.with(LoginActivity.this)
                 .load(R.drawable.loginbackground)
                 .dontAnimate()
@@ -59,8 +74,33 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         switch (view.getId())
         {
             case R.id.btn_login:
-                startActivity(new Intent(LoginActivity.this,MainActivity.class));
-                finish();
+                login();
+                //startActivity(new Intent(LoginActivity.this,MainActivity.class));
+                //finish();
         }
+    }
+
+    private void login() {
+//        if("".equals(mUserNameEt.getText().toString())){
+//            showToast(getResources().getString(R.string.login_user_null));
+//        }
+//        else if("".equals(mUserPassWordEt.getText().toString())){
+//            showToast(getResources().getString(R.string.login_password_null));
+//        }else {
+//            mLoginBt.setClickable(false);
+//            mPresenter.login(mUserNameEt.getText().toString(), mUserPassWordEt.getText().toString());
+//        }
+        mPresenter.login("15681953321", "123456");
+    }
+
+    //登陆请求的回调
+    @Override
+    public void loginReturn(LoginEvent event) {
+        Log.d("hjg", "Login"+event);
+    }
+
+    @Override
+    public void failBecauseNotNetworkReturn(int code) {
+        showToast(getResources().getString(R.string.not_network));
     }
 }

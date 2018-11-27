@@ -72,10 +72,10 @@ public abstract class BaseFragment<P extends BaseFragmentPresenter> extends Frag
      * 显示一个Snackbar
      * @param view
      * @param str
-     * @param backgroundColor
      */
-    public void showSnackBar(View view, String str, int backgroundColor)
+    public void showSnackBar(View view, String str)
     {
+        int backgroundColor = -10046724;
         Snackbar snackbar= Snackbar.make(view, str, Snackbar.LENGTH_SHORT);
         setSnackbarColor(snackbar,backgroundColor);
         snackbar.show();

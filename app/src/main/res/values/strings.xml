@@ -1,5 +1,25 @@
 <resources>
     <string name="app_name">icompetition</string>
 
+    <!-- 通用 -->
     <string name="system_time_error">系统时间错误,请检查设备时间</string>
+    <string name="request_fail">请求失败</string>
+    <string name="not_network">未能连接到服务器</string>
+
+    <!-- 登陆 -->
+    <string name="login_user_null">请输入学号</string>
+    <string name="login_password_null">请输入密码</string>
+
+    <!-- 首页竞赛信息item -->
+    <string name="item_home_list_is_start">正在报名</string>
+    <string name="item_home_list_time_sign_up">报名时间&#160;&#160;&#160;&#160;&#160;&#160;%1$s</string>
+    <string name="item_home_list_time_exam">考试时间&#160;&#160;&#160;&#160;&#160;&#160;%1$s</string>
+    <string name="item_home_list_organizer">主办方&#160;&#160;&#160;&#160;&#160;&#160;%1$s</string>
+    <string name="item_home_list_level">国家级比赛  全国参与</string>
+
+    <!-- ItemFoot -->
+    <string name="attention_fresh_hint">正在加载....</string>
+    <string name="attention_bottom_hint">我是有底线的</string>
+    <string name="attention_fail_hint">错误原因:</string>
+    
 </resources>
