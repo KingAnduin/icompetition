@@ -135,6 +135,7 @@
     </LinearLayout>
     </LinearLayout>
     <Button
+        android:id="@+id/btn_user_exit"
         android:layout_margin="10dp"
         android:layout_alignParentBottom="true"
         android:layout_width="match_parent"
