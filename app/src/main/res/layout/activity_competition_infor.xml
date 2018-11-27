@@ -43,7 +43,13 @@
                     android:layout_height="wrap_content"
                     android:src="@mipmap/ic_sponsor"/>
                 <TextView
-                    android:layout_marginRight="10dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="主办方:"
+                    android:layout_marginEnd="5dp"
+                    android:layout_gravity="center_vertical"/>
+                <TextView
+                    android:layout_marginEnd="10dp"
                     android:layout_gravity="center_vertical"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -64,6 +70,12 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:src="@mipmap/ic_organizer"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="承办方:"
+                    android:layout_marginEnd="5dp"
+                    android:layout_gravity="center_vertical"/>
                 <TextView
                     android:layout_marginRight="10dp"
                     android:layout_gravity="center_vertical"
@@ -87,6 +99,12 @@
                     android:layout_height="wrap_content"
                     android:src="@mipmap/ic_starttime"/>
                 <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="报名时间:"
+                    android:layout_marginEnd="5dp"
+                    android:layout_gravity="center_vertical"/>
+                <TextView
 
                     android:layout_marginRight="10dp"
                     android:layout_gravity="center_vertical"
@@ -109,6 +127,12 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:src="@mipmap/ic_endtime"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="比赛时间:"
+                    android:layout_marginEnd="5dp"
+                    android:layout_gravity="center_vertical"/>
                 <TextView
                     android:layout_marginRight="10dp"
                     android:layout_gravity="center_vertical"
@@ -150,11 +174,11 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
-                    <ImageView
+                    <com.example.thinkpad.icompetition.view.widget.AsyncImageView
                         android:layout_margin="10dp"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:background="@drawable/circle_blue"/>
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:src="@mipmap/ic_news_listview_img_loading"/>
                     <TextView
                         android:layout_gravity="center_vertical"
                         android:layout_width="match_parent"
