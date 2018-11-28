@@ -6,22 +6,34 @@ import java.util.List;
  * Created by Hjg on 2018/11/26.
  */
 public class ExamRecordRoot {
+
+
     private int code;
-    private String message;
-    private List<ExamRecordItemBean> itemBean;
-
-
-    public List<ExamRecordItemBean> getItemBean() {
-        return itemBean;
-    }
+    private String msg;
+    private List<ExamRecordItemBean> data;
 
     public int getCode() {
         return code;
     }
 
-    public String getMessage() {
-        return message;
+    public void setCode(int code) {
+        this.code = code;
     }
 
+    public String getMsg() {
+        return msg;
+    }
+
+    public void setMsg(String msg) {
+        this.msg = msg;
+    }
+
+    public List<ExamRecordItemBean> getData() {
+        return data;
+    }
+
+    public void setData(List<ExamRecordItemBean> data) {
+        this.data = data;
+    }
 
 }

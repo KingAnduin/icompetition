@@ -2,6 +2,7 @@ package com.example.thinkpad.icompetition.presenter.impl;
 
 import android.support.annotation.NonNull;
 import android.text.TextUtils;
+import android.util.Log;
 
 import com.example.thinkpad.icompetition.model.event.HomeHotEvent;
 import com.example.thinkpad.icompetition.model.impl.BaseFragmentModel;
@@ -36,14 +37,16 @@ public class HomeHotFragmentPresenter
             switch (what){
                 case HomeHotEvent.GET_ITEM_OK:
                     mView.PagingQueryHomeHotResponse(event.getRoot());
+                    break;
                 case HomeHotEvent.GET_ITEM_FAIL:
                     mView.failBecauseNotNetworkReturn(what);
-                    if(event.getRoot()!=null)
-                    {
-                        if(!TextUtils.isEmpty(event.getRoot().getMessage())){
-                            mView.showErrowMsg(event.getRoot());
-                        }
-                    }
+                    break;
+//                    if(event.getRoot()!=null)
+//                    {
+//                        if(!TextUtils.isEmpty(event.getRoot().getMsg())){
+//                            mView.showErrorMsg(event.getRoot());
+//                        }
+//                    }
             }
         }
     }

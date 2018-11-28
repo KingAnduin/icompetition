@@ -16,6 +16,7 @@
             android:id="@+id/rc_home_hot_list"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:scrollbars="vertical"
             android:background="@color/background_white_FA">
 
         </android.support.v7.widget.RecyclerView>

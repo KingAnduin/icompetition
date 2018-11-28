@@ -27,7 +27,7 @@ public class HomeHotFragmentModel
         Callback callback = new CallbackIntercept(){
             @Override
             public void onSuccess(Call call, String jsonBody) {
-                Log.d("hjg", "onSuccess: "+jsonBody);
+                //Log.d("hjg", "onSuccess: "+jsonBody);
                 HomeHotEvent event = new HomeHotEvent();
                 Gson gson = new Gson();
                 ExamRecordRoot recordRoot = gson.fromJson(jsonBody, ExamRecordRoot.class);
@@ -43,7 +43,6 @@ public class HomeHotFragmentModel
 
             @Override
             public void onFail(Call call, Exception e) {
-                Log.d("hjg", "onFail: "+e.getMessage());
                 HomeHotEvent event = new HomeHotEvent();
                 event.setWhat(HomeHotEvent.GET_ITEM_FAIL);
                 postEvent(event);

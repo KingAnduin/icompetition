@@ -17,8 +17,25 @@ public class NetworkInterfaces {
     //private static final String METHOD = "method";
 
     //以下是请求地址
-    private static final String LOG_IN = "/api/users/login";//登陆系统
-    private static final String PAGING_QUERY_EXAM = "";//分页查询竞赛信息
+    private static final String REGISTER = "/api/users/register"; //用户注册
+    private static final String LOG_IN = "/api/users/login"; //登陆系统
+    private static final String PAGING_QUERY_EXAM = "/api/competitions/bypage"; //分页查询竞赛信息
+
+
+
+    /**
+     * 用户注册
+     * @param callback 。
+     * @param name 用户名
+     * @param pwd 密码
+     */
+    public void userRegister(Callback callback, String name, String pwd){
+        ArrayMap<String, String> param = new ArrayMap<>();
+        param.put("user_num", name);
+        param.put("user_pwd", pwd);
+        new NetworkRequest(param, SERVER_HOST + REGISTER, callback).sendRequest();
+
+    }
 
 
     /**
@@ -28,7 +45,7 @@ public class NetworkInterfaces {
      * @param user_pwd 密码
      */
     public void userLogIn(Callback callback, String user_num, String user_pwd){
-        Log.d("hjg", "userLogIn: "+user_num+ "  " +user_pwd);
+        //Log.d("hjg", "userLogIn: "+user_num+ "  " +user_pwd);
         ArrayMap<String, String> param = new ArrayMap<>();
         param.put("user_num", user_num);
         param.put("user_pwd", user_pwd);

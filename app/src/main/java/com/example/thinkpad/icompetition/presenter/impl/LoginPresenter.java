@@ -34,6 +34,7 @@ public class LoginPresenter extends BasePresenter<LoginActivity, LoginModel> imp
                 break;
             case LoginEvent.LOGIN_FAIL:
                 mView.failBecauseNotNetworkReturn(msg.what);
+                break;
         }
     }
 }

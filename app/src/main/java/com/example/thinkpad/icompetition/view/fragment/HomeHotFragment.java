@@ -35,6 +35,8 @@ public class HomeHotFragment extends BaseFragment<HomeHotFragmentPresenter> impl
     private RecyclerView mRecyclerView;
     private int mRecyclerViewCurrentY = 0;
     private int mRecyclerViewCurrentX = 0;
+
+    private Handler mHandler = new Handler();
     List<ExamRecordItemBean> mInfo;                         //详细信息
     private int mCurrentPage = 1;                           //页数
     private final int page_size = 10;                       //每页信息数
@@ -132,11 +134,16 @@ public class HomeHotFragment extends BaseFragment<HomeHotFragmentPresenter> impl
     public void noMoreData() {
         mNoMoreData = true;
         mInfo = new ArrayList<>();
-        mAdapter = new HomeRecommendAdapter(getContext(), mInfo);
-        mAdapter.setNoMoreData(true);
-        mAdapter.notifyDataSetChanged();
-        mRecyclerView.setAdapter(mAdapter);
-        mRecyclerView.scrollTo(mRecyclerViewCurrentX, mRecyclerViewCurrentY);
+        mHandler.post(new Runnable() {
+            @Override
+            public void run() {
+                mAdapter = new HomeRecommendAdapter(getContext(), mInfo);
+                mAdapter.setNoMoreData(true);
+                mAdapter.notifyDataSetChanged();
+                mRecyclerView.setAdapter(mAdapter);
+                mRecyclerView.scrollTo(mRecyclerViewCurrentX, mRecyclerViewCurrentY);
+            }
+        });
     }
 
     @Override
@@ -151,32 +158,39 @@ public class HomeHotFragment extends BaseFragment<HomeHotFragmentPresenter> impl
             mSwipeRefreshLayout.setRefreshing(false);
         }
         if (root != null && root.getCode() == 200) {
-            if (root.getItemBean() != null) {
+            if (root.getData() != null) {
                 if (mInfo == null) {
                     mInfo = new ArrayList<>();
                 }
-                mInfo.addAll(root.getItemBean());
-                if (mAdapter == null) {
-                    mAdapter = new HomeRecommendAdapter(getContext(), root.getItemBean());
-                    if (root.getItemBean().size() < page_size) {
-                        //显示没有更多
-                        mNoMoreData = true;
-                        mAdapter.setNoMoreData(true);
+                mInfo.addAll(root.getData());
+
+                mHandler.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        if (mAdapter == null) {
+                            mAdapter = new HomeRecommendAdapter(getContext(), mInfo);
+                            if (mInfo.size() < page_size) {
+                                //显示没有更多
+                                mNoMoreData = true;
+                                mAdapter.setNoMoreData(true);
+                            }
+                            mRecyclerView.setAdapter(mAdapter);
+                        } else {
+                            //更新数据
+                            mAdapter.updateData(mInfo);
+                            if (mInfo.size() < page_size) {
+                                //显示没有更多
+                                mNoMoreData = true;
+                                mAdapter.setNoMoreData(true);
+                            }
+                            mAdapter.notifyDataSetChanged();
+                            mRecyclerView.scrollTo(mRecyclerViewCurrentX, mRecyclerViewCurrentY);
+                        }
+                        //设置点击事件
+                        gotoDoc();
                     }
-                    mRecyclerView.setAdapter(mAdapter);
-                } else {
-                    //更新数据
-                    mAdapter.updateData(mInfo);
-                    if (root.getItemBean().size() < page_size) {
-                        //显示没有更多
-                        mNoMoreData = true;
-                        mAdapter.setNoMoreData(true);
-                    }
-                    mAdapter.notifyDataSetChanged();
-                    mRecyclerView.scrollTo(mRecyclerViewCurrentX, mRecyclerViewCurrentY);
-                }
-                //设置点击时间
-                gotoDoc();
+                });
+
             } else {
                 noMoreData();
             }
@@ -187,6 +201,7 @@ public class HomeHotFragment extends BaseFragment<HomeHotFragmentPresenter> impl
 
     //查看详情 TODO
     private void gotoDoc() {
+
     }
 
     /**
@@ -194,7 +209,7 @@ public class HomeHotFragment extends BaseFragment<HomeHotFragmentPresenter> impl
      *
      * @param root .
      */
-    public void showErrowMsg(ExamRecordRoot root) {
-        showSnackBar(mRecyclerView, root.getMessage());
+    public void showErrorMsg(ExamRecordRoot root) {
+        showSnackBar(mRecyclerView, root.getMsg());
     }
 }

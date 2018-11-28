@@ -1,5 +1,6 @@
 package com.example.thinkpad.icompetition.view.activity.impl;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.util.Log;
@@ -96,7 +97,8 @@ public class LoginActivity extends BaseActivity<LoginPresenter>
     //登陆请求的回调
     @Override
     public void loginReturn(LoginEvent event) {
-        Log.d("hjg", "Login"+event);
+        startActivity(new Intent(LoginActivity.this,MainActivity.class));
+        finish();
     }
 
     @Override

@@ -62,7 +62,7 @@
 
 
         <TextView
-            android:id="@+id/tv_item_home_list_exam_time"
+            android:id="@+id/tv_item_home_list_start_time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
@@ -72,7 +72,7 @@
 
 
         <TextView
-            android:id="@+id/tv_item_home_list_start_time"
+            android:id="@+id/tv_item_home_list_exam_time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"

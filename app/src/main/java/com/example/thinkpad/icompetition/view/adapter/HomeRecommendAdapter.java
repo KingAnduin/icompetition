@@ -16,6 +16,7 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.example.thinkpad.icompetition.R;
 import com.example.thinkpad.icompetition.model.entity.exam.ExamRecordItemBean;
 
@@ -117,6 +118,7 @@ public class HomeRecommendAdapter
     }
 
 
+
     /**
      * Item
      */
@@ -125,7 +127,7 @@ public class HomeRecommendAdapter
         private ImageView mPhotoIv;             //比赛图片
         private TextView mIsStartTv;            //正在报名 报名结束
         private TextView mDeadlineTv;           //离报名截止时间
-        private TextView mTitleTv;              //比赛名称
+        private TextView mTitleTv;              //比赛标题
         private TextView mStartTimeTv;          //报名时间
         private TextView mExamTimeTv;           //比赛时间
         private TextView mOrganizerTv;          //主办方
@@ -150,6 +152,24 @@ public class HomeRecommendAdapter
 
         //填写数据 TODO
         public void setDate(int position){
+            ExamRecordItemBean itemBean = mExamRecordInfo.get(position);
+            String[] signUpStart = itemBean.getCom_signupstart().split(" ");
+            String[] signUpEnd = itemBean.getCom_signupend().split(" ");
+            String signUpTime = signUpStart[0] + " -- " + signUpEnd[0];
+            String[] examStart = itemBean.getCom_starttime().split(" ");
+            String[] examEnd = itemBean.getCom_endtime().split(" ");
+            String examTime = examStart[0] + " -- " + examEnd[0];
+
+
+
+            String imageUrl = itemBean.getCom_picture();
+            if (!imageUrl.equals("")){
+                Glide.with(mContext).load(imageUrl).centerCrop().into(mPhotoIv);
+            }
+            mTitleTv.setText(itemBean.getCom_title());
+            mStartTimeTv.setText(formatSpannableString(mContext, mContext.getString(R.string.item_home_list_time_sign_up), signUpTime));
+            mExamTimeTv.setText(formatSpannableString(mContext, mContext.getString(R.string.item_home_list_time_exam), examTime));
+            mOrganizerTv.setText(formatSpannableString(mContext, mContext.getString(R.string.item_home_list_organizer), itemBean.getCom_sponsor()));
 
         }
 
