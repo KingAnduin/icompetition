@@ -1,21 +1,17 @@
 package com.example.thinkpad.icompetition.presenter.impl;
 
 import android.support.annotation.NonNull;
-import android.text.TextUtils;
-import android.util.Log;
 
 import com.example.thinkpad.icompetition.model.event.HomeHotEvent;
 import com.example.thinkpad.icompetition.model.impl.BaseFragmentModel;
 import com.example.thinkpad.icompetition.model.impl.HomeHotFragmentModel;
 import com.example.thinkpad.icompetition.presenter.i.IHomeHotFragmentPresent;
-import com.example.thinkpad.icompetition.view.fragment.HomeHotFragment;
+import com.example.thinkpad.icompetition.view.fragment.impl.HomeHotFragment;
 
 /**
  * Created by Hjg on 2018/11/26.
  */
-public class HomeHotFragmentPresenter
-        extends BaseFragmentPresenter<HomeHotFragment, HomeHotFragmentModel, HomeHotEvent>
-        implements IHomeHotFragmentPresent {
+public class HomeHotFragmentPresenter extends BaseFragmentPresenter<HomeHotFragment, HomeHotFragmentModel, HomeHotEvent> implements IHomeHotFragmentPresent {
     public HomeHotFragmentPresenter(HomeHotFragment view) {
         super(view);
     }

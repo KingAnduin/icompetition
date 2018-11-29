@@ -1,4 +1,4 @@
-package com.example.thinkpad.icompetition.view.fragment;
+package com.example.thinkpad.icompetition.view.fragment.impl;
 
 import android.graphics.Color;
 import android.os.Bundle;
@@ -40,10 +40,9 @@ public class HomeHotFragment extends BaseFragment<HomeHotFragmentPresenter> impl
     List<ExamRecordItemBean> mInfo;                         //详细信息
     private int mCurrentPage = 1;                           //页数
     private final int page_size = 10;                       //每页信息数
-    private Handler handler = new Handler();
     private boolean mNoMoreData = false;
-
-
+    private SignInFreshListener mSignInFreshListener;
+    public boolean mFirstSignIn = true;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
@@ -56,13 +55,6 @@ public class HomeHotFragment extends BaseFragment<HomeHotFragmentPresenter> impl
         return rootView;
 
     }
-
-    @Override
-    public void onStart() {
-        super.onStart();
-        refreshDate();
-    }
-
     @Override
     protected HomeHotFragmentPresenter getPresenter() {
         return new HomeHotFragmentPresenter(this);
@@ -79,7 +71,7 @@ public class HomeHotFragment extends BaseFragment<HomeHotFragmentPresenter> impl
         mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                refreshDate();
+                refreshData();
             }
         });
 
@@ -103,8 +95,8 @@ public class HomeHotFragment extends BaseFragment<HomeHotFragmentPresenter> impl
 
     @Override
     public void failBecauseNotNetworkReturn(int code) {
-        showToast("服务器异常，稍后重试 " + code);
-        handler.post(new Runnable() {
+        showSnackBar(rootView,"服务器异常，稍后重试 " + code);
+        mHandler.post(new Runnable() {
             @Override
             public void run() {
                 mSwipeRefreshLayout.setRefreshing(false);
@@ -118,13 +110,19 @@ public class HomeHotFragment extends BaseFragment<HomeHotFragmentPresenter> impl
     /**
      * 刷新数据
      */
-    public void refreshDate() {
+    public void refreshData() {
         mNoMoreData = false;
         mCurrentPage = 1;
         mInfo = null;
         if (mAdapter != null) {
             mAdapter.setNoMoreData(false);
         }
+        mHandler.post(new Runnable() {
+            @Override
+            public void run() {
+                mSwipeRefreshLayout.setRefreshing(true);
+            }
+        });
         getExamInfo(mCurrentPage, page_size);
     }
 
@@ -151,12 +149,18 @@ public class HomeHotFragment extends BaseFragment<HomeHotFragmentPresenter> impl
         mPresenter.getExamInfo(page_no, page_size);
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (mSignInFreshListener!=null&&mFirstSignIn){
+            mSignInFreshListener.OnSignInFresh();
+            mFirstSignIn=false;
+        }
+    }
+
     //分页请求数据的返回
     @Override
     public void PagingQueryHomeHotResponse(ExamRecordRoot root) {
-        if (mSwipeRefreshLayout.isRefreshing()) {
-            mSwipeRefreshLayout.setRefreshing(false);
-        }
         if (root != null && root.getCode() == 200) {
             if (root.getData() != null) {
                 if (mInfo == null) {
@@ -167,6 +171,9 @@ public class HomeHotFragment extends BaseFragment<HomeHotFragmentPresenter> impl
                 mHandler.post(new Runnable() {
                     @Override
                     public void run() {
+                        if (mSwipeRefreshLayout.isRefreshing()) {
+                            mSwipeRefreshLayout.setRefreshing(false);
+                        }
                         if (mAdapter == null) {
                             mAdapter = new HomeRecommendAdapter(getContext(), mInfo);
                             if (mInfo.size() < page_size) {
@@ -211,5 +218,15 @@ public class HomeHotFragment extends BaseFragment<HomeHotFragmentPresenter> impl
      */
     public void showErrorMsg(ExamRecordRoot root) {
         showSnackBar(mRecyclerView, root.getMsg());
+    }
+
+    public void setSignInFreshListener(SignInFreshListener signInFreshListener){
+        if(mSignInFreshListener==null){
+            this.mSignInFreshListener=signInFreshListener;
+        }
+    }
+
+    public interface SignInFreshListener{
+        void OnSignInFresh();
     }
 }

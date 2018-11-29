@@ -30,11 +30,18 @@ public class InFragmentAdapter extends FragmentPagerAdapter {
 
     @Override
     public CharSequence getPageTitle(int position) {
+        String title = "";
         switch (position) {
             case 0:
-                return "推荐";
-            default:
-                return "热门";
+                title="最新";
+                break;
+            case 1:
+                title="热门";
+                break;
+            case 2:
+                title="兴趣";
+                break;
         }
+        return title;
     }
 }

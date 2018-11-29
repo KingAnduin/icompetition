@@ -3,12 +3,12 @@ package com.example.thinkpad.icompetition.view.activity.impl;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.example.thinkpad.icompetition.R;
@@ -22,20 +22,19 @@ import jp.wasabeef.glide.transformations.BlurTransformation;
  * Created by a'su's on 2018/7/12.
  */
 
-public class LoginActivity extends BaseActivity<LoginPresenter>
-        implements ILoginActivity, View.OnClickListener{
+public class LoginActivity extends BaseActivity<LoginPresenter> implements ILoginActivity, View.OnClickListener{
 
     private EditText mUserNameEt;
     private EditText mUserPassWordEt;
     private Button mLoginBt;
     private RelativeLayout relativeLayout;
     private ImageView mImageView;
-
+    private TextView mRegisterTV;
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        init();
+        findView();
         setListener();
     }
 
@@ -46,14 +45,16 @@ public class LoginActivity extends BaseActivity<LoginPresenter>
 
     private void setListener() {
         mLoginBt.setOnClickListener(this);
+        mRegisterTV.setOnClickListener(this);
     }
 
-    private void init() {
+    private void findView() {
         mUserNameEt = findViewById(R.id.et_username);
         mUserPassWordEt = findViewById(R.id.et_password);
         relativeLayout=findViewById(R.id.mRelativeLayout);
         mLoginBt =findViewById(R.id.btn_login);
         mImageView=findViewById(R.id.bg_login);
+        mRegisterTV=findViewById(R.id.tv_register);
         loadBackground();
     }
 
@@ -63,7 +64,7 @@ public class LoginActivity extends BaseActivity<LoginPresenter>
                 .load(R.drawable.loginbackground)
                 .dontAnimate()
                 .error(R.drawable.loginbackground)
-
+                .centerCrop()
                 .crossFade(0)
                 // 设置高斯模糊
                 .bitmapTransform(new BlurTransformation(this, 5))
@@ -78,6 +79,10 @@ public class LoginActivity extends BaseActivity<LoginPresenter>
                 login();
                 //startActivity(new Intent(LoginActivity.this,MainActivity.class));
                 //finish();
+                break;
+            case R.id.tv_register:
+                startActivity(new Intent(LoginActivity.this,RegisterActivity.class));
+                break;
         }
     }
 

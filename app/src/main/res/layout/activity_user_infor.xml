@@ -134,14 +134,5 @@
         </LinearLayout>
     </LinearLayout>
     </LinearLayout>
-    <Button
-        android:id="@+id/btn_user_exit"
-        android:layout_margin="10dp"
-        android:layout_alignParentBottom="true"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="16sp"
-        android:textColor="#fff"
-        android:text="退出当前账户"
-        android:background="@drawable/background_exitbt"/>
+
 </RelativeLayout>

@@ -2,9 +2,13 @@ package com.example.thinkpad.icompetition.model.impl;
 
 import android.os.Handler;
 
+import com.example.thinkpad.icompetition.model.entity.user.RegisterRoot;
+import com.example.thinkpad.icompetition.model.event.RegisterEvent;
 import com.example.thinkpad.icompetition.model.i.IRegisterModel;
 import com.example.thinkpad.icompetition.network.CallbackIntercept;
 import com.example.thinkpad.icompetition.network.NetworkInterfaces;
+import com.example.thinkpad.icompetition.view.activity.impl.RegisterActivity;
+import com.google.gson.Gson;
 
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -24,12 +28,24 @@ public class RegisterModel extends BaseModel implements IRegisterModel {
         Callback callback = new CallbackIntercept() {
             @Override
             public void onSuccess(Call call, String jsonBody) {
-
+                RegisterEvent event =new RegisterEvent();
+                Gson gson = new Gson();
+                RegisterRoot root = gson.fromJson(jsonBody,RegisterRoot.class);
+                if(root!=null){
+                    event.setWhat(RegisterEvent.REGISTE_OK);
+                    event.setRoot(root);
+                }
+                else {
+                    event.setWhat(RegisterEvent.REGISTE_FAIL);
+                }
+                postEvent(event);
             }
 
             @Override
             public void onFail(Call call, Exception e) {
-
+                RegisterEvent event =new RegisterEvent();
+                event.setWhat(RegisterEvent.REGISTE_FAIL);
+                postEvent(event);
             }
         };
         mNetworkInterface.userRegister(callback, name, pwd);

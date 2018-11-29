@@ -5,10 +5,24 @@
     <string name="system_time_error">系统时间错误,请检查设备时间</string>
     <string name="request_fail">请求失败</string>
     <string name="not_network">未能连接到服务器</string>
-
+    <string name="not_have_network">请检查网络状况</string>
     <!-- 登陆 -->
-    <string name="login_user_null">请输入学号</string>
+    <string name="login_user_null">请输入帐号</string>
     <string name="login_password_null">请输入密码</string>
+
+    <!--注册-->
+    <string name="register_userid">请输入注册手机号</string>
+    <string name="register_password">请输入6—10位数字或字母密码</string>
+    <string name="register_userid_notnull">手机号不能为空</string>
+    <string name="register_password_notnull">密码不能为空</string>
+    <string name="register_surepassword">请再次输入密码确定</string>
+    <string name="register_nomatch_password">两次密码不一致</string>
+    <string name="register_haveuser">已有账户？</string>
+    <string name="register_gotologin">直接登录</string>
+    <string name="register_userid_error">请输入正确的大陆手机号码</string>
+    <string name="register_password_error">请输入符合规范的密码</string>
+    <string name="register_repeat">该账户已被注册，换一个再试试？</string>
+    <string name="register_success">恭喜你~你已注册成功！</string>
 
     <!-- 首页竞赛信息item -->
     <string name="item_home_list_is_start">正在报名</string>

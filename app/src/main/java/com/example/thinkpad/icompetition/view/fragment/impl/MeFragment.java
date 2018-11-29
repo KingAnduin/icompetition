@@ -1,4 +1,4 @@
-package com.example.thinkpad.icompetition.view.fragment;
+package com.example.thinkpad.icompetition.view.fragment.impl;
 
 import android.content.Intent;
 import android.os.Bundle;

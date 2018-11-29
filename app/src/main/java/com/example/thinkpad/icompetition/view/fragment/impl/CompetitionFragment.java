@@ -1,4 +1,4 @@
-package com.example.thinkpad.icompetition.view.fragment;
+package com.example.thinkpad.icompetition.view.fragment.impl;
 
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
@@ -25,6 +25,7 @@ public class CompetitionFragment extends Fragment {
     private ViewPager viewPager;
     private HomeRecommendFragment homeRecommendFragment;
     private HomeHotFragment homeHotFragment;
+    private HomeInterestFragment homeInterestFragment;
     private ArrayList<Fragment> fragments;
     @Nullable
     @Override
@@ -36,13 +37,27 @@ public class CompetitionFragment extends Fragment {
         return view;
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+
+    }
+
     private void init() {
         tabLayout.setupWithViewPager(viewPager);
         fragments=new ArrayList<>();
         homeRecommendFragment =new HomeRecommendFragment();
         homeHotFragment =new HomeHotFragment();
+        homeInterestFragment= new HomeInterestFragment();
         fragments.add(homeRecommendFragment);
         fragments.add(homeHotFragment);
+        fragments.add(homeInterestFragment);
+        homeHotFragment.setSignInFreshListener(new HomeHotFragment.SignInFreshListener() {
+            @Override
+            public void OnSignInFresh() {
+                homeHotFragment.refreshData();
+            }
+        });
         viewPager.setAdapter(new InFragmentAdapter(getFragmentManager(),fragments));
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override

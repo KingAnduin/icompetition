@@ -3,6 +3,7 @@ package com.example.thinkpad.icompetition.presenter.impl;
 import android.os.Handler;
 import android.os.Message;
 
+import com.example.thinkpad.icompetition.model.entity.user.RegisterRoot;
 import com.example.thinkpad.icompetition.model.event.RegisterEvent;
 import com.example.thinkpad.icompetition.model.impl.RegisterModel;
 import com.example.thinkpad.icompetition.presenter.i.IRegisterPresenter;
@@ -31,13 +32,16 @@ public class RegisterPresenter
 
     @Override
     protected void eventReceive(Message msg) {
-        switch (msg.what){
-            case RegisterEvent.REGISTE_OK:
-                mView.registeredReturn((RegisterEvent)msg.obj);
-                break;
-            case RegisterEvent.REGISTE_FAIL:
-                mView.failBecauseNotNetworkReturn(msg.what);
-                break;
+        RegisterRoot registerRoot = ((RegisterEvent)msg.obj).getRoot();
+        if(registerRoot!=null) {
+            switch (msg.what) {
+                case RegisterEvent.REGISTE_OK:
+                    mView.registeredReturn(registerRoot);
+                    break;
+                case RegisterEvent.REGISTE_FAIL:
+                    mView.failBecauseNotNetworkReturn(msg.what);
+                    break;
+            }
         }
     }
 }
