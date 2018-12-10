@@ -11,7 +11,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.thinkpad.icompetition.R;
-import com.example.thinkpad.icompetition.view.activity.impl.MainActivity;
 import com.example.thinkpad.icompetition.view.activity.impl.UserInforActivity;
 import com.example.thinkpad.icompetition.view.activity.impl.UserSetActivity;
 

@@ -14,7 +14,7 @@ import greendao.gen.DaoSession;
  * Created by a'su's on 2018/11/13.
  */
 public class IcompetitionApplication extends MultiDexApplication {
-    private String session;//session,登陆时服务器返回该值,有效期内不需要重复获取,存储于sharedPreferences
+    private String token;//token,登陆时服务器返回该值,有效期内不需要重复获取,存储于sharedPreferences
     private DaoSession daoSession; //greenDao数据库DaoSession
     private boolean initDone;               //初始化完成标志
 
@@ -77,33 +77,33 @@ public class IcompetitionApplication extends MultiDexApplication {
      */
     private void loadDataFromSharePreferences() {
         SharedPreferences sharedPreferences = getSharedPreferences("ApplicationBase", MODE_PRIVATE);
-        session = sharedPreferences.getString("session", "");
+        token = sharedPreferences.getString("token", "");
     }
 
     /**
-     * 获取session,如果为null,或者为空串,再次从SharedPreferences读取值
+     * 获取token,如果为null,或者为空串,再次从SharedPreferences读取值
      *
-     * @return session
+     * @return token
      */
 
-    public String getSession() {
-        if (session == null || "".equals(session)) {
+    public String getToken() {
+        if (token == null || "".equals(token)) {
             SharedPreferences sharedPreferences = getSharedPreferences("ApplicationBase", MODE_PRIVATE);
-            session = sharedPreferences.getString("session", "");
+            token = sharedPreferences.getString("token", "");
         }
-        return session;
+        return token;
     }
 
     /**
      * 设置值时,不仅设置给变量,同时存储到SharedPreferences中,以便于以后读取
      *
-     * @param session 设置的session值
+     * @param token 设置的token值
      */
-    public void setSession(String session) {
-        this.session = session;
+    public void setToken(String token) {
+        this.token = token;
         SharedPreferences sharedPreferences = getSharedPreferences("ApplicationBase", MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putString("session", session);
+        editor.putString("token", token);
         editor.apply();
     }
 

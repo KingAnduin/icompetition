@@ -1,6 +1,10 @@
 <resources>
     <string name="app_name">icompetition</string>
 
+    <!--主页标题-->
+    <string name="competition">竞赛汇聚地</string>
+    <string name="me">我的地盘</string>
+
     <!-- 通用 -->
     <string name="system_time_error">系统时间错误,请检查设备时间</string>
     <string name="request_fail">请求失败</string>

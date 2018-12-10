@@ -190,6 +190,7 @@ public class RegisterActivity extends BaseActivity<RegisterPresenter> implements
         try {
             if (mProgressDialog == null){
                 mProgressDialog = ProgressDialog.show(this,"提示","注册中...请稍后");
+                mProgressDialog.setCancelable(true);
             }
             if (mProgressDialog.isShowing() || isFinishing()){
                 return;

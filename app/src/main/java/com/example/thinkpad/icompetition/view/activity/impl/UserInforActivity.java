@@ -1,29 +1,79 @@
 package com.example.thinkpad.icompetition.view.activity.impl;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
 import android.view.View;
-import android.widget.Button;
-import android.widget.Switch;
 import android.widget.TextView;
 
+import com.example.thinkpad.icompetition.IcompetitionApplication;
 import com.example.thinkpad.icompetition.R;
-import com.example.thinkpad.icompetition.presenter.impl.BasePresenter;
+import com.example.thinkpad.icompetition.model.entity.user.UserInforBean;
 import com.example.thinkpad.icompetition.presenter.impl.UserInforPresenter;
 import com.example.thinkpad.icompetition.view.activity.i.IBaseActivity;
 import com.example.thinkpad.icompetition.view.activity.i.IUserInforActivity;
+import com.example.thinkpad.icompetition.view.widget.AsyncImageView;
+
+import java.util.List;
+
+import greendao.gen.DaoSession;
+import greendao.gen.UserInforBeanDao;
+import io.rong.imageloader.core.DisplayImageOptions;
+import io.rong.imageloader.core.ImageLoader;
+import io.rong.imageloader.core.ImageLoaderConfiguration;
+import io.rong.imageloader.core.display.FadeInBitmapDisplayer;
 
 public class UserInforActivity extends BaseActivity<UserInforPresenter> implements IBaseActivity,IUserInforActivity,View.OnClickListener {
+    private DisplayImageOptions options;
     private TextView mToolbarTitleTV;
+    private TextView mUserNameTV;
+    private TextView mUserSexTV;
+    private TextView mUserBirthday;
+    private AsyncImageView mUserHeadImageAIV;
     private Toolbar mToolbar;
+    private DaoSession mDaoSession;
+    private UserInforBean mUserBean;
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_infor);
         findView();
         setListener();
+        initDisplayImageOptions();
+        getUserInforFromDao();
+    }
+
+    private void initDisplayImageOptions() {
+        this.options = new DisplayImageOptions.Builder()
+                .showImageForEmptyUri(R.mipmap.ic_launcher)
+                .showImageOnFail(R.mipmap.ic_launcher)
+                .showImageOnLoading(R.mipmap.ic_news_listview_img_loading)
+                .displayer(new FadeInBitmapDisplayer(300))
+                .cacheInMemory(true)
+                .cacheOnDisk(true)
+                .build();
+    }
+
+
+    private void getUserInforFromDao() {
+        mDaoSession=((IcompetitionApplication)getApplication()).getDaoSession();
+        UserInforBeanDao userInforBeanDao = mDaoSession.getUserInforBeanDao();
+        List<UserInforBean> list = userInforBeanDao.loadAll();
+        if(list.get(0)!=null) {
+            mUserBean = list.get(0);
+        }
+        if(!TextUtils.isEmpty(mUserBean.getUser_name()))
+            mUserNameTV.setText(String.valueOf(mUserBean.getUser_name()));
+        if(!TextUtils.isEmpty(mUserBean.getUser_sex()))
+            mUserSexTV.setText(mUserBean.getUser_sex());
+        if(!TextUtils.isEmpty(mUserBean.getUser_birthday()))
+            mUserBirthday.setText(mUserBean.getUser_birthday());
+        if(!TextUtils.isEmpty(mUserBean.getUser_headimage())){
+            ImageLoader imageLoader = ImageLoader.getInstance();
+            imageLoader.init(ImageLoaderConfiguration.createDefault(this));
+            imageLoader.displayImage(mUserBean.getUser_headimage(),mUserHeadImageAIV,options);
+        }
     }
 
     private void setListener() {
@@ -36,6 +86,10 @@ public class UserInforActivity extends BaseActivity<UserInforPresenter> implemen
     }
 
     private void findView() {
+        mUserNameTV=findViewById(R.id.tv_user_name);
+        mUserSexTV=findViewById(R.id.tv_user_sex);
+        mUserBirthday=findViewById(R.id.tv_user_birthday);
+        mUserHeadImageAIV = findViewById(R.id.aiv_user_headimage);
         mToolbar=findViewById(R.id.toolbar_main);
         mToolbar.setNavigationIcon(R.mipmap.back);
         mToolbarTitleTV = findViewById(R.id.toolbar_title);

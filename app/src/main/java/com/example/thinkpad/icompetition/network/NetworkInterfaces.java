@@ -19,6 +19,7 @@ public class NetworkInterfaces {
     //以下是请求地址
     private static final String REGISTER = "/api/users/register"; //用户注册
     private static final String LOG_IN = "/api/users/login"; //登陆系统
+    private static final String USER_INFOR = "/api/users/message"; //用户信息数据
     private static final String PAGING_QUERY_EXAM = "/api/competitions/bypage"; //分页查询竞赛信息
     private static final String PAGING_QUERY_HOT = "/api/competitions/hot"; //分页查询热门竞赛
 
@@ -52,7 +53,16 @@ public class NetworkInterfaces {
         new NetworkRequest(param, SERVER_HOST + LOG_IN, callback).sendRequest();
     }
 
-
+    /**
+     * 用户信息
+     * @param callback 。
+     * @param name 用户名
+     */
+    public void userInfor(Callback callback, String name) {
+        ArrayMap<String, String> param = new ArrayMap<>();
+        param.put("user_num", name);
+        new NetworkRequest(param, SERVER_HOST + USER_INFOR, callback).sendRequest();
+    }
 
     /**
      * 分页查询竞赛信息

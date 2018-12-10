@@ -1,14 +1,15 @@
 package com.example.thinkpad.icompetition.model.entity.user;
 
+import java.util.List;
+
 /**
  * Created by Hjg on 2018/11/27.
  * 登陆的返回结果
  */
 public class LoginRoot {
-
     private int code;
     private String msg;
-    private String status;
+    private List<LoginBean> data;
 
     public int getCode() {
         return code;
@@ -26,11 +27,11 @@ public class LoginRoot {
         this.msg = msg;
     }
 
-    public String getStatus() {
-        return status;
+    public List<LoginBean> getData() {
+        return data;
     }
 
-    public void setStatus(String status) {
-        this.status = status;
+    public void setData(List<LoginBean> data) {
+        this.data = data;
     }
 }

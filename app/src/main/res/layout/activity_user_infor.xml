@@ -27,11 +27,12 @@
                 android:textColor="#000"
                 android:textSize="16sp"/>
             <com.example.thinkpad.icompetition.view.widget.AsyncImageView
+                android:id="@+id/aiv_user_headimage"
                 android:layout_weight="1"
                 android:layout_margin="10dp"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
-                android:src="@mipmap/ic_news_listview_img_loading"/>
+                android:src="@mipmap/ic_launcher"/>
         </LinearLayout>
         <LinearLayout
             android:layout_marginTop="15dp"
@@ -49,11 +50,12 @@
                 android:textColor="#000"
                 android:textSize="16sp"/>
             <TextView
+                android:id="@+id/tv_user_name"
                 android:layout_weight="1"
                 android:layout_marginRight="5dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="义小攻"
+                android:text="未设置"
                 android:layout_gravity="center_vertical"
                 android:textSize="14sp"/>
             <ImageView
@@ -83,11 +85,12 @@
                 android:textColor="#000"
                 android:textSize="16sp"/>
             <TextView
+                android:id="@+id/tv_user_sex"
                 android:layout_weight="1"
                 android:layout_marginRight="5dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="男"
+                android:text="未设置"
                 android:layout_gravity="center_vertical"
                 android:textSize="14sp"/>
             <ImageView
@@ -117,11 +120,12 @@
                 android:textColor="#000"
                 android:textSize="16sp"/>
             <TextView
+                android:id="@+id/tv_user_birthday"
                 android:layout_weight="1"
                 android:layout_marginRight="5dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="1998-1-1"
+                android:text="未设置"
                 android:layout_gravity="center_vertical"
                 android:textSize="14sp"/>
             <ImageView

@@ -58,15 +58,14 @@ public class SignUtil {
 		//以下加入系统参数,某些值需要计算得出.登录界面连续点击登录,在activity finish()之后还会进入登录函数
 		//这是Activity栈是空的,所以没办法获取session,这种情况会抛出NullPointerException,这里catch异常,
 		//将session置为空串
-		String session;
+		String token;
 		try {
-			session = ((IcompetitionApplication) ActivityManager.getActivityManager().peekActivity()
-					.getApplication()).getSession();            //从application中获取session
+			token = ((IcompetitionApplication) ActivityManager.getActivityManager().peekActivity().getApplication()).getToken();            //从application中获取session
 		} catch (NullPointerException e) {
-			session = "";
+			token = "";
 		}
-		if (session != null && !session.equals("")) {
-			requestParam.put("session", session);
+		if (token != null && !token.equals("")) {
+			requestParam.put("token", token);
 		}
 		requestParam.put("timestamp", time);
 		requestParam.put("format", format);
@@ -133,5 +132,4 @@ public class SignUtil {
 		}
 		return hex.toString().toUpperCase();    //转换成大写
 	}
-
 }

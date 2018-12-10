@@ -4,7 +4,6 @@ import android.animation.ArgbEvaluator;
 import android.content.Intent;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
@@ -13,6 +12,7 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.example.thinkpad.icompetition.presenter.impl.BasePresenter;
 import com.example.thinkpad.icompetition.view.adapter.MainFragmentAdapter;
 import com.example.thinkpad.icompetition.view.widget.BottomImageView;
 import com.example.thinkpad.icompetition.view.fragment.impl.CompetitionFragment;
@@ -21,7 +21,7 @@ import com.example.thinkpad.icompetition.R;
 
 import java.util.ArrayList;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+public class MainActivity extends BaseActivity implements View.OnClickListener {
     private TextView mToolbarTitleTV;
     private LinearLayout mCompetitionLayout;
     private LinearLayout mMeLayout;
@@ -40,7 +40,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private int mTextSelectedColor;// 选中的字体颜色
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         findView();
@@ -48,6 +48,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         initColor();//初始化底部导航栏字体颜色
         setListener();
     }
+
+    @Override
+    protected BasePresenter getPresenter() {
+        return null;
+    }
+
+//    @Override
+//    public void onWindowFocusChanged(boolean hasFocus) {
+//        super.onWindowFocusChanged(hasFocus);
+////        mCompetitionFragment.getHomeHotFragment().FirstFreshData();
+//    }
 
     private void initSelectIcon() {
         mCompetitionBV.setImages(R.mipmap.cup, R.mipmap.cup_select);
@@ -79,11 +90,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         switch (view.getId()) {
             case R.id.layout_competion:
                 mViewPager.setCurrentItem(0);
-                mToolbarTitleTV.setText("竞赛汇聚地");
+                mToolbarTitleTV.setText(getString(R.string.competition));
                 break;
             case R.id.layout_me:
                 mViewPager.setCurrentItem(1);
-                mToolbarTitleTV.setText("我的地盘");
+                mToolbarTitleTV.setText(getString(R.string.me));
                 break;
         }
     }

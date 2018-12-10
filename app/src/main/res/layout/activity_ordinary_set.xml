@@ -24,11 +24,12 @@
             android:textColor="#000"
             android:textSize="16sp"/>
         <TextView
+            android:id="@+id/tv_role_id"
             android:layout_weight="1"
             android:layout_marginRight="10dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="5802931"
+            android:text="无"
             android:layout_gravity="center_vertical"
             android:textSize="14sp"/>
     </LinearLayout>
@@ -48,11 +49,12 @@
             android:textColor="#000"
             android:textSize="16sp"/>
         <TextView
+            android:id="@+id/tv_user_num"
             android:layout_weight="1"
             android:layout_marginRight="10dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="17713657669"
+            android:text="无"
             android:layout_gravity="center_vertical"
             android:textSize="14sp"/>
     </LinearLayout>

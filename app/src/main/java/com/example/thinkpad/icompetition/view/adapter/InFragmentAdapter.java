@@ -32,14 +32,14 @@ public class InFragmentAdapter extends FragmentPagerAdapter {
     public CharSequence getPageTitle(int position) {
         String title = "";
         switch (position) {
-            case 0:
-                title="最新";
-                break;
             case 1:
-                title="热门";
+                title="最新";
                 break;
             case 2:
                 title="兴趣";
+                break;
+            default:
+                title="热门";
                 break;
         }
         return title;

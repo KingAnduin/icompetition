@@ -39,8 +39,8 @@ class NetworkManager {
     private static NetworkManager mInstance;    //单一实例
     private OkHttpClient mHttpClient;           //单一实例
 
-    private static final int CONNECT_TIMEOUT = 30;   //连接超时(秒)
-    private static final int READ_TIMEOUT = 30;      //响应超时(秒)
+    private static final int CONNECT_TIMEOUT = 10;   //连接超时(秒)
+    private static final int READ_TIMEOUT = 10;      //响应超时(秒)
 
     private NetworkManager() {
 

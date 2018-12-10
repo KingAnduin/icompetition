@@ -9,10 +9,13 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.example.thinkpad.icompetition.IcompetitionApplication;
 import com.example.thinkpad.icompetition.R;
-import com.example.thinkpad.icompetition.model.event.LoginEvent;
+import com.example.thinkpad.icompetition.model.entity.user.LoginRoot;
+import com.example.thinkpad.icompetition.model.entity.user.UserInforRoot;
 import com.example.thinkpad.icompetition.presenter.impl.LoginPresenter;
 import com.example.thinkpad.icompetition.view.activity.i.ILoginActivity;
 
@@ -24,6 +27,8 @@ import jp.wasabeef.glide.transformations.BlurTransformation;
 
 public class LoginActivity extends BaseActivity<LoginPresenter> implements ILoginActivity, View.OnClickListener{
 
+    private String mUserNum;
+    private String mUserPassword;
     private EditText mUserNameEt;
     private EditText mUserPassWordEt;
     private Button mLoginBt;
@@ -77,6 +82,7 @@ public class LoginActivity extends BaseActivity<LoginPresenter> implements ILogi
         {
             case R.id.btn_login:
                 login();
+                mLoginBt.setClickable(false);
                 //startActivity(new Intent(LoginActivity.this,MainActivity.class));
                 //finish();
                 break;
@@ -87,27 +93,52 @@ public class LoginActivity extends BaseActivity<LoginPresenter> implements ILogi
     }
 
     private void login() {
-//        if("".equals(mUserNameEt.getText().toString())){
-//            showToast(getResources().getString(R.string.login_user_null));
-//        }
-//        else if("".equals(mUserPassWordEt.getText().toString())){
-//            showToast(getResources().getString(R.string.login_password_null));
-//        }else {
-//            mLoginBt.setClickable(false);
-//            mPresenter.login(mUserNameEt.getText().toString(), mUserPassWordEt.getText().toString());
-//        }
-        mPresenter.login("15681953321", "123456");
+        if(judgeUserNumAndPassword()) {
+            mPresenter.login(mUserNum, mUserPassword);
+        }
+    }
+
+    //判断用户是否输入了账户和密码
+    private boolean judgeUserNumAndPassword() {
+        mUserNum = mUserNameEt.getText().toString();
+        mUserPassword=mUserPassWordEt.getText().toString();
+        if(mUserNum.isEmpty()){
+            showSnackBar(mLoginBt,getResources().getString(R.string.login_user_null),getMainColor());
+            return false;
+        }
+        if(mUserPassword.isEmpty()){
+            showSnackBar(mLoginBt,getResources().getString(R.string.login_password_null),getMainColor());
+            return false;
+        }
+        return true;
+    }
+
+    private void getUserInfor(){
+        mPresenter.getUserInfor(mUserNum);
     }
 
     //登陆请求的回调
     @Override
-    public void loginReturn(LoginEvent event) {
+    public void loginReturn(LoginRoot root) {
+        ((IcompetitionApplication)getApplication()).setToken(root.getData().get(0).get_$Token251());//保存token至sharedpreferences
+        getUserInfor();
+    }
+
+    //请求返回用户数据的回调
+    @Override
+    public void getUserInforReturn(UserInforRoot root) {
         startActivity(new Intent(LoginActivity.this,MainActivity.class));
+        //Log.d("LYactivity", "count"+((IcompetitionApplication) ActivityManager.getActivityManager() );
         finish();
     }
 
     @Override
     public void failBecauseNotNetworkReturn(int code) {
         showToast(getResources().getString(R.string.not_network));
+    }
+
+    public void failBecauseNullPointer() {
+        mLoginBt.setClickable(true); //若登陆失败则将登录按钮重构设为可点击
+        Toast.makeText(this, "登录过程中出现了一些问题，如果您在使用过程中出现问题的话建议您重新登录", Toast.LENGTH_LONG).show();
     }
 }

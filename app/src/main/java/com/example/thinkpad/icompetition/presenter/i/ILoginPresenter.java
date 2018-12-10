@@ -5,4 +5,5 @@ package com.example.thinkpad.icompetition.presenter.i;
  */
 public interface ILoginPresenter extends IBasePresenter{
     void login(String name, String pwd);
+    void getUserInfor(String name);
 }

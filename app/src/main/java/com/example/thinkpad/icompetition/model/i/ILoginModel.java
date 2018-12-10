@@ -5,4 +5,5 @@ package com.example.thinkpad.icompetition.model.i;
  */
 public interface ILoginModel extends IBaseModel{
     void userLogin(String name, String pwd);
+    void userGetInfor(String name);
 }

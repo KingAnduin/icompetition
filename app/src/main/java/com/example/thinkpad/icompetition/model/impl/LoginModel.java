@@ -4,10 +4,12 @@ import android.os.Handler;
 import android.util.Log;
 
 import com.example.thinkpad.icompetition.model.entity.user.LoginRoot;
+import com.example.thinkpad.icompetition.model.entity.user.UserInforRoot;
 import com.example.thinkpad.icompetition.model.event.LoginEvent;
 import com.example.thinkpad.icompetition.model.i.ILoginModel;
 import com.example.thinkpad.icompetition.network.CallbackIntercept;
 import com.example.thinkpad.icompetition.network.NetworkInterfaces;
+import com.example.thinkpad.icompetition.network.request.JsonPostRequest;
 import com.google.gson.Gson;
 
 import okhttp3.Call;
@@ -47,6 +49,32 @@ public class LoginModel extends BaseModel implements ILoginModel {
             }
         };
         mNetworkInterface.userLogIn(callback, name, pwd);
+    }
+
+    @Override
+    public void userGetInfor(String name) {
+        Callback callback = new CallbackIntercept() {
+            @Override
+            public void onSuccess(Call call, String jsonBody) {
+                Log.d("lyy", "onSuccess: "+jsonBody);
+                Gson gson = new Gson();
+                UserInforRoot root = gson.fromJson(jsonBody,UserInforRoot.class);
+                if(root!=null){
+                    LoginEvent event = new LoginEvent();
+                    event.setUserInforRoot(root);
+                    event.setWhat(LoginEvent.GETUERINFOR_OK);
+                    postEvent(event);
+                }
+            }
+
+            @Override
+            public void onFail(Call call, Exception e) {
+                LoginEvent event = new LoginEvent();
+                event.setWhat(LoginEvent.GETUSERINFOR_FAIL);
+                postEvent(event);
+            }
+        };
+        mNetworkInterface.userInfor(callback,name);
     }
 
     @Override

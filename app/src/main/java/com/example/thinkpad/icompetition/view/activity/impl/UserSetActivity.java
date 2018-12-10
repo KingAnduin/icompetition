@@ -3,24 +3,56 @@ package com.example.thinkpad.icompetition.view.activity.impl;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.support.v7.widget.Toolbar;
 
+import com.example.thinkpad.icompetition.IcompetitionApplication;
 import com.example.thinkpad.icompetition.R;
+import com.example.thinkpad.icompetition.model.entity.user.UserInforBean;
+import com.example.thinkpad.icompetition.presenter.impl.UserSetPresenter;
+import com.example.thinkpad.icompetition.view.activity.i.IBaseActivity;
 
-public class UserSetActivity extends AppCompatActivity implements View.OnClickListener {
+import java.util.List;
+
+import greendao.gen.DaoSession;
+import greendao.gen.UserInforBeanDao;
+
+public class UserSetActivity extends BaseActivity<UserSetPresenter> implements View.OnClickListener, IBaseActivity {
+    private TextView mRoleIdTV;
+    private TextView mUserNumTV;
     private Toolbar mToolbar;
     private TextView mToolTitleTV;
     private Button mExitBtn;
+    private DaoSession mDaoSession;
+    private UserInforBean mUserBean;
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
+    public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ordinary_set);
         findView();
         setListener();
+        getInformationFromDao();
+    }
+
+    @Override
+    protected UserSetPresenter getPresenter() {
+        return new UserSetPresenter(this);
+    }
+
+    private void getInformationFromDao() {
+        mDaoSession=((IcompetitionApplication)getApplication()).getDaoSession();
+        UserInforBeanDao userInforBeanDao = mDaoSession.getUserInforBeanDao();
+        List<UserInforBean> list = userInforBeanDao.loadAll();
+        if(list.get(0)!=null) {
+            mUserBean = list.get(0);
+        }
+        if(!TextUtils.isEmpty(String.valueOf(mUserBean.getUser_roleid())))
+        mRoleIdTV.setText(String.valueOf(mUserBean.getUser_roleid()));
+        if(!TextUtils.isEmpty(String.valueOf(mUserBean.getUser_num())))
+        mUserNumTV.setText(String.valueOf(mUserBean.getUser_num()));
     }
 
     private void setListener() {
@@ -34,6 +66,8 @@ public class UserSetActivity extends AppCompatActivity implements View.OnClickLi
     }
 
     private void findView() {
+        mRoleIdTV = findViewById(R.id.tv_role_id);
+        mUserNumTV=findViewById(R.id.tv_user_num);
         mExitBtn=findViewById(R.id.btn_set_exit);
         mToolbar=findViewById(R.id.toolbar_main);
         mToolTitleTV=findViewById(R.id.toolbar_title);
@@ -51,5 +85,10 @@ public class UserSetActivity extends AppCompatActivity implements View.OnClickLi
                 startActivity(intent);
                 break;
         }
+    }
+
+    @Override
+    public void failBecauseNotNetworkReturn(int code) {
+
     }
 }

@@ -37,7 +37,14 @@ public abstract class CallbackIntercept implements Callback {
         if (response.isSuccessful()) {            //对http请求状态码的判断
             interceptRequest(call, response);    //拦截某些返回的请求
         } else {
-            onFail(call, new IOException(response.body().string())); //请求未成功
+            if (response.code() == 401)
+            {
+                System.out.println("用户鉴权失败");
+                onFail(call, new IOException(response.body().string())); //请求未成功
+            }
+            else{
+                onFail(call, new IOException(response.body().string())); //请求未成功
+            }
         }
         int[] nums=new int[10];
     }
