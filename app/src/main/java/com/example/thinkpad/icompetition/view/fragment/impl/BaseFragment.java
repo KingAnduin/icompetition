@@ -34,6 +34,7 @@ public abstract class BaseFragment<P extends BaseFragmentPresenter> extends Frag
         return super.onCreateView(inflater, container, savedInstanceState);
     }
 
+    
     /**
      * 获取Presenter，类型应和Fragment的泛型一致
      *

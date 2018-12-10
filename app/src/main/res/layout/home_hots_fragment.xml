@@ -9,15 +9,15 @@
     <android.support.v4.widget.SwipeRefreshLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/srl_home_hot_list"
+        android:id="@+id/srl_home_hots_list"
         android:layout_marginTop="8dp">
 
         <android.support.v7.widget.RecyclerView
-            android:id="@+id/rc_home_hot_list"
+            android:id="@+id/rc_home_hots_list"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:scrollbars="vertical"
-            android:background="@color/background_white_FA">
+            android:background="@color/background_white_EF">
 
         </android.support.v7.widget.RecyclerView>
 

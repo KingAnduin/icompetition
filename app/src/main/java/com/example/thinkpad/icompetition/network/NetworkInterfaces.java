@@ -20,7 +20,7 @@ public class NetworkInterfaces {
     private static final String REGISTER = "/api/users/register"; //用户注册
     private static final String LOG_IN = "/api/users/login"; //登陆系统
     private static final String PAGING_QUERY_EXAM = "/api/competitions/bypage"; //分页查询竞赛信息
-
+    private static final String PAGING_QUERY_HOT = "/api/competitions/hot"; //分页查询热门竞赛
 
 
     /**
@@ -66,5 +66,21 @@ public class NetworkInterfaces {
         param.put("pageSize", String.valueOf(page_size));
         new NetworkRequest(param, SERVER_HOST + PAGING_QUERY_EXAM, callback).sendRequest();
     }
+
+    /**
+     * 分页查询热门竞赛信息
+     * @param callback .
+     * @param page_no 页码
+     * @param page_size 每页数量
+     */
+    public void getHotsExam(Callback callback, int page_no, int page_size){
+        ArrayMap<String, String> param = new ArrayMap<>();
+        param.put("page", String.valueOf(page_no));
+        param.put("pageSize", String.valueOf(page_size));
+        new NetworkRequest(param, SERVER_HOST + PAGING_QUERY_HOT, callback).sendRequest();
+
+    }
+
+
 
 }

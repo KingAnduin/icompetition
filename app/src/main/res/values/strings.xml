@@ -26,6 +26,9 @@
 
     <!-- 首页竞赛信息item -->
     <string name="item_home_list_is_start">正在报名</string>
+    <string name="item_home_list_started">报名截止</string>
+    <string name="item_home_list_deadline">距离报名截止时间还有&#160;%1$s&#160;天&#160;</string>
+    <string name="item_home_list_is_end">报名时间已截止</string>
     <string name="item_home_list_time_sign_up">报名时间&#160;&#160;&#160;&#160;&#160;&#160;%1$s</string>
     <string name="item_home_list_time_exam">考试时间&#160;&#160;&#160;&#160;&#160;&#160;%1$s</string>
     <string name="item_home_list_organizer">主办方&#160;&#160;&#160;&#160;&#160;&#160;%1$s</string>

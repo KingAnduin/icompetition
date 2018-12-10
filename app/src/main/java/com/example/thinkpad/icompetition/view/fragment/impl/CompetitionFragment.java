@@ -23,8 +23,8 @@ public class CompetitionFragment extends Fragment {
     private View view;
     private TabLayout tabLayout;
     private ViewPager viewPager;
+    private HomeHotsFragment homeHotsFragment;
     private HomeRecommendFragment homeRecommendFragment;
-    private HomeHotFragment homeHotFragment;
     private HomeInterestFragment homeInterestFragment;
     private ArrayList<Fragment> fragments;
     @Nullable
@@ -32,10 +32,13 @@ public class CompetitionFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         view=inflater.inflate(R.layout.fragment_competition,container,false);
         viewPager=view.findViewById(R.id.vp_competition);
+        viewPager.setOffscreenPageLimit(2);
         tabLayout=view.findViewById(R.id.tab_competition);
         init();
+
         return view;
     }
+
 
     @Override
     public void onResume() {
@@ -46,16 +49,16 @@ public class CompetitionFragment extends Fragment {
     private void init() {
         tabLayout.setupWithViewPager(viewPager);
         fragments=new ArrayList<>();
+        homeHotsFragment =new HomeHotsFragment();
         homeRecommendFragment =new HomeRecommendFragment();
-        homeHotFragment =new HomeHotFragment();
         homeInterestFragment= new HomeInterestFragment();
+        fragments.add(homeHotsFragment);
         fragments.add(homeRecommendFragment);
-        fragments.add(homeHotFragment);
         fragments.add(homeInterestFragment);
-        homeHotFragment.setSignInFreshListener(new HomeHotFragment.SignInFreshListener() {
+        homeRecommendFragment.setSignInFreshListener(new HomeRecommendFragment.SignInFreshListener() {
             @Override
             public void OnSignInFresh() {
-                homeHotFragment.refreshData();
+                homeRecommendFragment.refreshData();
             }
         });
         viewPager.setAdapter(new InFragmentAdapter(getFragmentManager(),fragments));

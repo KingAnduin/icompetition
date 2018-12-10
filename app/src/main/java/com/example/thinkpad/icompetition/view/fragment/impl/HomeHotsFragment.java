@@ -1,5 +1,6 @@
 package com.example.thinkpad.icompetition.view.fragment.impl;
 
+
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
@@ -11,25 +12,28 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.thinkpad.icompetition.R;
 import com.example.thinkpad.icompetition.model.entity.exam.ExamRecordItemBean;
 import com.example.thinkpad.icompetition.model.entity.exam.ExamRecordRoot;
+import com.example.thinkpad.icompetition.presenter.impl.HomeHotsFragmentPresenter;
 import com.example.thinkpad.icompetition.presenter.impl.HomeRecommendFragmentPresenter;
 import com.example.thinkpad.icompetition.view.activity.i.IBaseActivity;
+import com.example.thinkpad.icompetition.R;
+import com.example.thinkpad.icompetition.view.adapter.HomeHotAdapter;
 import com.example.thinkpad.icompetition.view.adapter.HomeRecommendAdapter;
-import com.example.thinkpad.icompetition.view.fragment.i.IHomeRecommendFragment;
+import com.example.thinkpad.icompetition.view.fragment.i.IHomeHotsFragment;
 
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Created by a'su's on 2018/7/12.
- * 首页推荐Fragment
+ * 首页热门Fragment
  */
 
-public class HomeRecommendFragment extends BaseFragment<HomeRecommendFragmentPresenter> implements IBaseActivity, IHomeRecommendFragment {
+public class HomeHotsFragment extends BaseFragment<HomeHotsFragmentPresenter>
+        implements IBaseActivity, IHomeHotsFragment {
     private View rootView;
-    private HomeRecommendAdapter mAdapter = null;
+    private HomeHotAdapter mAdapter = null;
     private SwipeRefreshLayout mSwipeRefreshLayout;
     private RecyclerView mRecyclerView;
     private int mRecyclerViewCurrentY = 0;
@@ -40,57 +44,37 @@ public class HomeRecommendFragment extends BaseFragment<HomeRecommendFragmentPre
     private int mCurrentPage = 1;                           //页数
     private final int page_size = 10;                       //每页信息数
     private boolean mNoMoreData = false;
-    private SignInFreshListener mSignInFreshListener;
-    public boolean mFirstSignIn = true;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
-        rootView = inflater.inflate(R.layout.home_recommend_fragment, container, false);
+        rootView=inflater.inflate(R.layout.home_hots_fragment,container,false);
         if (mPresenter == null)
             mPresenter = getPresenter();
 
         initView();
         setViewListener();
         return rootView;
-
     }
 
     @Override
-    protected HomeRecommendFragmentPresenter getPresenter() {
-        return new HomeRecommendFragmentPresenter(this);
+    public void onStart() {
+        super.onStart();
+        refreshData();
+    }
+
+    @Override
+    protected HomeHotsFragmentPresenter getPresenter() {
+        return new HomeHotsFragmentPresenter(this);
     }
 
     @Override
     public void getExamInfo(int page_no, int page_size) {
-        mPresenter.getRecommendInfo(page_no, page_size);
+        mPresenter.getHotsInfo(page_no, page_size);
     }
 
     @Override
-    public void onResume() {
-        super.onResume();
-        if (mSignInFreshListener!=null&&mFirstSignIn){
-            mSignInFreshListener.OnSignInFresh();
-            mFirstSignIn=false;
-        }
-    }
-
-    @Override
-    public void failBecauseNotNetworkReturn(int code) {
-        showSnackBar(rootView,"服务器异常，稍后重试 " + code);
-        mHandler.post(new Runnable() {
-            @Override
-            public void run() {
-                mSwipeRefreshLayout.setRefreshing(false);
-                if (mInfo == null || mInfo.size() == 0) {
-                    mRecyclerView.setVisibility(View.GONE);
-                }
-            }
-        });
-    }
-
-    //分页请求数据的返回
-    @Override
-    public void PagingQueryHomeRecommendResponse(ExamRecordRoot root) {
+    public void pagingQueryHomeHotsResponse(ExamRecordRoot root) {
         if (root != null && root.getCode() == 200) {
             if (root.getData() != null) {
                 if (mInfo == null) {
@@ -105,7 +89,7 @@ public class HomeRecommendFragment extends BaseFragment<HomeRecommendFragmentPre
                             mSwipeRefreshLayout.setRefreshing(false);
                         }
                         if (mAdapter == null) {
-                            mAdapter = new HomeRecommendAdapter(getContext(), mInfo);
+                            mAdapter = new HomeHotAdapter(getContext(), mInfo);
                             if (mInfo.size() < page_size) {
                                 //显示没有更多
                                 mNoMoreData = true;
@@ -136,10 +120,23 @@ public class HomeRecommendFragment extends BaseFragment<HomeRecommendFragmentPre
         }
     }
 
+    @Override
+    public void failBecauseNotNetworkReturn(int code) {
+        showSnackBar(rootView,"服务器异常，稍后重试 " + code);
+        mHandler.post(new Runnable() {
+            @Override
+            public void run() {
+                mSwipeRefreshLayout.setRefreshing(false);
+                if (mInfo == null || mInfo.size() == 0) {
+                    mRecyclerView.setVisibility(View.GONE);
+                }
+            }
+        });
+    }
 
-    public void initView() {
-        mRecyclerView = rootView.findViewById(R.id.rc_home_recommend_list);
-        mSwipeRefreshLayout = rootView.findViewById(R.id.srl_home_recommend_list);
+    public void initView(){
+        mSwipeRefreshLayout = rootView.findViewById(R.id.srl_home_hots_list);
+        mRecyclerView = rootView.findViewById(R.id.rc_home_hots_list);
         mSwipeRefreshLayout.setColorSchemeColors(Color.BLUE, Color.GREEN, Color.RED);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
     }
@@ -170,8 +167,6 @@ public class HomeRecommendFragment extends BaseFragment<HomeRecommendFragmentPre
         });
     }
 
-
-
     /**
      * 刷新数据
      */
@@ -200,7 +195,7 @@ public class HomeRecommendFragment extends BaseFragment<HomeRecommendFragmentPre
         mHandler.post(new Runnable() {
             @Override
             public void run() {
-                mAdapter = new HomeRecommendAdapter(getContext(), mInfo);
+                mAdapter = new HomeHotAdapter(getContext(), mInfo);
                 mAdapter.setNoMoreData(true);
                 mAdapter.notifyDataSetChanged();
                 mRecyclerView.setAdapter(mAdapter);
@@ -209,7 +204,6 @@ public class HomeRecommendFragment extends BaseFragment<HomeRecommendFragmentPre
         });
     }
 
-
     /**
      * 查看详情 TODO
      */
@@ -217,22 +211,5 @@ public class HomeRecommendFragment extends BaseFragment<HomeRecommendFragmentPre
 
     }
 
-    /**
-     * 用于网络请求错误时打印信息
-     *
-     * @param root .
-     */
-    public void showErrorMsg(ExamRecordRoot root) {
-        showSnackBar(mRecyclerView, root.getMsg());
-    }
 
-    public void setSignInFreshListener(SignInFreshListener signInFreshListener){
-        if(mSignInFreshListener==null){
-            this.mSignInFreshListener=signInFreshListener;
-        }
-    }
-
-    public interface SignInFreshListener{
-        void OnSignInFresh();
-    }
 }

@@ -1,6 +1,5 @@
 package com.example.thinkpad.icompetition.view.adapter;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Color;
 import android.support.v4.content.ContextCompat;
@@ -28,11 +27,9 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * Created by Hjg on 2018/11/26.
- * 首页推荐的Adapter
+ * Created By hjg on 2018/11/29
  */
-public class HomeRecommendAdapter
-    extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class HomeHotAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private Context mContext;
     private LayoutInflater mLayoutInflater;
@@ -42,7 +39,7 @@ public class HomeRecommendAdapter
     private docItemClickListener itemClickListener;                     //item监听器
     private int mPosition;                                              //用于记录哪一个item被点击
 
-    public HomeRecommendAdapter(Context context, List<ExamRecordItemBean> info){
+    public HomeHotAdapter(Context context, List<ExamRecordItemBean> info){
         mContext = context;
         mExamRecordInfo = info;
         mLayoutInflater = LayoutInflater.from(context);
@@ -83,19 +80,20 @@ public class HomeRecommendAdapter
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         if(viewType == FOOT){
-            return new HomeRecommendAdapter.FootViewHolder(mLayoutInflater.inflate(R.layout.item_typefoot, parent, false));
+            return new HomeHotAdapter.FootViewHolder(mLayoutInflater.inflate(R.layout.item_typefoot, parent, false));
         }
-        return new HomeRecommendAdapter.BodyViewHolder(mLayoutInflater.inflate(R.layout.item_home_exam, parent, false));
+        return new HomeHotAdapter.BodyViewHolder(mLayoutInflater.inflate(R.layout.item_home_exam, parent, false));
+
     }
 
     @Override
-    public void onBindViewHolder(RecyclerView.ViewHolder holder, @SuppressLint("RecyclerView") final int position) {
-        if(holder instanceof HomeRecommendAdapter.FootViewHolder){
-            ((HomeRecommendAdapter.FootViewHolder) holder).setData();
+    public void onBindViewHolder(RecyclerView.ViewHolder holder, final int position) {
+        if(holder instanceof HomeHotAdapter.FootViewHolder){
+            ((HomeHotAdapter.FootViewHolder) holder).setData();
         }
         else {
-            ((HomeRecommendAdapter.BodyViewHolder)holder).setDate(position);
-            ((BodyViewHolder) holder).mItemCv.setOnClickListener(new View.OnClickListener() {
+            ((HomeHotAdapter.BodyViewHolder)holder).setDate(position);
+            ((HomeHotAdapter.BodyViewHolder) holder).mItemCv.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     if(itemClickListener != null){
@@ -106,8 +104,6 @@ public class HomeRecommendAdapter
             });
         }
     }
-
-
 
     @Override
     public int getItemCount() {
@@ -129,8 +125,8 @@ public class HomeRecommendAdapter
      */
     public class BodyViewHolder extends RecyclerView.ViewHolder{
         private CardView mItemCv;
-        private ImageView mPhotoIv;             //比赛图片
-        private TextView mIsStartTv;            //正在报名 报名结束
+        private ImageView mPhotoIv;
+        private TextView mIsStartTv;            //正在报名 / 报名结束
         private TextView mDeadlineTv;           //离报名截止时间
         private TextView mTitleTv;              //比赛标题
         private TextView mStartTimeTv;          //报名时间
@@ -185,11 +181,11 @@ public class HomeRecommendAdapter
             if (!imageUrl.equals("")){
                 Glide.with(mContext).load(imageUrl).centerCrop().into(mPhotoIv);
             }
-
             mTitleTv.setText(itemBean.getCom_title());
             mStartTimeTv.setText(formatSpannableString(mContext, mContext.getString(R.string.item_home_list_time_sign_up), signUpTime));
             mExamTimeTv.setText(formatSpannableString(mContext, mContext.getString(R.string.item_home_list_time_exam), examTime));
             mOrganizerTv.setText(formatSpannableString(mContext, mContext.getString(R.string.item_home_list_organizer), itemBean.getCom_sponsor()));
+
 
         }
 
@@ -221,7 +217,7 @@ public class HomeRecommendAdapter
             mFootTv = itemView.findViewById(R.id.tv_attention_item_hint);
         }
 
-        public void setData(){
+        void setData(){
             if(mNoMoreData){
                 mFootTv.setText(mContext.getString(R.string.attention_bottom_hint));
                 mProgressBar.setVisibility(View.GONE);

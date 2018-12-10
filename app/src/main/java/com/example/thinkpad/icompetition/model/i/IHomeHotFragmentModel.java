@@ -1,8 +1,9 @@
 package com.example.thinkpad.icompetition.model.i;
 
 /**
- * Created by Hjg on 2018/11/26.
+ * Created By hjg on 2018/11/29
  */
 public interface IHomeHotFragmentModel extends IBaseFragmentModel{
-    void getItem(int page_no, int page_size);
+    //获取热门
+    void getHotItem(int page_no, int page_size);
 }

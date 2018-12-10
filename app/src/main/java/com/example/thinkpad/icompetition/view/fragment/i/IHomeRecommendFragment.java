@@ -5,7 +5,7 @@ import com.example.thinkpad.icompetition.model.entity.exam.ExamRecordRoot;
 /**
  * Created by Hjg on 2018/11/26.
  */
-public interface IHomeHotFragment {
+public interface IHomeRecommendFragment {
     void getExamInfo(int page_no, int page_size);
-    void PagingQueryHomeHotResponse(ExamRecordRoot root);
+    void PagingQueryHomeRecommendResponse(ExamRecordRoot root);
 }

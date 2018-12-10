@@ -1,6 +1,7 @@
 package com.example.thinkpad.icompetition.model.impl;
 
 import android.os.Handler;
+import android.util.Log;
 
 import com.example.thinkpad.icompetition.model.entity.user.RegisterRoot;
 import com.example.thinkpad.icompetition.model.event.RegisterEvent;
@@ -28,6 +29,7 @@ public class RegisterModel extends BaseModel implements IRegisterModel {
         Callback callback = new CallbackIntercept() {
             @Override
             public void onSuccess(Call call, String jsonBody) {
+                Log.d("hjg666", "onSuccess: "+jsonBody);
                 RegisterEvent event =new RegisterEvent();
                 Gson gson = new Gson();
                 RegisterRoot root = gson.fromJson(jsonBody,RegisterRoot.class);
