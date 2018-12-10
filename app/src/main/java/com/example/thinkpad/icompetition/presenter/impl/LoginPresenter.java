@@ -56,6 +56,7 @@ public class LoginPresenter extends BasePresenter<LoginActivity, LoginModel> imp
                 break;
         }
     }
+
     private void saveUserInforToDB(UserInforBean bean){
         if(bean!=null){
             if (mDaoSession.getUserInforBeanDao().count() == 0){

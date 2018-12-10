@@ -26,7 +26,6 @@ import jp.wasabeef.glide.transformations.BlurTransformation;
  */
 
 public class LoginActivity extends BaseActivity<LoginPresenter> implements ILoginActivity, View.OnClickListener{
-
     private String mUserNum;
     private String mUserPassword;
     private EditText mUserNameEt;

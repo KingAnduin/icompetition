@@ -59,6 +59,7 @@
                 android:layout_gravity="center_vertical"
                 android:textSize="14sp"/>
             <ImageView
+                android:id="@+id/iv_name_toeditinfor"
                 android:layout_weight="1"
                 android:layout_marginRight="10dp"
                 android:layout_width="25dp"
@@ -94,6 +95,7 @@
                 android:layout_gravity="center_vertical"
                 android:textSize="14sp"/>
             <ImageView
+                android:id="@+id/iv_sex_toeditinfor"
                 android:layout_weight="1"
                 android:layout_marginRight="10dp"
                 android:layout_width="25dp"
@@ -129,6 +131,7 @@
                 android:layout_gravity="center_vertical"
                 android:textSize="14sp"/>
             <ImageView
+                android:id="@+id/iv_birthday_toeditinfor"
                 android:layout_weight="1"
                 android:layout_marginRight="10dp"
                 android:layout_width="25dp"

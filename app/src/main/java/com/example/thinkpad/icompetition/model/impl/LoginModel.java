@@ -81,4 +81,5 @@ public class LoginModel extends BaseModel implements ILoginModel {
     protected NetworkInterfaces getNetworkInterface() {
         return new NetworkInterfaces();
     }
+
 }

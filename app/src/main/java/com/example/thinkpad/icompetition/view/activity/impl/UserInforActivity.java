@@ -1,15 +1,18 @@
 package com.example.thinkpad.icompetition.view.activity.impl;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.thinkpad.icompetition.IcompetitionApplication;
 import com.example.thinkpad.icompetition.R;
 import com.example.thinkpad.icompetition.model.entity.user.UserInforBean;
+import com.example.thinkpad.icompetition.model.entity.user.UserInforRoot;
 import com.example.thinkpad.icompetition.presenter.impl.UserInforPresenter;
 import com.example.thinkpad.icompetition.view.activity.i.IBaseActivity;
 import com.example.thinkpad.icompetition.view.activity.i.IUserInforActivity;
@@ -34,6 +37,10 @@ public class UserInforActivity extends BaseActivity<UserInforPresenter> implemen
     private Toolbar mToolbar;
     private DaoSession mDaoSession;
     private UserInforBean mUserBean;
+    private ImageView mNameToEditInforIV;
+    private ImageView mSexToEditInforIV;
+    private ImageView mBirthdayToEditInforIV;
+    private ImageLoader imageLoader = ImageLoader.getInstance();
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,7 +51,8 @@ public class UserInforActivity extends BaseActivity<UserInforPresenter> implemen
         getUserInforFromDao();
     }
 
-    private void initDisplayImageOptions() {
+    public void initDisplayImageOptions() {
+        this.imageLoader.init(ImageLoaderConfiguration.createDefault(this));
         this.options = new DisplayImageOptions.Builder()
                 .showImageForEmptyUri(R.mipmap.ic_launcher)
                 .showImageOnFail(R.mipmap.ic_launcher)
@@ -64,7 +72,7 @@ public class UserInforActivity extends BaseActivity<UserInforPresenter> implemen
             mUserBean = list.get(0);
         }
         if(!TextUtils.isEmpty(mUserBean.getUser_name()))
-            mUserNameTV.setText(String.valueOf(mUserBean.getUser_name()));
+            mUserNameTV.setText(mUserBean.getUser_name());
         if(!TextUtils.isEmpty(mUserBean.getUser_sex()))
             mUserSexTV.setText(mUserBean.getUser_sex());
         if(!TextUtils.isEmpty(mUserBean.getUser_birthday()))
@@ -86,6 +94,9 @@ public class UserInforActivity extends BaseActivity<UserInforPresenter> implemen
     }
 
     private void findView() {
+        mNameToEditInforIV=findViewById(R.id.iv_name_toeditinfor);
+        mSexToEditInforIV=findViewById(R.id.iv_sex_toeditinfor);
+        mBirthdayToEditInforIV=findViewById(R.id.iv_birthday_toeditinfor);
         mUserNameTV=findViewById(R.id.tv_user_name);
         mUserSexTV=findViewById(R.id.tv_user_sex);
         mUserBirthday=findViewById(R.id.tv_user_birthday);
@@ -107,7 +118,25 @@ public class UserInforActivity extends BaseActivity<UserInforPresenter> implemen
     }
 
     @Override
-    public void onClick(View v) {
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode==100){
+            getUserInforFromDao();
+        }
+    }
 
+    @Override
+    public void onClick(View v) {
+//        switch (v.getId()){
+//            case R.id.iv_name_toeditinfor:
+//                startActivityForResult(new Intent(UserInforActivity.this,EditUserInforActivity.class));
+//                break;
+//            case R.id.iv_sex_toeditinfor:
+//                startActivityForResult(new Intent(UserInforActivity.this,EditUserInforActivity.class));
+//                break;
+//            case R.id.iv_birthday_toeditinfor:
+//                startActivityForResult(new Intent(UserInforActivity.this,EditUserInforActivity.class));
+//                break;
+//        }
     }
 }
