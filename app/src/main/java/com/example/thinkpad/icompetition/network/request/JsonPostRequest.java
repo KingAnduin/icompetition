@@ -51,8 +51,6 @@ public class JsonPostRequest {
      * @return request
      */
     private String getBase64Token(String token){
-        String hh = encodeToString(token.getBytes(), Base64.NO_WRAP);
-        String kk = hh;
         return encodeToString(token.getBytes(), Base64.NO_WRAP);
     }
 }
