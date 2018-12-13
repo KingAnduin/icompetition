@@ -14,6 +14,7 @@ import android.widget.TextView;
 import com.example.thinkpad.icompetition.IcompetitionApplication;
 import com.example.thinkpad.icompetition.R;
 import com.example.thinkpad.icompetition.model.entity.user.UserInforBean;
+import com.example.thinkpad.icompetition.view.activity.impl.LoginActivity;
 import com.example.thinkpad.icompetition.view.activity.impl.UserInforActivity;
 import com.example.thinkpad.icompetition.view.activity.impl.UserSetActivity;
 import com.example.thinkpad.icompetition.view.widget.AsyncImageView;
@@ -50,8 +51,14 @@ public class MeFragment extends Fragment implements View.OnClickListener{
         findView();
         setListener();
         initDisplayImageOptions();
-        loadUserInfor();
+        judgeUserByToken();
         return view;
+    }
+
+    private void judgeUserByToken(){
+        if(!TextUtils.isEmpty(((IcompetitionApplication)getActivity().getApplication()).getToken())) {
+            loadUserInfor();
+        }
     }
 
     //加载用户头像,名字以及电话
@@ -113,10 +120,21 @@ public class MeFragment extends Fragment implements View.OnClickListener{
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.iv_me_editor:
-                startActivityForResult(new Intent(getActivity(),UserInforActivity.class),100);
+                if(!TextUtils.isEmpty(((IcompetitionApplication)getActivity().getApplication()).getToken())){
+                    startActivityForResult(new Intent(getActivity(), UserInforActivity.class), 100);
+                }else {
+                    startActivity(new Intent(getActivity(),LoginActivity.class));
+                    getActivity().finish();//因为没有登陆所以回到登陆界面
+                }
                 break;
             case R.id.iv_me_set:
-                startActivity(new Intent(getActivity(),UserSetActivity.class));
+                if(!TextUtils.isEmpty(((IcompetitionApplication)getActivity().getApplication()).getToken())){
+                    startActivity(new Intent(getActivity(), UserSetActivity.class));
+                }else {
+                    startActivity(new Intent(getActivity(),LoginActivity.class));
+                    getActivity().finish();//因为没有登陆所以回到登陆界面
+                }
+
                 break;
         }
     }

@@ -27,11 +27,13 @@ import jp.wasabeef.glide.transformations.BlurTransformation;
  */
 
 public class LoginActivity extends BaseActivity<LoginPresenter> implements ILoginActivity, View.OnClickListener{
+    private ImageView mNoUserLoginIV;
     private String mUserNum;
     private String mUserPassword;
     private EditText mUserNameEt;
     private EditText mUserPassWordEt;
     private Button mLoginBt;
+    private long exitTime=0;
     private RelativeLayout relativeLayout;
     private ImageView mImageView;
     private TextView mRegisterTV;
@@ -51,9 +53,11 @@ public class LoginActivity extends BaseActivity<LoginPresenter> implements ILogi
     private void setListener() {
         mLoginBt.setOnClickListener(this);
         mRegisterTV.setOnClickListener(this);
+        mNoUserLoginIV.setOnClickListener(this);
     }
 
     private void findView() {
+        mNoUserLoginIV = findViewById(R.id.iv_no_user_login);
         mUserNameEt = findViewById(R.id.et_username);
         mUserPassWordEt = findViewById(R.id.et_password);
         relativeLayout=findViewById(R.id.mRelativeLayout);
@@ -88,6 +92,22 @@ public class LoginActivity extends BaseActivity<LoginPresenter> implements ILogi
             case R.id.tv_register:
                 startActivity(new Intent(LoginActivity.this,RegisterActivity.class));
                 break;
+            case R.id.iv_no_user_login:
+                startActivity(new Intent(LoginActivity.this,MainActivity.class));
+                finish();
+                break;
+        }
+    }
+
+    @Override
+    public void onBackPressed() {
+        //super.onBackPressed();
+        if((System.currentTimeMillis()-exitTime>1000)){
+            exitTime=System.currentTimeMillis();
+            Toast.makeText(getApplicationContext(), "再按一次退出程序", Toast.LENGTH_SHORT).show();
+        }else{
+            finish();
+            System.exit(0);
         }
     }
 

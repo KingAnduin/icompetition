@@ -65,4 +65,14 @@
                 android:text="@string/search" />
         </LinearLayout>
     </android.support.v7.widget.Toolbar>
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/layout_refresh_search"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent">
+        <android.support.v4.widget.NestedScrollView
+            android:id="@+id/search_scrollview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+        </android.support.v4.widget.NestedScrollView>
+    </android.support.v4.widget.SwipeRefreshLayout>
 </LinearLayout>

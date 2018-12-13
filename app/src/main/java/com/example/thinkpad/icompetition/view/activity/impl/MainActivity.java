@@ -11,6 +11,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.thinkpad.icompetition.presenter.impl.BasePresenter;
 import com.example.thinkpad.icompetition.view.adapter.MainFragmentAdapter;
@@ -30,6 +31,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     private BottomImageView mMeBV;
     private TextView mCompetitionTV;
     private TextView mMeTV;
+    private long exitTime=0;//记录用户点击back键的时间点
     private ViewPager mViewPager;
     private ArrayList<Fragment> mFragments;
     private CompetitionFragment mCompetitionFragment;
@@ -146,6 +148,18 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
                 mCompetitionBV.transformPage(positionOffset);  //设置消息的图片
                 mMeBV.transformPage(1 - positionOffset); //设置通讯录的图片
                 break;
+        }
+    }
+
+    @Override
+    public void onBackPressed() {
+        //super.onBackPressed();
+        if((System.currentTimeMillis()-exitTime>1000)){
+            exitTime=System.currentTimeMillis();
+            Toast.makeText(getApplicationContext(), "再按一次退出程序", Toast.LENGTH_SHORT).show();
+        }else{
+            finish();
+            System.exit(0);
         }
     }
 

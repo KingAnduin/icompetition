@@ -88,6 +88,7 @@ public class UserSetActivity extends BaseActivity<UserSetPresenter> implements V
         Intent intent;
         switch(v.getId()){
             case R.id.btn_set_exit:
+                ((IcompetitionApplication)getApplication()).setToken("");
                 intent = new Intent(UserSetActivity.this,LoginActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent);
