@@ -52,7 +52,7 @@ public class LoginModel extends BaseModel implements ILoginModel {
     }
 
     @Override
-    public void userGetInfor(String name) {
+    public void userGetInfor(String num) {
         Callback callback = new CallbackIntercept() {
             @Override
             public void onSuccess(Call call, String jsonBody) {
@@ -74,7 +74,7 @@ public class LoginModel extends BaseModel implements ILoginModel {
                 postEvent(event);
             }
         };
-        mNetworkInterface.userInfor(callback,name);
+        mNetworkInterface.userInfor(callback,num);
     }
 
     @Override

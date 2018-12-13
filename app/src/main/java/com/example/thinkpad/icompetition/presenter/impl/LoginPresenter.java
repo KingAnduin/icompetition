@@ -26,8 +26,8 @@ public class LoginPresenter extends BasePresenter<LoginActivity, LoginModel> imp
     }
 
     @Override
-    public void getUserInfor(String name) {
-        mModel.userGetInfor(name);
+    public void getUserInfor(String num) {
+        mModel.userGetInfor(num);
     }
 
     @Override

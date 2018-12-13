@@ -2,9 +2,19 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="com.example.thinkpad.icompetition">
-
+    <!--获取网络及其状态权限-->
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
     <uses-permission android:name="android.permission.INTERNET" />
+
+    <!-- 使用相机 -->
+    <uses-permission android:name="android.permission.CAMERA"/>
+    <uses-feature android:name="android.hardware.camera.autofocus"/>
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="true"/>
+
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
 
     <application
         android:allowBackup="true"
@@ -46,5 +56,13 @@
         <activity android:name=".view.activity.impl.RegisterActivity"
             android:screenOrientation="portrait"
             android:launchMode="singleTask"/>
+        <activity android:name=".view.activity.impl.EditUserInforActivity"
+            android:screenOrientation="portrait"
+            android:launchMode="singleTask"/>
+        <activity android:name=".view.activity.impl.ChangePasswordActivity"
+            android:screenOrientation="portrait"
+            android:launchMode="singleTask"/>
+        <!--剪裁图片用到的activity-->
+        <activity android:name="com.android.camera.CropImage"/>
     </application>
 </manifest>

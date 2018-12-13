@@ -21,6 +21,19 @@ android {
         daoPackage 'greendao.gen'
         targetGenDir 'src/main/java'
     }
+    repositories {
+        mavenCentral()
+
+        maven(){
+            url "https://oss.sonatype.org/content/repositories/snapshots"
+        }
+        maven {
+            url "https://jitpack.io"
+        }
+        flatDir {
+            dirs 'libs'
+        }
+    }
     configurations.all {
         resolutionStrategy.force 'com.android.support:support-annotations:27.1.1'
     }
@@ -50,4 +63,7 @@ dependencies {
     implementation 'org.greenrobot:greendao:3.0.1'
     implementation 'org.greenrobot:greendao-generator:3.0.0'
     implementation files('libs/ImageLoader.jar')
+    //裁剪图片
+    implementation(name: 'android-cropimage-1.1.2', ext: 'aar')
+    implementation 'com.github.chenupt.android:dragtoplayout:1.2.1@aar'
 }

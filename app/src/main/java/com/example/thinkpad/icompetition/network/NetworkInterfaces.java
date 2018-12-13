@@ -22,6 +22,8 @@ public class NetworkInterfaces {
     private static final String USER_INFOR = "/api/users/message"; //用户信息数据
     private static final String PAGING_QUERY_EXAM = "/api/competitions/bypage"; //分页查询竞赛信息
     private static final String PAGING_QUERY_HOT = "/api/competitions/hot"; //分页查询热门竞赛
+    private static final String SUBMIT_USERINFOR = "/api/users/update"; //提交用户信息
+    private static final String CHANGE_PASSWORD = "/api/users/updatepwd"; //修改密码
 
 
     /**
@@ -54,13 +56,26 @@ public class NetworkInterfaces {
     }
 
     /**
+     * 用户密码修改
+     * @param callback .
+     * @param oldPassword 旧密码
+     * @param newPassword 新密码
+     */
+    public void changePassword(Callback callback,String oldPassword,String newPassword ){
+        ArrayMap<String, String> param = new ArrayMap<>();
+        param.put("user_pwd", oldPassword);
+        param.put("new_pwd",newPassword);
+        new NetworkRequest(param,SERVER_HOST + CHANGE_PASSWORD,callback).sendRequest();
+    }
+
+    /**
      * 用户信息
      * @param callback 。
-     * @param name 用户名
+     * @param num 用户名
      */
-    public void userInfor(Callback callback, String name) {
+    public void userInfor(Callback callback, String num) {
         ArrayMap<String, String> param = new ArrayMap<>();
-        param.put("user_num", name);
+        param.put("user_num", num);
         new NetworkRequest(param, SERVER_HOST + USER_INFOR, callback).sendRequest();
     }
 
@@ -89,6 +104,25 @@ public class NetworkInterfaces {
         param.put("pageSize", String.valueOf(page_size));
         new NetworkRequest(param, SERVER_HOST + PAGING_QUERY_HOT, callback).sendRequest();
 
+    }
+
+    /**
+     * 提交个人用户信息
+     * @param callback .
+     * @param userName 用户姓名
+     * @param userSex 用户性别
+     * @param userBirthday 用户生日
+     * @param interest 用户兴趣
+     * @param headImage 用户头像
+     */
+    public void submitUserInfor(Callback callback,String userName,String userSex,String userBirthday,String interest,String headImage){
+        ArrayMap<String,String> param = new ArrayMap<>();
+        param.put("user_name",userName);
+        param.put("user_sex",userSex);
+        param.put("user_birthday",userBirthday);
+        param.put("user_interest",interest);
+        param.put("user_headimage",headImage);
+        new NetworkRequest(param,SERVER_HOST + SUBMIT_USERINFOR,callback).sendRequest();
     }
 
 

@@ -7,6 +7,7 @@ public class LoginBean {
     private String _$Token251; // FIXME check this code
 
     public String get_$Token251() {
+        _$Token251 = _$Token251+":";
         return _$Token251;
     }
 

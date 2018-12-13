@@ -27,6 +27,9 @@ import io.rong.imageloader.core.ImageLoader;
 import io.rong.imageloader.core.ImageLoaderConfiguration;
 import io.rong.imageloader.core.display.FadeInBitmapDisplayer;
 
+/**
+ * created by a’su's
+ */
 public class UserInforActivity extends BaseActivity<UserInforPresenter> implements IBaseActivity,IUserInforActivity,View.OnClickListener {
     private DisplayImageOptions options;
     private TextView mToolbarTitleTV;
@@ -37,6 +40,7 @@ public class UserInforActivity extends BaseActivity<UserInforPresenter> implemen
     private Toolbar mToolbar;
     private DaoSession mDaoSession;
     private UserInforBean mUserBean;
+    private ImageView mHeadImageToEditInforIV;
     private ImageView mNameToEditInforIV;
     private ImageView mSexToEditInforIV;
     private ImageView mBirthdayToEditInforIV;
@@ -78,8 +82,9 @@ public class UserInforActivity extends BaseActivity<UserInforPresenter> implemen
         if(!TextUtils.isEmpty(mUserBean.getUser_birthday()))
             mUserBirthday.setText(mUserBean.getUser_birthday());
         if(!TextUtils.isEmpty(mUserBean.getUser_headimage())){
-            ImageLoader imageLoader = ImageLoader.getInstance();
             imageLoader.init(ImageLoaderConfiguration.createDefault(this));
+            imageLoader.clearDiskCache();
+            imageLoader.clearMemoryCache();
             imageLoader.displayImage(mUserBean.getUser_headimage(),mUserHeadImageAIV,options);
         }
     }
@@ -88,12 +93,18 @@ public class UserInforActivity extends BaseActivity<UserInforPresenter> implemen
         mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                setResult(200);
                 finish();
             }
         });
+        mHeadImageToEditInforIV.setOnClickListener(this);
+        mNameToEditInforIV.setOnClickListener(this);
+        mSexToEditInforIV.setOnClickListener(this);
+        mBirthdayToEditInforIV.setOnClickListener(this);
     }
 
     private void findView() {
+        mHeadImageToEditInforIV=findViewById(R.id.iv_headimage_toeditinfor);
         mNameToEditInforIV=findViewById(R.id.iv_name_toeditinfor);
         mSexToEditInforIV=findViewById(R.id.iv_sex_toeditinfor);
         mBirthdayToEditInforIV=findViewById(R.id.iv_birthday_toeditinfor);
@@ -120,23 +131,29 @@ public class UserInforActivity extends BaseActivity<UserInforPresenter> implemen
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode==100){
-            getUserInforFromDao();
+        if(resultCode==100 && requestCode==50){
+            getUserInforFromDao();//修改个人信息后重新从数据库里获取个人信息
+            showSnackBar(mUserSexTV,getResources().getString(R.string.submit_success),getMainColor());
         }
     }
 
     @Override
     public void onClick(View v) {
-//        switch (v.getId()){
-//            case R.id.iv_name_toeditinfor:
-//                startActivityForResult(new Intent(UserInforActivity.this,EditUserInforActivity.class));
-//                break;
-//            case R.id.iv_sex_toeditinfor:
-//                startActivityForResult(new Intent(UserInforActivity.this,EditUserInforActivity.class));
-//                break;
-//            case R.id.iv_birthday_toeditinfor:
-//                startActivityForResult(new Intent(UserInforActivity.this,EditUserInforActivity.class));
-//                break;
-//        }
+        Intent intent = new Intent(UserInforActivity.this,EditUserInforActivity.class);
+        intent.putExtra("userinfor",mUserBean);
+        switch (v.getId()){
+            case R.id.iv_headimage_toeditinfor:
+                startActivityForResult(intent,50);
+                break;
+            case R.id.iv_name_toeditinfor:
+                startActivityForResult(intent,50);
+                break;
+            case R.id.iv_sex_toeditinfor:
+                startActivityForResult(intent,50);
+                break;
+            case R.id.iv_birthday_toeditinfor:
+                startActivityForResult(intent,50);
+                break;
+        }
     }
 }

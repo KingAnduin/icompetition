@@ -8,7 +8,7 @@ import org.greenrobot.greendao.annotation.Property;
 import java.io.Serializable;
 
 @Entity
-public class UserInforBean {
+public class UserInforBean implements Serializable {
     /**
      * user_birthday : null
      * user_headimage : null

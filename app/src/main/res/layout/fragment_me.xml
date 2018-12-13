@@ -64,7 +64,7 @@
                                 android:layout_centerHorizontal="true"
                                 android:layout_centerVertical="true"
                                 android:paddingTop="15dp"
-                                android:text="义小攻"
+                                android:text="未编辑"
                                 android:textColor="#000" />
 
                             <LinearLayout
@@ -81,10 +81,11 @@
                                     android:textSize="12sp" />
 
                                 <TextView
+                                    android:id="@+id/tv_user_phone"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:paddingTop="5dp"
-                                    android:text="17713657669"
+                                    android:text="未知"
                                     android:textSize="12sp" />
                             </LinearLayout>
                         </RelativeLayout>
@@ -98,6 +99,7 @@
                 </RelativeLayout>
 
                 <com.example.thinkpad.icompetition.view.widget.AsyncImageView
+                    android:id="@+id/aiv_me_headimage"
                     android:layout_width="80dp"
                     android:layout_height="80dp"
                     android:layout_gravity="center_horizontal"

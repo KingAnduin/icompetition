@@ -1,6 +1,7 @@
 package com.example.thinkpad.icompetition.network.request;
 
 import android.support.v4.util.ArrayMap;
+import android.text.TextUtils;
 import android.util.Base64;
 
 import com.example.thinkpad.icompetition.IcompetitionApplication;
@@ -26,6 +27,7 @@ public class JsonPostRequest {
     private static final MediaType JSON = MediaType.parse("application/json; charset=utf-8");
     private String mUrl;                                //请求地址
     private ArrayMap<String, String> mRequestParam;     //请求参数
+    private String token;
 
     public JsonPostRequest(String url, ArrayMap<String, String> requestParam) {
         this.mUrl = url;
@@ -40,10 +42,14 @@ public class JsonPostRequest {
      * @return request
      */
     public Request getRequest() {
+        token=getBase64Token(((IcompetitionApplication) ActivityManager.getActivityManager().peekActivity().getApplication()).getToken());
         //将map转换为json字串
         RequestBody body = RequestBody.create(JSON, new Gson().toJson(mRequestParam));
-        return new Request.Builder().url(mUrl).addHeader("Authorization","Basic "+getBase64Token(((IcompetitionApplication) ActivityManager.getActivityManager().peekActivity().getApplication()).getToken())).post(body).tag("tag").build();
-       // return new Request.Builder().url(mUrl).addHeader("Authorization","Basic ZXlKaGJHY2lPaUpJVXpJMU5pSXNJbWxoZENJNk1UVTBNelEzTmprMk15d2laWGh3SWpveE5UUXpORGczTURRemZRLmV5SjFjMlZ5WDI1MWJTSTZNVFUyT0RFNU5UTXpNakY5LlVqT3ZwMHNMOEtlc252dXpyS2d0NzZ3eWJWUy1uSV9MdFVwQ2lnSnl2c006").post(body).tag("tag").build();
+        if(!TextUtils.isEmpty(token)) {
+            return new Request.Builder().url(mUrl).header("Authorization", "Basic "+token).post(body).tag("tag").build();
+        }
+        return new Request.Builder().url(mUrl).post(body).tag("tag").build();
+        //return new Request.Builder().url(mUrl).addHeader("Authorization","Basic ZXlKaGJHY2lPaUpJVXpJMU5pSXNJbWxoZENJNk1UVTBNelEzTmprMk15d2laWGh3SWpveE5UUXpORGczTURRemZRLmV5SjFjMlZ5WDI1MWJTSTZNVFUyT0RFNU5UTXpNakY5LlVqT3ZwMHNMOEtlc252dXpyS2d0NzZ3eWJWUy1uSV9MdFVwQ2lnSnl2c006").post(body).tag("tag").build();
     }
 
     /**
@@ -51,6 +57,8 @@ public class JsonPostRequest {
      * @return request
      */
     private String getBase64Token(String token){
+        //token=token+":";
+        //token=encodeToString(token.getBytes(), Base64.NO_WRAP);
         return encodeToString(token.getBytes(), Base64.NO_WRAP);
     }
 }

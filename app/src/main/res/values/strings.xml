@@ -28,7 +28,27 @@
     <string name="register_repeat">该账户已被注册，换一个再试试？</string>
     <string name="register_success">恭喜你~你已注册成功！</string>
 
-    <!-- 首页竞赛信息item -->
+    <!--修改用户信息-->
+    <string name="submit_success">个人信息保存成功</string>
+
+    <!--修改密码-->
+    <string name="user_num">当前账户</string>
+    <string name="sure_password">确认密码</string>
+    <string name="old_password">旧密码</string>
+    <string name="new_password">新密码</string>
+    <string name="password_change">修改密码</string>
+    <string name="input_old_password">请输入原来的密码</string>
+    <string name="new_password_limit">由6到16位大小写字母或数字组成</string>
+    <string name="second_input_new_password">请再次输入新密码</string>
+    <string name="not_input_old_password">请输入旧密码</string>
+    <string name="not_input_new_password">请输入新密码</string>
+    <string name="not_input_sure_password">请再次确认密码</string>
+    <string name="new_password_notmatch">两次输入的密码不一致！</string>
+    <string name="new_password_error">新密码不符合规范请重新填写！</string>
+    <string name="old_password_notmatch">旧密码错误,请重新输入！</string>
+    <string name="change_password_success">密码修改成功！</string>
+
+  <!-- 首页竞赛信息item -->
     <string name="item_home_list_is_start">正在报名</string>
     <string name="item_home_list_started">报名截止</string>
     <string name="item_home_list_deadline">距离报名截止时间还有&#160;%1$s&#160;天&#160;</string>
@@ -42,5 +62,9 @@
     <string name="attention_fresh_hint">正在加载....</string>
     <string name="attention_bottom_hint">我是有底线的</string>
     <string name="attention_fail_hint">错误原因:</string>
+
+    <!--搜索-->
+    <string name="search_keywords">请输入关键字</string>
+    <string name="search">搜索</string>
     
 </resources>

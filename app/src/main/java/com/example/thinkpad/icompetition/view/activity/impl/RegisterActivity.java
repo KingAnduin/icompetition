@@ -84,6 +84,7 @@ public class RegisterActivity extends BaseActivity<RegisterPresenter> implements
 
     @Override
     public void failBecauseNotNetworkReturn(int code) {
+        dismissDialog();
         showToast(getResources().getString(R.string.not_network));
     }
 
@@ -150,7 +151,7 @@ public class RegisterActivity extends BaseActivity<RegisterPresenter> implements
     }
 
     /**
-     * 校验密码
+     * 校验密码6到16位大小写字母或数字组成
      */
     public boolean isUserfulPassword(String password){
         String regExp="^([a-z]|[A-Z]|[0-9]){6,16}$";

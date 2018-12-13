@@ -17,6 +17,7 @@ import com.example.thinkpad.icompetition.R;
 import com.example.thinkpad.icompetition.model.entity.user.LoginRoot;
 import com.example.thinkpad.icompetition.model.entity.user.UserInforRoot;
 import com.example.thinkpad.icompetition.presenter.impl.LoginPresenter;
+import com.example.thinkpad.icompetition.util.NetWorkHelper;
 import com.example.thinkpad.icompetition.view.activity.i.ILoginActivity;
 
 import jp.wasabeef.glide.transformations.BlurTransformation;
@@ -81,7 +82,6 @@ public class LoginActivity extends BaseActivity<LoginPresenter> implements ILogi
         {
             case R.id.btn_login:
                 login();
-                mLoginBt.setClickable(false);
                 //startActivity(new Intent(LoginActivity.this,MainActivity.class));
                 //finish();
                 break;
@@ -93,20 +93,28 @@ public class LoginActivity extends BaseActivity<LoginPresenter> implements ILogi
 
     private void login() {
         if(judgeUserNumAndPassword()) {
-            mPresenter.login(mUserNum, mUserPassword);
+            if(NetWorkHelper.isNetworkAvailable(this)) {
+                mPresenter.login(mUserNum, mUserPassword);
+            }else {
+                mLoginBt.setClickable(true);
+                showSnackBar(mLoginBt,getString(R.string.not_have_network),getMainColor());
+            }
         }
     }
 
     //判断用户是否输入了账户和密码
     private boolean judgeUserNumAndPassword() {
+        mLoginBt.setClickable(false);
         mUserNum = mUserNameEt.getText().toString();
         mUserPassword=mUserPassWordEt.getText().toString();
         if(mUserNum.isEmpty()){
             showSnackBar(mLoginBt,getResources().getString(R.string.login_user_null),getMainColor());
+            mLoginBt.setClickable(true);
             return false;
         }
         if(mUserPassword.isEmpty()){
             showSnackBar(mLoginBt,getResources().getString(R.string.login_password_null),getMainColor());
+            mLoginBt.setClickable(true);
             return false;
         }
         return true;
@@ -119,8 +127,20 @@ public class LoginActivity extends BaseActivity<LoginPresenter> implements ILogi
     //登陆请求的回调
     @Override
     public void loginReturn(LoginRoot root) {
-        ((IcompetitionApplication)getApplication()).setToken(root.getData().get(0).get_$Token251());//保存token至sharedpreferences
-        getUserInfor();
+        if(root.getCode()==200) {
+            ((IcompetitionApplication) getApplication()).setToken(root.getData().get(0).get_$Token251());//保存token至sharedpreferences
+            getUserInfor();
+        }
+        if(root.getCode()==1)
+        {
+            mLoginBt.setClickable(true);
+            showSnackBar(mLoginBt,"账户尚未注册",getMainColor());
+        }
+        if(root.getCode()==2)
+        {
+            mLoginBt.setClickable(true);
+            showSnackBar(mLoginBt,"账户密码错误",getMainColor());
+        }
     }
 
     //请求返回用户数据的回调
@@ -133,6 +153,7 @@ public class LoginActivity extends BaseActivity<LoginPresenter> implements ILogi
 
     @Override
     public void failBecauseNotNetworkReturn(int code) {
+        mLoginBt.setClickable(true);
         showToast(getResources().getString(R.string.not_network));
     }
 

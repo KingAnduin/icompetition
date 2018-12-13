@@ -16,6 +16,9 @@ import com.example.thinkpad.icompetition.presenter.impl.BasePresenter;
 import java.util.Timer;
 import java.util.TimerTask;
 
+/**
+ * created by a’su's
+ */
 public class SplashActivity extends BaseActivity{
     private Timer timer;
     private TimerTask timerTask;
