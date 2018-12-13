@@ -28,7 +28,7 @@ public class EditUserInforModel extends BaseModel implements IBaseModel,IEditUse
     }
 
     @Override
-    public void submitUserInfor(UserInforBean bean) {
+    public void submitUserInfor(UserInforBean bean,boolean haveHeadImage) {
         Callback callback = new CallbackIntercept() {
             @Override
             public void onSuccess(Call call, String jsonBody) {
@@ -58,7 +58,12 @@ public class EditUserInforModel extends BaseModel implements IBaseModel,IEditUse
                 postEvent(event);
             }
         };
-        mNetworkInterface.submitUserInfor(callback,bean.getUser_name(),bean.getUser_sex(),bean.getUser_birthday(),bean.getUser_interest(),bean.getUser_headimage());
+        if(haveHeadImage){
+            mNetworkInterface.submitUserInfor(callback,bean.getUser_name(),bean.getUser_sex(),bean.getUser_birthday(),bean.getUser_interest(),bean.getUser_headimage());
+        }
+        else {
+            mNetworkInterface.submitUserInforWithoutHeadImage(callback, bean.getUser_name(), bean.getUser_sex(), bean.getUser_birthday(), bean.getUser_interest());
+        }
     }
     @Override
     public void getUserInfor(String num) {

@@ -70,7 +70,7 @@ public class EditUserInforActivity extends BaseActivity<EditUserInforPresenter> 
     private int mDay=calendar.get(Calendar.DAY_OF_MONTH);
     private String birthday = null;
     private ProgressDialog mProgressDialog;
-
+    private boolean haveHeadImage = false; //提交的用户信息中是否包含头像
     //以下是有关头像处理的变量
     private Bitmap bitmap;
     protected static Uri tempUri; //用于给出图片的uri
@@ -218,9 +218,10 @@ public class EditUserInforActivity extends BaseActivity<EditUserInforPresenter> 
             }
             if(!TextUtils.isEmpty(str_icon_stream)) {
                 mUserInforBean.setUser_headimage(str_icon_stream);
+                haveHeadImage=true;
             }
             //mUserInforBean.setUser_interest("计算机");
-            mPresenter.submitUserInfor(mUserInforBean);
+            mPresenter.submitUserInfor(mUserInforBean,haveHeadImage);
             showProgressBarDialog();
         }else{
             showSnackBar(mUserSexTV,getString(R.string.not_have_network),getMainColor());

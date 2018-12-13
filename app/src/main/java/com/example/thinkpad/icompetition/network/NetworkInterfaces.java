@@ -107,7 +107,7 @@ public class NetworkInterfaces {
     }
 
     /**
-     * 提交个人用户信息
+     * 带头像提交个人用户信息
      * @param callback .
      * @param userName 用户姓名
      * @param userSex 用户性别
@@ -122,6 +122,24 @@ public class NetworkInterfaces {
         param.put("user_birthday",userBirthday);
         param.put("user_interest",interest);
         param.put("user_headimage",headImage);
+        new NetworkRequest(param,SERVER_HOST + SUBMIT_USERINFOR,callback).sendRequest();
+    }
+
+    /**
+     * 应后台要求添加
+     * 不带头像提交个人用户信息
+     * @param callback .
+     * @param userName 用户姓名
+     * @param userSex 用户性别
+     * @param userBirthday 用户生日
+     * @param interest 用户兴趣
+     */
+    public void submitUserInforWithoutHeadImage(Callback callback,String userName,String userSex,String userBirthday,String interest){
+        ArrayMap<String,String> param = new ArrayMap<>();
+        param.put("user_name",userName);
+        param.put("user_sex",userSex);
+        param.put("user_birthday",userBirthday);
+        param.put("user_interest",interest);
         new NetworkRequest(param,SERVER_HOST + SUBMIT_USERINFOR,callback).sendRequest();
     }
 

@@ -25,8 +25,8 @@ public class EditUserInforPresenter extends BasePresenter<EditUserInforActivity,
     }
 
     @Override
-    public void submitUserInfor(UserInforBean bean) {
-        mModel.submitUserInfor(bean);
+    public void submitUserInfor(UserInforBean bean,boolean haveHeadImage) {
+        mModel.submitUserInfor(bean,haveHeadImage);
     }
 
     @Override
