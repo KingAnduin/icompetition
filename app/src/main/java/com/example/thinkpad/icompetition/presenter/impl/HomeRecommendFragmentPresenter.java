@@ -1,6 +1,7 @@
 package com.example.thinkpad.icompetition.presenter.impl;
 
 import android.support.annotation.NonNull;
+import android.text.TextUtils;
 
 import com.example.thinkpad.icompetition.model.event.HomeRecommendEvent;
 import com.example.thinkpad.icompetition.model.impl.BaseFragmentModel;
@@ -39,12 +40,6 @@ public class HomeRecommendFragmentPresenter
                 case HomeRecommendEvent.GET_RECOMMEND_FAIL:
                     mView.failBecauseNotNetworkReturn(what);
                     break;
-//                    if(event.getRoot()!=null)
-//                    {
-//                        if(!TextUtils.isEmpty(event.getRoot().getMsg())){
-//                            mView.showErrorMsg(event.getRoot());
-//                        }
-//                    }
             }
         }
     }

@@ -1,5 +1,6 @@
 package com.example.thinkpad.icompetition.view.fragment.impl;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
@@ -16,6 +17,7 @@ import com.example.thinkpad.icompetition.model.entity.exam.ExamRecordItemBean;
 import com.example.thinkpad.icompetition.model.entity.exam.ExamRecordRoot;
 import com.example.thinkpad.icompetition.presenter.impl.HomeRecommendFragmentPresenter;
 import com.example.thinkpad.icompetition.view.activity.i.IBaseActivity;
+import com.example.thinkpad.icompetition.view.activity.impl.CompetitionInfoActivity;
 import com.example.thinkpad.icompetition.view.adapter.HomeRecommendAdapter;
 import com.example.thinkpad.icompetition.view.fragment.i.IHomeRecommendFragment;
 
@@ -27,7 +29,9 @@ import java.util.List;
  * 首页推荐Fragment
  */
 
-public class HomeRecommendFragment extends BaseFragment<HomeRecommendFragmentPresenter> implements IBaseActivity, IHomeRecommendFragment {
+public class HomeRecommendFragment
+        extends BaseFragment<HomeRecommendFragmentPresenter>
+        implements IBaseActivity, IHomeRecommendFragment {
     private View rootView;
     private HomeRecommendAdapter mAdapter = null;
     private SwipeRefreshLayout mSwipeRefreshLayout;
@@ -40,8 +44,7 @@ public class HomeRecommendFragment extends BaseFragment<HomeRecommendFragmentPre
     private int mCurrentPage = 1;                           //页数
     private final int page_size = 10;                       //每页信息数
     private boolean mNoMoreData = false;
-    private SignInFreshListener mSignInFreshListener;
-    public boolean mFirstSignIn = true;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
@@ -56,6 +59,12 @@ public class HomeRecommendFragment extends BaseFragment<HomeRecommendFragmentPre
     }
 
     @Override
+    public void onStart() {
+        super.onStart();
+        refreshData();
+    }
+
+    @Override
     protected HomeRecommendFragmentPresenter getPresenter() {
         return new HomeRecommendFragmentPresenter(this);
     }
@@ -65,14 +74,7 @@ public class HomeRecommendFragment extends BaseFragment<HomeRecommendFragmentPre
         mPresenter.getRecommendInfo(page_no, page_size);
     }
 
-    @Override
-    public void onResume() {
-        super.onResume();
-        if (mSignInFreshListener!=null&&mFirstSignIn){
-            mSignInFreshListener.OnSignInFresh();
-            mFirstSignIn=false;
-        }
-    }
+
 
     @Override
     public void failBecauseNotNetworkReturn(int code) {
@@ -90,7 +92,7 @@ public class HomeRecommendFragment extends BaseFragment<HomeRecommendFragmentPre
 
     //分页请求数据的返回
     @Override
-    public void PagingQueryHomeRecommendResponse(ExamRecordRoot root) {
+    public void PagingQueryHomeRecommendResponse(final ExamRecordRoot root) {
         if (root != null && root.getCode() == 200) {
             if (root.getData() != null) {
                 if (mInfo == null) {
@@ -106,7 +108,7 @@ public class HomeRecommendFragment extends BaseFragment<HomeRecommendFragmentPre
                         }
                         if (mAdapter == null) {
                             mAdapter = new HomeRecommendAdapter(getContext(), mInfo);
-                            if (mInfo.size() < page_size) {
+                            if (root.getData().size() < page_size) {
                                 //显示没有更多
                                 mNoMoreData = true;
                                 mAdapter.setNoMoreData(true);
@@ -211,28 +213,18 @@ public class HomeRecommendFragment extends BaseFragment<HomeRecommendFragmentPre
 
 
     /**
-     * 查看详情 TODO
+     * 查看竞赛详情
      */
     private void gotoDoc() {
-
-    }
-
-    /**
-     * 用于网络请求错误时打印信息
-     *
-     * @param root .
-     */
-    public void showErrorMsg(ExamRecordRoot root) {
-        showSnackBar(mRecyclerView, root.getMsg());
-    }
-
-    public void setSignInFreshListener(SignInFreshListener signInFreshListener){
-        if(mSignInFreshListener==null){
-            this.mSignInFreshListener=signInFreshListener;
-        }
-    }
-
-    public interface SignInFreshListener{
-        void OnSignInFresh();
+        mAdapter.setItemClickListener(new HomeRecommendAdapter.docItemClickListener() {
+            @Override
+            public void onClick(int position) {
+                Intent intent = new Intent(getContext(), CompetitionInfoActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("item", mInfo.get(position));
+                intent.putExtras(bundle);
+                startActivity(intent);
+            }
+        });
     }
 }

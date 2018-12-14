@@ -1,6 +1,7 @@
 package com.example.thinkpad.icompetition.network;
 
 import android.support.v4.util.ArrayMap;
+import android.telephony.SignalStrength;
 import android.util.Log;
 
 import okhttp3.Callback;
@@ -24,6 +25,10 @@ public class NetworkInterfaces {
     private static final String PAGING_QUERY_HOT = "/api/competitions/hot"; //分页查询热门竞赛
     private static final String SUBMIT_USERINFOR = "/api/users/update"; //提交用户信息
     private static final String CHANGE_PASSWORD = "/api/users/updatepwd"; //修改密码
+    private static final String PAGING_QUERY_INTEREST = "api/competitions/type";//分页查询分类的竞赛
+    private static final String COLLECTION_BY_ID = "/api/collections/byid"; //获取是否收藏（单个）
+    private static final String COLLECTION_ADD = "/api/collections/add"; //添加收藏
+    private static final String COLLECTION_CANCLE = "/api/collections/delete "; //删除收藏
 
 
     /**
@@ -143,6 +148,57 @@ public class NetworkInterfaces {
         new NetworkRequest(param,SERVER_HOST + SUBMIT_USERINFOR,callback).sendRequest();
     }
 
+    /**
+     * 分页查询兴趣的竞赛信息
+     * @param callback .
+     * @param page_no 页码
+     * @param page_size 每页数量
+     * @param type 类型
+     */
+    public void getTypeExam(Callback callback, int page_no, int page_size, String type){
+        ArrayMap<String, String> param = new ArrayMap<>();
+        param.put("page", String.valueOf(page_no));
+        param.put("pageSize", String.valueOf(page_size));
+        param.put("type", type);
+        new NetworkRequest(param, SERVER_HOST + PAGING_QUERY_INTEREST, callback).sendRequest();
+    }
+
+    /**
+     * 删除收藏
+     * @param callback .
+     * @param comid 比赛id
+     */
+    public void cancleCollection(Callback callback, String comid){
+        ArrayMap<String, String> param = new ArrayMap<>();
+        param.put("comid", comid);
+        new NetworkRequest(param, SERVER_HOST + COLLECTION_CANCLE, callback).sendRequest();
+    }
+
+
+    /**
+     * 添加收藏
+     * @param callback .
+     * @param usernum 用户账号
+     * @param comid 比赛id
+     */
+    public void addCollection(Callback callback, String usernum, String comid){
+        ArrayMap<String, String> param = new ArrayMap<>();
+        param.put("usernum", usernum);
+        param.put("comid", comid);
+        new NetworkRequest(param, SERVER_HOST + COLLECTION_ADD, callback).sendRequest();
+    }
+
+
+    /**
+     * 获取是否收藏（单个）
+     * @param callback .
+     * @param comid 比赛id
+     */
+    public void getIsCollection(Callback callback,String comid){
+        ArrayMap<String, String> param = new ArrayMap<>();
+        param.put("comid", comid);
+        new NetworkRequest(param, SERVER_HOST + COLLECTION_BY_ID, callback).sendRequest();
+    }
 
 
 }

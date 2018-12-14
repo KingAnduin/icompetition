@@ -58,6 +58,17 @@
     <string name="item_home_list_organizer">主办方&#160;&#160;&#160;&#160;&#160;&#160;%1$s</string>
     <string name="item_home_list_level">国家级比赛  全国参与</string>
 
+    <!-- 竞赛详细信息 -->
+    <string name="competition_info_title">竞赛详情</string>
+    <string name="competition_info_publish">竞赛发布者</string>
+    <string name="competition_info_publish_name">发布者姓名</string>
+    <string name="competition_info_url">官方网址</string>
+    <string name="competition_info_time_sign_up">报名时间</string>
+    <string name="competition_info_time_exam">考试时间</string>
+    <string name="competition_info_organizer">主办方</string>
+    <string name="competition_info_webView">前往官网报名</string>
+
+
     <!-- ItemFoot -->
     <string name="attention_fresh_hint">正在加载....</string>
     <string name="attention_bottom_hint">我是有底线的</string>

@@ -44,7 +44,7 @@
         <activity android:name=".view.activity.impl.SearchActivity"
             android:screenOrientation="portrait"
             android:launchMode="singleTask"/>
-        <activity android:name=".view.activity.impl.CompetitionInforActivity"
+        <activity android:name=".view.activity.impl.CompetitionInfoActivity"
             android:screenOrientation="portrait"
             android:launchMode="singleTask"/>
         <activity android:name=".view.activity.impl.UserInforActivity"

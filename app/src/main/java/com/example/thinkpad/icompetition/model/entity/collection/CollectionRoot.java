@@ -1,8 +1,16 @@
-package com.example.thinkpad.icompetition.model.entity.user;
+package com.example.thinkpad.icompetition.model.entity.collection;
 
-public class UserInforRoot {
+/**
+ * Created By hjg on 2018/12/13
+ */
+public class CollectionRoot {
+
+    /**
+     * code : 200
+     * msg : 成功
+     */
+
     private int code;
-    private UserInforBean data;
     private String msg;
 
     public int getCode() {
@@ -11,14 +19,6 @@ public class UserInforRoot {
 
     public void setCode(int code) {
         this.code = code;
-    }
-
-    public UserInforBean getData() {
-        return data;
-    }
-
-    public void setData(UserInforBean data) {
-        this.data = data;
     }
 
     public String getMsg() {

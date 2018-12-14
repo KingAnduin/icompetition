@@ -1,6 +1,7 @@
 package com.example.thinkpad.icompetition.view.fragment.impl;
 
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
@@ -18,6 +19,7 @@ import com.example.thinkpad.icompetition.presenter.impl.HomeHotsFragmentPresente
 import com.example.thinkpad.icompetition.presenter.impl.HomeRecommendFragmentPresenter;
 import com.example.thinkpad.icompetition.view.activity.i.IBaseActivity;
 import com.example.thinkpad.icompetition.R;
+import com.example.thinkpad.icompetition.view.activity.impl.CompetitionInfoActivity;
 import com.example.thinkpad.icompetition.view.adapter.HomeHotAdapter;
 import com.example.thinkpad.icompetition.view.adapter.HomeRecommendAdapter;
 import com.example.thinkpad.icompetition.view.fragment.i.IHomeHotsFragment;
@@ -74,7 +76,7 @@ public class HomeHotsFragment extends BaseFragment<HomeHotsFragmentPresenter>
     }
 
     @Override
-    public void pagingQueryHomeHotsResponse(ExamRecordRoot root) {
+    public void pagingQueryHomeHotsResponse(final ExamRecordRoot root) {
         if (root != null && root.getCode() == 200) {
             if (root.getData() != null) {
                 if (mInfo == null) {
@@ -90,7 +92,7 @@ public class HomeHotsFragment extends BaseFragment<HomeHotsFragmentPresenter>
                         }
                         if (mAdapter == null) {
                             mAdapter = new HomeHotAdapter(getContext(), mInfo);
-                            if (mInfo.size() < page_size) {
+                            if (root.getData().size() < page_size) {
                                 //显示没有更多
                                 mNoMoreData = true;
                                 mAdapter.setNoMoreData(true);
@@ -205,9 +207,19 @@ public class HomeHotsFragment extends BaseFragment<HomeHotsFragmentPresenter>
     }
 
     /**
-     * 查看详情 TODO
+     * 查看详情
      */
     private void gotoDoc() {
+        mAdapter.setItemClickListener(new HomeHotAdapter.docItemClickListener() {
+            @Override
+            public void onClick(int position) {
+                Intent intent = new Intent(getContext(), CompetitionInfoActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("item", mInfo.get(position));
+                intent.putExtras(bundle);
+                startActivity(intent);
+            }
+        });
 
     }
 

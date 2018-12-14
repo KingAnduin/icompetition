@@ -21,7 +21,6 @@ public class DateCount {
         } catch (ParseException e) {
             e.printStackTrace();
         }
-        Log.d("hjg", "count: "+counts);
         return counts;
     }
 }

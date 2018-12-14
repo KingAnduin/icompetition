@@ -54,12 +54,6 @@ public class CompetitionFragment extends Fragment {
         fragments.add(homeHotsFragment);
         fragments.add(homeRecommendFragment);
         fragments.add(homeInterestFragment);
-        homeRecommendFragment.setSignInFreshListener(new HomeRecommendFragment.SignInFreshListener() {
-            @Override
-            public void OnSignInFresh() {
-                homeRecommendFragment.refreshData();
-            }
-        });
         viewPager.setAdapter(new InFragmentAdapter(getFragmentManager(),fragments));
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override

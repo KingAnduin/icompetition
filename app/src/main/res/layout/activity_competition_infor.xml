@@ -1,12 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#fff"
-    android:fitsSystemWindows="true"
-    android:orientation="vertical">
+    android:fitsSystemWindows="true">
     <include layout="@layout/toolbar_tab"/>
-    <android.support.v4.widget.NestedScrollView
+    <ScrollView
+        android:id="@+id/com_info_scroll"
+        android:layout_below="@+id/toolbar_main"
+        android:layout_above="@+id/com_info_tool"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
         <LinearLayout
@@ -15,18 +18,23 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
             <ImageView
+                android:id="@+id/com_info_photo"
                 android:layout_width="match_parent"
-                android:layout_height="180dp"
-                android:background="@drawable/infor"/>
+                android:layout_height="120dp"
+                android:background="@drawable/infor"
+                tools:ignore="ContentDescription" />
             <TextView
+                android:id="@+id/com_info_title"
                 android:paddingTop="10dp"
                 android:paddingBottom="10dp"
+                android:layout_marginStart="5dp"
+                android:layout_marginEnd="5dp"
                 android:gravity="center"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="赛事名称"
-                android:textSize="20sp"
-                android:background="#fff"/>
+                android:text="@string/competition_info_title"
+                android:textSize="@dimen/fontSizeLarge"
+                android:textColor="@color/font_black_primary"/>
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
@@ -41,76 +49,44 @@
                     android:layout_margin="10dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@mipmap/ic_sponsor"/>
+                    android:src="@mipmap/ic_sponsor"
+                    tools:ignore="ContentDescription" />
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="主办方:"
-                    android:layout_marginEnd="5dp"
+                    android:text="@string/competition_info_organizer"
+                    android:layout_marginEnd="10dp"
                     android:layout_gravity="center_vertical"/>
                 <TextView
+                    android:id="@+id/com_info_organizer"
                     android:layout_marginEnd="10dp"
                     android:layout_gravity="center_vertical"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="清华大学"/>
+                    android:layout_height="wrap_content"/>
             </LinearLayout>
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:background="#f7f7f7"/>
-            <LinearLayout
-                android:background="#fff"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-                <ImageView
-                    android:layout_gravity="center_vertical"
-                    android:layout_margin="10dp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@mipmap/ic_organizer"/>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="承办方:"
-                    android:layout_marginEnd="5dp"
-                    android:layout_gravity="center_vertical"/>
-                <TextView
-                    android:layout_marginRight="10dp"
-                    android:layout_gravity="center_vertical"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="清华大学"/>
-            </LinearLayout>
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="#f7f7f7"/>
-            <LinearLayout
-                android:background="#fff"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-                <ImageView
-                    android:layout_gravity="center_vertical"
-                    android:layout_margin="10dp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@mipmap/ic_starttime"/>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="报名时间:"
-                    android:layout_marginEnd="5dp"
-                    android:layout_gravity="center_vertical"/>
-                <TextView
 
-                    android:layout_marginRight="10dp"
+            <LinearLayout
+                android:background="#fff"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <ImageView
+                    android:layout_gravity="center_vertical"
+                    android:layout_margin="10dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@mipmap/ic_starttime"
+                    tools:ignore="ContentDescription" />
+                <TextView
+                    android:id="@+id/com_info_time_sign_up"
+                    android:layout_marginEnd="10dp"
                     android:layout_gravity="center_vertical"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="2018.04.18 00:00--2018.07.18 23:59"/>
+                    android:layout_height="wrap_content" />
             </LinearLayout>
             <View
                 android:layout_width="match_parent"
@@ -126,19 +102,14 @@
                     android:layout_margin="10dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@mipmap/ic_endtime"/>
+                    android:src="@mipmap/ic_endtime"
+                    tools:ignore="ContentDescription" />
                 <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="比赛时间:"
-                    android:layout_marginEnd="5dp"
-                    android:layout_gravity="center_vertical"/>
-                <TextView
-                    android:layout_marginRight="10dp"
+                    android:id="@+id/com_info_time_exam"
+                    android:layout_marginEnd="10dp"
                     android:layout_gravity="center_vertical"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="2018.07.19 00:00--2018.07.20 23:59"/>
+                    android:layout_height="wrap_content"/>
             </LinearLayout>
             <View
                 android:layout_width="match_parent"
@@ -148,8 +119,17 @@
                 android:background="#fff"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="20dp"
-                android:text="了解赛事详情请前往444444444444444444444444444444444444444444444"/>
+                android:layout_margin="10dp"
+                android:textSize="@dimen/fontSizeLarge"
+                android:text="@string/competition_info_url"/>
+
+            <TextView
+                android:id="@+id/com_info_url"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginBottom="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
             <View
                 android:layout_width="match_parent"
                 android:layout_height="10dp"
@@ -164,7 +144,7 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="10dp"
                     android:textColor="#1296db"
-                    android:text="竞赛发布者"/>
+                    android:text="@string/competition_info_publish"/>
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
@@ -175,16 +155,17 @@
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
                     <com.example.thinkpad.icompetition.view.widget.AsyncImageView
+                        android:id="@+id/com_info_publish_head"
                         android:layout_margin="10dp"
                         android:layout_width="40dp"
                         android:layout_height="40dp"
                         android:src="@mipmap/ic_news_listview_img_loading"/>
                     <TextView
+                        android:id="@+id/com_info_publish_name"
                         android:layout_gravity="center_vertical"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginRight="10dp"
-                        android:text="达拉蹦吧"/>
+                        android:layout_marginEnd="10dp"/>
                 </LinearLayout>
                 <View
                     android:layout_width="match_parent"
@@ -192,5 +173,57 @@
                     android:background="#f7f7f7"/>
             </LinearLayout>
         </LinearLayout>
-    </android.support.v4.widget.NestedScrollView>
-</LinearLayout>
+    </ScrollView>
+
+    <LinearLayout
+        android:id="@+id/com_info_tool"
+        android:layout_alignParentBottom="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="@color/background_white_FF">
+
+        <ImageView
+            android:id="@+id/com_info_share"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginBottom="5dp"
+            android:layout_marginTop="5dp"
+            android:src="@mipmap/share"
+            tools:ignore="ContentDescription" />
+
+        <ImageView
+            android:id="@+id/com_info_collection"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginBottom="5dp"
+            android:layout_marginTop="5dp"
+            android:src="@mipmap/collection"
+            tools:ignore="ContentDescription" />
+
+        <ImageView
+            android:id="@+id/com_info_attention"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginBottom="5dp"
+            android:layout_marginTop="5dp"
+            android:src="@mipmap/attention"
+            tools:ignore="ContentDescription" />
+
+        <Button
+            android:id="@+id/com_info_webView"
+            android:layout_width="150dp"
+            android:layout_height="30dp"
+            android:layout_marginStart="50dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginBottom="5dp"
+            android:layout_marginTop="5dp"
+            android:background="@drawable/background_loginbt"
+            android:textColor="#fff"
+            android:text="@string/competition_info_webView"/>
+
+    </LinearLayout>
+</RelativeLayout>

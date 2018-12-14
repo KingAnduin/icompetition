@@ -2,7 +2,6 @@ package com.example.thinkpad.icompetition.view.activity.i;
 
 import com.example.thinkpad.icompetition.model.entity.user.LoginRoot;
 import com.example.thinkpad.icompetition.model.entity.user.UserInforRoot;
-import com.example.thinkpad.icompetition.model.event.LoginEvent;
 
 /**
  * Created by Hjg on 2018/11/27.

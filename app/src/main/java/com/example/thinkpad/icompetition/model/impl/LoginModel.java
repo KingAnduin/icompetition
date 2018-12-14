@@ -9,7 +9,6 @@ import com.example.thinkpad.icompetition.model.event.LoginEvent;
 import com.example.thinkpad.icompetition.model.i.ILoginModel;
 import com.example.thinkpad.icompetition.network.CallbackIntercept;
 import com.example.thinkpad.icompetition.network.NetworkInterfaces;
-import com.example.thinkpad.icompetition.network.request.JsonPostRequest;
 import com.google.gson.Gson;
 
 import okhttp3.Call;
@@ -30,7 +29,6 @@ public class LoginModel extends BaseModel implements ILoginModel {
 
             @Override
             public void onSuccess(Call call, String jsonBody) {
-                Log.d("hjg", "onSuccess: "+jsonBody);
                 Gson gson = new Gson();
                 LoginRoot root = gson.fromJson(jsonBody, LoginRoot.class);
                 if(root!=null){

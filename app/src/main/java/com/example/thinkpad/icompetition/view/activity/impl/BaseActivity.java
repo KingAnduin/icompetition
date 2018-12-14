@@ -196,18 +196,7 @@ public abstract class BaseActivity<T extends BasePresenter & IBasePresenter>
      * @return 主题色
      */
     public int getMainColor(){
-        int kind = getSharedPreferences("theme", MODE_PRIVATE).getInt("kind", 0);
-        int mainColor = getSharedPreferences("theme", MODE_PRIVATE).getInt("mainColor",
-                ThemeUtil.getDefaultColor());
-        if(kind%2==1) {//标题栏为黑色 主题色浅色
-            getWindow().getDecorView().setSystemUiVisibility(
-                    View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN | View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
-
-        } else{
-            //设置标题栏颜色
-            getWindow().getDecorView().setSystemUiVisibility(
-                    View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN | View.SYSTEM_UI_FLAG_LAYOUT_STABLE);
-        }
+        int mainColor = Color.parseColor("#00b7ee");
         return mainColor;
     }
 

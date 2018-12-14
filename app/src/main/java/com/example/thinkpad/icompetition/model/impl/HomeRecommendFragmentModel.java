@@ -26,7 +26,6 @@ public class HomeRecommendFragmentModel
         Callback callback = new CallbackIntercept(){
             @Override
             public void onSuccess(Call call, String jsonBody) {
-                //Log.d("hjg", "onSuccess: "+jsonBody);
                 HomeRecommendEvent event = new HomeRecommendEvent();
                 Gson gson = new Gson();
                 ExamRecordRoot recordRoot = gson.fromJson(jsonBody, ExamRecordRoot.class);

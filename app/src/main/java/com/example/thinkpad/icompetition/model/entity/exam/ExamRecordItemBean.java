@@ -7,22 +7,22 @@ import java.io.Serializable;
  * 比赛的详细信息
  */
 public class ExamRecordItemBean implements Serializable {
-    private int com_browse;
-    private String com_endtime;
-    private String com_id;
-    private String com_level;
-    private String com_mode;
-    private String com_object;
-    private String com_picture;
-    private String com_publisher;
-    private String com_signupend;
-    private String com_signupstart;
-    private String com_sponsor;
-    private String com_squrl;
-    private String com_starttime;
-    private String com_title;
-    private String com_type;
-    private String com_url;
+    private int com_browse;         //浏览次数
+    private String com_endtime;     //比赛结束时间
+    private String com_id;          //比赛id
+    private String com_level;       //竞赛级别
+    private String com_mode;        //竞赛模式
+    private String com_object;      //参赛对象
+    private String com_picture;     //竞赛图片
+    private String com_publisher;   //竞赛发布者
+    private String com_signupend;   //报名结束时间
+    private String com_signupstart; //报名开始时间
+    private String com_sponsor;     //主办方
+    private String com_squrl;       //
+    private String com_starttime;   //比赛开始时间
+    private String com_title;       //标题
+    private String com_type;        //竞赛类别
+    private String com_url;         //竞赛主办方网址
 
     public int getCom_browse() {
         return com_browse;

@@ -170,9 +170,10 @@ public class HomeRecommendAdapter
             Date curDate = new Date(System.currentTimeMillis());
             String curDates = format.format(curDate);
             DateCount dateCount = new DateCount();
-            Log.d("hjg", "setDate: "+curDates + "  "+signUpEnd[0]);
             Long counts = dateCount.count(curDates, signUpEnd[0], "yyyy.MM.dd");
             if(counts > 0){
+                mIsStartTv.setText(R.string.item_home_list_is_start);
+                mIsStartTv.setTextColor(Color.GREEN);
                 mDeadlineTv.setText(formatSpannableString(mContext, mContext.getString(R.string.item_home_list_deadline), String.valueOf(counts)));
             }else {
                 mIsStartTv.setText(R.string.item_home_list_started);

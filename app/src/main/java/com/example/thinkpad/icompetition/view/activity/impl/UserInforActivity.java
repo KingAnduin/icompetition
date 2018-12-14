@@ -12,7 +12,6 @@ import android.widget.TextView;
 import com.example.thinkpad.icompetition.IcompetitionApplication;
 import com.example.thinkpad.icompetition.R;
 import com.example.thinkpad.icompetition.model.entity.user.UserInforBean;
-import com.example.thinkpad.icompetition.model.entity.user.UserInforRoot;
 import com.example.thinkpad.icompetition.presenter.impl.UserInforPresenter;
 import com.example.thinkpad.icompetition.view.activity.i.IBaseActivity;
 import com.example.thinkpad.icompetition.view.activity.i.IUserInforActivity;
