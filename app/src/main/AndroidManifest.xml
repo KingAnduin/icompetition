@@ -43,6 +43,7 @@
             android:launchMode="singleTask"/>
         <activity android:name=".view.activity.impl.SearchActivity"
             android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan"
             android:launchMode="singleTask"/>
         <activity android:name=".view.activity.impl.CompetitionInfoActivity"
             android:screenOrientation="portrait"
@@ -60,6 +61,9 @@
             android:screenOrientation="portrait"
             android:launchMode="singleTask"/>
         <activity android:name=".view.activity.impl.ChangePasswordActivity"
+            android:screenOrientation="portrait"
+            android:launchMode="singleTask"/>
+        <activity android:name=".view.activity.impl.UserBySearchActivity"
             android:screenOrientation="portrait"
             android:launchMode="singleTask"/>
         <!--剪裁图片用到的activity-->

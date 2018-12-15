@@ -8,14 +8,19 @@
     android:id="@+id/tab_competition"
     android:layout_width="match_parent"
     android:layout_height="40dp"
-    android:background="#9a9a9a"
+    android:background="#00b7ee"
     app:tabTextColor="#fff"
-    app:tabIndicatorColor="#fff"
+    app:tabSelectedTextColor="#FFF68F"
+    app:tabIndicatorColor="#FFF68F"
     app:tabIndicatorHeight="2dp">
 </android.support.design.widget.TabLayout>
-    <android.support.v4.view.ViewPager
-        android:id="@+id/vp_competition"
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-    </android.support.v4.view.ViewPager>
+        <android.support.v4.view.ViewPager
+            android:id="@+id/vp_competition"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+        </android.support.v4.view.ViewPager>
+    </RelativeLayout>
 </LinearLayout>

@@ -84,6 +84,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         mFragments.add(mMeFragment);
         mFragmentAdapter = new MainFragmentAdapter(getSupportFragmentManager(), mFragments);
         mViewPager.setAdapter(mFragmentAdapter);
+        mToolbarTitleTV.setText(getString(R.string.competition));
         setSupportActionBar(mToolbar);
     }
 

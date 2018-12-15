@@ -292,7 +292,7 @@ public abstract class BaseActivity<T extends BasePresenter & IBasePresenter>
      */
     public void showSnackBar(View view, String str, int backgroundColor)
     {
-        Snackbar snackbar= Snackbar.make(view, str, Snackbar.LENGTH_SHORT);
+        Snackbar snackbar= Snackbar.make(view, str, Snackbar.LENGTH_LONG);
         setSnackbarColor(snackbar,backgroundColor);
         snackbar.show();
     }

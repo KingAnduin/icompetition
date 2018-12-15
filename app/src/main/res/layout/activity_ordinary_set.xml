@@ -19,7 +19,7 @@
             android:layout_margin="10dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="UID"
+            android:text="我的身份"
             android:layout_gravity="center_vertical"
             android:textColor="#000"
             android:textSize="16sp"/>

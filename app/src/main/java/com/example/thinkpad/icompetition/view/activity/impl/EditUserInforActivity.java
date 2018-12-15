@@ -110,8 +110,8 @@ public class EditUserInforActivity extends BaseActivity<EditUserInforPresenter> 
     public void initDisplayImageOptions() {
         this.imageLoader.init(ImageLoaderConfiguration.createDefault(this));
         this.options = new DisplayImageOptions.Builder()
-                .showImageForEmptyUri(R.mipmap.ic_launcher)
-                .showImageOnFail(R.mipmap.ic_launcher)
+                .showImageForEmptyUri(R.mipmap.no_user)
+                .showImageOnFail(R.mipmap.no_user)
                 .showImageOnLoading(R.mipmap.ic_news_listview_img_loading)
                 .displayer(new FadeInBitmapDisplayer(300))
                 .cacheInMemory(true)

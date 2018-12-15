@@ -7,7 +7,7 @@
     android:layout_height="wrap_content"
     android:minHeight="?attr/actionBarSize"
     app:title=" "
-    android:background="#00b7ee "
+    android:background="#00b7ee"
     app:titleMarginStart="10dp"
     app:titleMarginTop="2dp"
     app:titleTextColor="#fff"
@@ -16,6 +16,7 @@
         android:id="@+id/toolbar_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:text=" "
         android:layout_gravity="center"
         android:textColor="#fff"
         android:textSize="20sp" />

@@ -54,8 +54,19 @@ public class UserSetActivity extends BaseActivity<UserSetPresenter> implements V
         if(list.get(0)!=null) {
             mUserBean = list.get(0);
         }
-        if(!TextUtils.isEmpty(String.valueOf(mUserBean.getUser_roleid())))
-        mRoleIdTV.setText(String.valueOf(mUserBean.getUser_roleid()));
+        if(!TextUtils.isEmpty(String.valueOf(mUserBean.getUser_roleid()))){
+            int roleID = mUserBean.getUser_roleid();
+            //根据roleID填写角色权限名
+            if(roleID==1){
+                mRoleIdTV.setText(R.string.role_ordinary_user);
+            }
+            if(roleID==2){
+                mRoleIdTV.setText(R.string.role_release_user);
+            }
+            if(roleID==3){
+                mRoleIdTV.setText(R.string.role_manage_user);
+            }
+        }
         if(!TextUtils.isEmpty(String.valueOf(mUserBean.getUser_num())))
         mUserNumTV.setText(String.valueOf(mUserBean.getUser_num()));
     }

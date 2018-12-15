@@ -28,6 +28,11 @@
     <string name="register_repeat">该账户已被注册，换一个再试试？</string>
     <string name="register_success">恭喜你~你已注册成功！</string>
 
+    <!--角色权限名称-->
+    <string name="role_ordinary_user">普通用户</string>
+    <string name="role_release_user">发布者</string>
+    <string name="role_manage_user">管理员</string>
+
     <!--修改用户信息-->
     <string name="submit_success">个人信息保存成功</string>
 
@@ -77,5 +82,12 @@
     <!--搜索-->
     <string name="search_keywords">请输入关键字</string>
     <string name="search">搜索</string>
-    
+    <string name="other_user">他的资料</string>
+
+    <!--关注-->
+    <string name="concern_is_concern">已关注</string>
+    <string name="concern_not_concern">未关注</string>
+    <string name="add_concern_success">关注成功！</string>
+    <string name="delete_concern_success">取消关注成功！</string>
+    <string name="action_fail">操作失败</string>
 </resources>

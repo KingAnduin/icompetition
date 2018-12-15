@@ -25,10 +25,14 @@ public class NetworkInterfaces {
     private static final String PAGING_QUERY_HOT = "/api/competitions/hot"; //分页查询热门竞赛
     private static final String SUBMIT_USERINFOR = "/api/users/update"; //提交用户信息
     private static final String CHANGE_PASSWORD = "/api/users/updatepwd"; //修改密码
+    private static final String SEARCH_INFOR = "/api/competitions/search"; //搜索信息
     private static final String PAGING_QUERY_INTEREST = "api/competitions/type";//分页查询分类的竞赛
     private static final String COLLECTION_BY_ID = "/api/collections/byid"; //获取是否收藏（单个）
     private static final String COLLECTION_ADD = "/api/collections/add"; //添加收藏
     private static final String COLLECTION_CANCLE = "/api/collections/delete "; //删除收藏
+    private static final String GET_ISCONCERN = "/api/focus/search"; //获取单个用户是否被关注
+    private static final String ADD_CONCERN ="/api/focus/add"; //添加关注
+    private static final String DELETE_CONCERN ="/api/focus/delete"; //删除关注
     private static final String PAGING_QUERY_COLLECTION = "/api/collections/bypage";//分页查询收藏
 
 
@@ -150,6 +154,20 @@ public class NetworkInterfaces {
     }
 
     /**
+     *
+     * @param callback .
+     * @param page 请求页号
+     * @param page_size 每页请求的数据条数
+     * @param words 关键字
+     */
+    public void searchInfor(Callback callback,int page,int page_size,String words){
+        ArrayMap<String,String> param = new ArrayMap<>();
+        param.put("page",String.valueOf(page));
+        param.put("pageSize",String.valueOf(page_size));
+        param.put("words",words);
+        new NetworkRequest(param,SERVER_HOST + SEARCH_INFOR ,callback).sendRequest();
+    }
+    /**
      * 分页查询兴趣的竞赛信息
      * @param callback .
      * @param page_no 页码
@@ -175,7 +193,6 @@ public class NetworkInterfaces {
         new NetworkRequest(param, SERVER_HOST + COLLECTION_CANCLE, callback).sendRequest();
     }
 
-
     /**
      * 添加收藏
      * @param callback .
@@ -189,7 +206,6 @@ public class NetworkInterfaces {
         new NetworkRequest(param, SERVER_HOST + COLLECTION_ADD, callback).sendRequest();
     }
 
-
     /**
      * 获取是否收藏（单个）
      * @param callback .
@@ -201,6 +217,38 @@ public class NetworkInterfaces {
         new NetworkRequest(param, SERVER_HOST + COLLECTION_BY_ID, callback).sendRequest();
     }
 
+    /**
+     * 获取搜索到的其他用户是否被关注
+     * @param callback .
+     * @param other_num 其他用户的id
+     */
+    public void getIsConcern(Callback callback,String other_num){
+        ArrayMap<String, String> param = new ArrayMap<>();
+        param.put("other_num", other_num);
+        new NetworkRequest(param, SERVER_HOST + GET_ISCONCERN, callback).sendRequest();
+    }
+
+    /**
+     * 添加关注
+     * @param callback .
+     * @param other_num 其他用户的id
+     */
+    public void addConcern(Callback callback,String other_num){
+        ArrayMap<String, String> param = new ArrayMap<>();
+        param.put("star", other_num);
+        new NetworkRequest(param, SERVER_HOST + ADD_CONCERN, callback).sendRequest();
+    }
+
+    /**
+     * 删除关注
+     * @param callback .
+     * @param other_num 其他用户的id
+     */
+    public void deleteConcern(Callback callback,String other_num){
+        ArrayMap<String, String> param = new ArrayMap<>();
+        param.put("star", other_num);
+        new NetworkRequest(param, SERVER_HOST + DELETE_CONCERN, callback).sendRequest();
+    }
 
     /**
      * 分页查询收藏

@@ -136,17 +136,17 @@
                 android:layout_marginEnd="5dp"
                 android:text="萌新注册"
                 android:textColor="#1296db"/>
-            <View
-                android:layout_width="1dp"
-                android:layout_height="match_parent"
-                android:background="#1296db"/>
-        <TextView
-            android:id="@+id/tv_forgetpassword"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="5dp"
-            android:text="忘记密码?"
-            android:textColor="#1296db"/>
+            <!--<View-->
+                <!--android:layout_width="1dp"-->
+                <!--android:layout_height="match_parent"-->
+                <!--android:background="#1296db"/>-->
+        <!--<TextView-->
+            <!--android:id="@+id/tv_forgetpassword"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginLeft="5dp"-->
+            <!--android:text="忘记密码?"-->
+            <!--android:textColor="#1296db"/>-->
         </LinearLayout>
     </LinearLayout>
 </RelativeLayout>
