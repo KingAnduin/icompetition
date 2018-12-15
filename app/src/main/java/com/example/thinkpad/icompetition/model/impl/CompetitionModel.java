@@ -1,6 +1,7 @@
 package com.example.thinkpad.icompetition.model.impl;
 
 import android.os.Handler;
+import android.util.Log;
 
 import com.example.thinkpad.icompetition.model.entity.collection.CollectionRoot;
 import com.example.thinkpad.icompetition.model.entity.collection.IsCollectionRoot;
@@ -54,6 +55,7 @@ public class CompetitionModel extends BaseModel implements IBaseModel,ICompetiti
         Callback callback = new CallbackIntercept() {
             @Override
             public void onSuccess(Call call, String jsonBody) {
+                Log.d("hjg", "onSuccess: "+jsonBody);
                 Gson gson = new Gson();
                 CollectionRoot root = gson.fromJson(jsonBody, CollectionRoot.class);
                 if(root != null ){

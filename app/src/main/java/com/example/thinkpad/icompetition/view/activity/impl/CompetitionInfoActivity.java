@@ -176,7 +176,7 @@ public class CompetitionInfoActivity
 
             //关注
             case R.id.com_info_attention:
-
+                showSnackBar(mPublishHeadIv, "还没写", getMainColor());
                 break;
 
             //收藏
@@ -184,19 +184,19 @@ public class CompetitionInfoActivity
                 if(mIsCollection){
                     mPresenter.cancelCollection(mItemBean.getCom_id());
                 }else {
-                    //TODO
+
                     mPresenter.addCollection("",mItemBean.getCom_id());
                 }
                 break;
 
             //分享
             case R.id.com_info_share:
-
+                showSnackBar(mPublishHeadIv, "还没写", getMainColor());
                 break;
 
             //WebView
             case R.id.com_info_webView:
-
+                showSnackBar(mPublishHeadIv, "还没写", getMainColor());
                 break;
         }
     }
@@ -241,12 +241,12 @@ public class CompetitionInfoActivity
     }
 
     @Override
-    public void addAttention() {
+    public void addAttentionResponse() {
 
     }
 
     @Override
-    public void cancelAttention() {
+    public void cancelAttentionResponse() {
 
     }
 

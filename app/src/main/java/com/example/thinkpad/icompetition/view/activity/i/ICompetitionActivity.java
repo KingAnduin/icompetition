@@ -15,8 +15,8 @@ public interface ICompetitionActivity extends IBaseActivity{
     void cancelCollectionResponse(CollectionRoot root);
 
     //关注用户
-    void addAttention();
+    void addAttentionResponse();
 
     //取消关注
-    void cancelAttention();
+    void cancelAttentionResponse();
 }

@@ -2,6 +2,7 @@ package com.example.thinkpad.icompetition.model.event;
 
 import com.example.thinkpad.icompetition.model.entity.collection.CollectionRoot;
 import com.example.thinkpad.icompetition.model.entity.collection.IsCollectionRoot;
+import com.example.thinkpad.icompetition.model.entity.exam.ExamRecordRoot;
 
 /**
  * Created By hjg on 2018/12/13
@@ -13,9 +14,21 @@ public class CompetitionInfoEvent extends BaseEvent{
     public static final int CANCEL_FAIL = 202;
     public static final int IS_OK = 301;
     public static final int IS_FAIL = 302;
+    public static final int QUERY_COLLECTION_OK = 401;
+    public static final int QUERY_COLLECTION_FAIL = 402;
     private String message = "";
     private IsCollectionRoot isCollectionRoot;
     private CollectionRoot root;
+    private ExamRecordRoot examRecordRoot;
+
+
+    public ExamRecordRoot getExamRecordRoot() {
+        return examRecordRoot;
+    }
+
+    public void setExamRecordRoot(ExamRecordRoot examRecordRoot) {
+        this.examRecordRoot = examRecordRoot;
+    }
 
     public String getMessage() {
         return message;

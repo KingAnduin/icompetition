@@ -29,6 +29,7 @@ public class NetworkInterfaces {
     private static final String COLLECTION_BY_ID = "/api/collections/byid"; //获取是否收藏（单个）
     private static final String COLLECTION_ADD = "/api/collections/add"; //添加收藏
     private static final String COLLECTION_CANCLE = "/api/collections/delete "; //删除收藏
+    private static final String PAGING_QUERY_COLLECTION = "/api/collections/bypage";//分页查询收藏
 
 
     /**
@@ -198,6 +199,22 @@ public class NetworkInterfaces {
         ArrayMap<String, String> param = new ArrayMap<>();
         param.put("comid", comid);
         new NetworkRequest(param, SERVER_HOST + COLLECTION_BY_ID, callback).sendRequest();
+    }
+
+
+    /**
+     * 分页查询收藏
+     * @param callback .
+     * @param page_no 页号
+     * @param page_size 页面大小
+     */
+    public void queryByPageCollection(Callback callback,String userNum, int page_no, int page_size){
+        ArrayMap<String, String > param = new ArrayMap<>();
+        param.put("page", String.valueOf(page_no));
+        param.put("pageSize", String.valueOf(page_size));
+        param.put("usernum", userNum);
+        new NetworkRequest(param, SERVER_HOST + PAGING_QUERY_COLLECTION, callback).sendRequest();
+
     }
 
 
