@@ -65,5 +65,6 @@
         <!--剪裁图片用到的activity-->
         <activity android:name="com.android.camera.CropImage"/>
         <activity android:name=".view.activity.impl.MyCollectionActivity" />
+        <activity android:name=".view.activity.impl.CompetitionWebViewActivity" />
     </application>
 </manifest>

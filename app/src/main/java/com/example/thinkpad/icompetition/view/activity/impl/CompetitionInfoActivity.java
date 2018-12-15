@@ -1,6 +1,9 @@
 package com.example.thinkpad.icompetition.view.activity.impl;
 
+import android.content.ClipboardManager;
+import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
@@ -8,6 +11,7 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.text.TextPaint;
 import android.view.View;
+import android.webkit.WebView;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -22,6 +26,7 @@ import com.example.thinkpad.icompetition.presenter.impl.CompetitionInfoPresenter
 import com.example.thinkpad.icompetition.view.activity.i.IBaseActivity;
 import com.example.thinkpad.icompetition.view.activity.i.ICompetitionActivity;
 import com.example.thinkpad.icompetition.view.widget.AsyncImageView;
+import com.example.thinkpad.icompetition.view.widget.Share;
 
 import io.rong.imageloader.core.DisplayImageOptions;
 import io.rong.imageloader.core.ImageLoader;
@@ -39,6 +44,7 @@ public class CompetitionInfoActivity
 
     private Toolbar mToolbar;
     private DisplayImageOptions options;
+
     private UserInforBean mUserBean;                    //用户信息
     private ExamRecordItemBean mItemBean;               //竞赛信息
     private ImageView mExamPhotoIv;                    //比赛图片
@@ -122,6 +128,7 @@ public class CompetitionInfoActivity
         mAttentionIv.setOnClickListener(this);
         mShareIv.setOnClickListener(this);
         mCollectionIv.setOnClickListener(this);
+        mUrlTv.setOnClickListener(this);
     }
 
     private void setDate() {
@@ -154,9 +161,8 @@ public class CompetitionInfoActivity
             mOrganizerTv.setText(organizer);
             mSignUpTimeTv.setText(signUpTime);
             mExamTimeTv.setText(examTime);
-            mUrlTv.setText(url);
             mPublishNameTv.setText(publishName);
-
+            mUrlTv.setText(url);
             mPresenter.getIsCollection(mItemBean.getCom_id());
 
         }else {
@@ -191,12 +197,25 @@ public class CompetitionInfoActivity
 
             //分享
             case R.id.com_info_share:
-                showSnackBar(mPublishHeadIv, "还没写", getMainColor());
+                Share share = new Share(this);
+                share.share(mUrlTv.getText().toString());
                 break;
 
-            //WebView
+            case R.id.com_info_url:
+                Intent intents = new Intent();
+                intents.setData(Uri.parse(mUrlTv.getText().toString()));//Url 就是你要打开的网址
+                intents.setAction(Intent.ACTION_VIEW);
+                startActivity(intents); //启动浏览器
+                break;
+
+
+                //WebView
             case R.id.com_info_webView:
-                showSnackBar(mPublishHeadIv, "还没写", getMainColor());
+                Intent intent = new Intent(getApplicationContext(), CompetitionWebViewActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("url", mUrlTv.getText().toString());
+                intent.putExtras(bundle);
+                startActivity(intent);
                 break;
         }
     }
@@ -247,6 +266,11 @@ public class CompetitionInfoActivity
 
     @Override
     public void cancelAttentionResponse() {
+
+    }
+
+    @Override
+    public void getIsAttentionResponse() {
 
     }
 

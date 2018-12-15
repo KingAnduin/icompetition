@@ -19,4 +19,8 @@ public interface ICompetitionActivity extends IBaseActivity{
 
     //取消关注
     void cancelAttentionResponse();
+
+    //获取是否关注
+    void getIsAttentionResponse();
+
 }
