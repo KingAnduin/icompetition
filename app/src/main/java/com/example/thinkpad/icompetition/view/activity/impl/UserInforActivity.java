@@ -57,8 +57,8 @@ public class UserInforActivity extends BaseActivity<UserInforPresenter> implemen
     public void initDisplayImageOptions() {
         this.imageLoader.init(ImageLoaderConfiguration.createDefault(this));
         this.options = new DisplayImageOptions.Builder()
-                .showImageForEmptyUri(R.mipmap.no_user)
-                .showImageOnFail(R.mipmap.no_user)
+                .showImageForEmptyUri(R.mipmap.no_user_head)
+                .showImageOnFail(R.mipmap.no_user_head)
                 .showImageOnLoading(R.mipmap.ic_news_listview_img_loading)
                 .displayer(new FadeInBitmapDisplayer(300))
                 .cacheInMemory(true)

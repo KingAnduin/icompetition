@@ -1,5 +1,6 @@
 package com.example.thinkpad.icompetition.view.fragment.impl;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
@@ -15,12 +16,15 @@ import com.example.thinkpad.icompetition.R;
 import com.example.thinkpad.icompetition.model.entity.exam.ExamRecordItemBean;
 import com.example.thinkpad.icompetition.model.entity.exam.ExamRecordRoot;
 import com.example.thinkpad.icompetition.view.activity.i.IBaseActivity;
+import com.example.thinkpad.icompetition.view.activity.impl.CompetitionInfoActivity;
 import com.example.thinkpad.icompetition.view.adapter.HomeInterestAdapter;
 import com.example.thinkpad.icompetition.view.fragment.i.IHomeInterestFragment;
 import com.example.thinkpad.icompetition.presenter.impl.HomeInterestFragmentPresenter;
 
 import java.util.ArrayList;
 import java.util.List;
+
+
 
 public class HomeInterestFragment
         extends BaseFragment<HomeInterestFragmentPresenter>
@@ -36,6 +40,7 @@ public class HomeInterestFragment
     List<ExamRecordItemBean> mInfo;                         //详细信息
     private int mCurrentPage = 1;                           //页数
     private final int page_size = 10;                       //每页信息数
+    private String userInterest = "数学建模";                  //用户兴趣
     private boolean mNoMoreData = false;
 
     @Nullable
@@ -48,6 +53,12 @@ public class HomeInterestFragment
         initView();
         setViewListener();
         return rootView;
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        refreshData();
     }
 
     public void initView() {
@@ -75,8 +86,8 @@ public class HomeInterestFragment
                     if (!mNoMoreData) {
                         mRecyclerViewCurrentY = dy;
                         mRecyclerViewCurrentX = dx;
-                        //加载更多 TODO
-                        //getTypeInfo(++mCurrentPage, page_size);
+                        //加载更多
+                        getTypeInfo(++mCurrentPage, page_size, userInterest);
                     }
                 }
             }
@@ -120,8 +131,7 @@ public class HomeInterestFragment
                 mSwipeRefreshLayout.setRefreshing(true);
             }
         });
-        //TODO
-        //getTypeInfo(mCurrentPage, page_size);
+        getTypeInfo(mCurrentPage, page_size, userInterest);
     }
 
     /**
@@ -144,10 +154,19 @@ public class HomeInterestFragment
 
 
     /**
-     * 查看详情 TODO
+     * 查看详情
      */
     private void gotoDoc() {
-
+        mAdapter.setItemClickListener(new HomeInterestAdapter.docItemClickListener() {
+            @Override
+            public void onClick(int position) {
+                Intent intent = new Intent(getContext(), CompetitionInfoActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("item", mInfo.get(position));
+                intent.putExtras(bundle);
+                startActivity(intent);
+            }
+        });
     }
 
     /**
@@ -168,7 +187,49 @@ public class HomeInterestFragment
 
     //分页查询的回调
     @Override
-    public void PagingQueryHomeInterestResponse(ExamRecordRoot root) {
+    public void PagingQueryHomeInterestResponse(final ExamRecordRoot root) {
+        if (root != null && root.getCode() == 200) {
+            if (root.getData() != null) {
+                if (mInfo == null) {
+                    mInfo = new ArrayList<>();
+                }
+                mInfo.addAll(root.getData());
 
+                mHandler.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        if (mSwipeRefreshLayout.isRefreshing()) {
+                            mSwipeRefreshLayout.setRefreshing(false);
+                        }
+                        if (mAdapter == null) {
+                            mAdapter = new HomeInterestAdapter(getContext(), mInfo);
+                            if (root.getData().size() < page_size) {
+                                //显示没有更多
+                                mNoMoreData = true;
+                                mAdapter.setNoMoreData(true);
+                            }
+                            mRecyclerView.setAdapter(mAdapter);
+                        } else {
+                            //更新数据
+                            mAdapter.updateData(mInfo);
+                            if (mInfo.size() < page_size) {
+                                //显示没有更多
+                                mNoMoreData = true;
+                                mAdapter.setNoMoreData(true);
+                            }
+                            mAdapter.notifyDataSetChanged();
+                            mRecyclerView.scrollTo(mRecyclerViewCurrentX, mRecyclerViewCurrentY);
+                        }
+                        //设置点击事件
+                        gotoDoc();
+                    }
+                });
+
+            } else {
+                noMoreData();
+            }
+        } else {
+            showSnackBar(mSwipeRefreshLayout, getResources().getString(R.string.request_fail));
+        }
     }
 }

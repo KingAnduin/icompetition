@@ -109,8 +109,8 @@ public class MeFragment extends Fragment implements View.OnClickListener{
     public void initDisplayImageOptions() {
         this.imageLoader.init(ImageLoaderConfiguration.createDefault(getActivity()));
         this.options = new DisplayImageOptions.Builder()
-                .showImageForEmptyUri(R.mipmap.no_user)
-                .showImageOnFail(R.mipmap.no_user)
+                .showImageForEmptyUri(R.mipmap.no_user_head)
+                .showImageOnFail(R.mipmap.no_user_head)
                 .showImageOnLoading(R.mipmap.ic_news_listview_img_loading)
                 .displayer(new FadeInBitmapDisplayer(300))
                 .cacheInMemory(true)

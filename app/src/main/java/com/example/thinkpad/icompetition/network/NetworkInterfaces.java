@@ -26,7 +26,7 @@ public class NetworkInterfaces {
     private static final String SUBMIT_USERINFOR = "/api/users/update"; //提交用户信息
     private static final String CHANGE_PASSWORD = "/api/users/updatepwd"; //修改密码
     private static final String SEARCH_INFOR = "/api/competitions/search"; //搜索信息
-    private static final String PAGING_QUERY_INTEREST = "api/competitions/type";//分页查询分类的竞赛
+    private static final String PAGING_QUERY_INTEREST = "/api/competitions/type";//分页查询分类的竞赛
     private static final String COLLECTION_BY_ID = "/api/collections/byid"; //获取是否收藏（单个）
     private static final String COLLECTION_ADD = "/api/collections/add"; //添加收藏
     private static final String COLLECTION_CANCLE = "/api/collections/delete "; //删除收藏
@@ -34,7 +34,6 @@ public class NetworkInterfaces {
     private static final String ADD_CONCERN ="/api/focus/add"; //添加关注
     private static final String DELETE_CONCERN ="/api/focus/delete"; //删除关注
     private static final String PAGING_QUERY_COLLECTION = "/api/collections/bypage";//分页查询收藏
-
 
     /**
      * 用户注册
@@ -264,6 +263,5 @@ public class NetworkInterfaces {
         new NetworkRequest(param, SERVER_HOST + PAGING_QUERY_COLLECTION, callback).sendRequest();
 
     }
-
 
 }

@@ -1,5 +1,7 @@
 package com.example.thinkpad.icompetition.model.impl;
 
+import android.util.Log;
+
 import com.example.thinkpad.icompetition.model.entity.exam.ExamRecordRoot;
 import com.example.thinkpad.icompetition.model.event.HomeInterestEvent;
 import com.example.thinkpad.icompetition.model.i.IHomeInterestModel;
@@ -31,6 +33,7 @@ public class HomeInterestModel extends BaseFragmentModel<HomeInterestEvent> impl
                 HomeInterestEvent event = new HomeInterestEvent();
                 Gson gson = new Gson();
                 ExamRecordRoot recordRoot = gson.fromJson(jsonBody, ExamRecordRoot.class);
+                Log.d("hjg", "onSuccess: " + recordRoot);
                 if(recordRoot!=null && recordRoot.getCode() != 0){
                     event.setWhat(HomeInterestEvent.GET_TYPE_OK);
                     event.setRoot(recordRoot);

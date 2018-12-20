@@ -33,10 +33,11 @@ public class HomeInterestFragmentPresenter
         if(event!=null){
             switch (what){
                 case HomeInterestEvent.GET_TYPE_OK:
-
+                    mView.PagingQueryHomeInterestResponse(event.getRoot());
                     break;
                 case HomeInterestEvent.GET_TYPE_FAIL:
-
+                    mView.showErrorMsg(event.getRoot());
+                    //mView.failBecauseNotNetworkReturn(what);
                     break;
             }
         }
