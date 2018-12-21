@@ -3,6 +3,7 @@ package com.example.thinkpad.icompetition.view.activity.impl;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.Toolbar;
@@ -153,6 +154,10 @@ public class ChangePasswordActivity extends BaseActivity<ChangePasswordPresenter
             showSnackBar(mOldPasswordET,getString(R.string.old_password_notmatch),getMainColor());
         }
         if (root.getCode()==200){
+            SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences("user_login",Context.MODE_PRIVATE);
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            editor.putString("user_login_pwd",mNewPasswordET.getText().toString());
+            editor.apply();
             showSnackBar(mOldPasswordET,getString(R.string.change_password_success),getMainColor());
         }
     }

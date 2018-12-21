@@ -16,6 +16,7 @@ import android.widget.Toast;
 import com.example.thinkpad.icompetition.IcompetitionApplication;
 import com.example.thinkpad.icompetition.R;
 import com.example.thinkpad.icompetition.model.entity.user.UserInforBean;
+import com.example.thinkpad.icompetition.view.activity.impl.InterstsSelectActivity;
 import com.example.thinkpad.icompetition.view.activity.impl.LoginActivity;
 import com.example.thinkpad.icompetition.view.activity.impl.MyCollectionActivity;
 import com.example.thinkpad.icompetition.view.activity.impl.UserInforActivity;
@@ -154,6 +155,14 @@ public class MeFragment extends Fragment implements View.OnClickListener{
             case R.id.ll_me_collection:
                 if(!TextUtils.isEmpty(((IcompetitionApplication)getActivity().getApplication()).getToken())){
                     startActivity(new Intent(getActivity(), MyCollectionActivity.class));
+                }else {
+                    startActivity(new Intent(getActivity(),LoginActivity.class));
+                    getActivity().finish();//因为没有登陆所以回到登陆界面
+                }
+                break;
+            case R.id.ll_me_interest:
+                if(!TextUtils.isEmpty(((IcompetitionApplication)getActivity().getApplication()).getToken())){
+                    startActivity(new Intent(getActivity(),InterstsSelectActivity.class));
                 }else {
                     startActivity(new Intent(getActivity(),LoginActivity.class));
                     getActivity().finish();//因为没有登陆所以回到登陆界面

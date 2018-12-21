@@ -51,10 +51,7 @@ public class SplashActivity extends BaseActivity{
 
     private boolean judgeToken() {
         String nowToken = ((IcompetitionApplication)getApplication()).getToken();
-        if(TextUtils.isEmpty(nowToken)){
-            return false;
-        }
-        return true;
+        return !TextUtils.isEmpty(nowToken);
     }
 
     @Override

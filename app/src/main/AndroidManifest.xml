@@ -70,5 +70,9 @@
         <activity android:name="com.android.camera.CropImage"/>
         <activity android:name=".view.activity.impl.MyCollectionActivity" />
         <activity android:name=".view.activity.impl.CompetitionWebViewActivity" />
+
+        <activity android:name=".view.activity.impl.InterstsSelectActivity"
+            android:screenOrientation="portrait"
+            android:launchMode="singleTask"/>
     </application>
 </manifest>
