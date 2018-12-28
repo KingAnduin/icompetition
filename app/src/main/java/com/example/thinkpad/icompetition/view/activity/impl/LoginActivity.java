@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -29,6 +30,7 @@ import jp.wasabeef.glide.transformations.BlurTransformation;
  */
 
 public class LoginActivity extends BaseActivity<LoginPresenter> implements ILoginActivity, View.OnClickListener{
+    private ProgressBar mProgressBar;
     private ImageView mNoUserLoginIV;
     private String mUserNum;
     private String mUserPassword;
@@ -59,6 +61,7 @@ public class LoginActivity extends BaseActivity<LoginPresenter> implements ILogi
     }
 
     private void findView() {
+        mProgressBar = findViewById(R.id.progress_login);
         mNoUserLoginIV = findViewById(R.id.iv_no_user_login);
         mUserNameEt = findViewById(R.id.et_username);
         mUserPassWordEt = findViewById(R.id.et_password);
@@ -116,6 +119,8 @@ public class LoginActivity extends BaseActivity<LoginPresenter> implements ILogi
     private void login() {
         if(judgeUserNumAndPassword()) {
             if(NetWorkHelper.isNetworkAvailable(this)) {
+                mProgressBar.setVisibility(View.VISIBLE);
+                mLoginBt.setVisibility(View.GONE);
                 mPresenter.login(mUserNum, mUserPassword);
             }else {
                 mLoginBt.setClickable(true);
@@ -155,11 +160,25 @@ public class LoginActivity extends BaseActivity<LoginPresenter> implements ILogi
         }
         if(root.getCode()==1)
         {
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    mProgressBar.setVisibility(View.GONE);
+                    mLoginBt.setVisibility(View.VISIBLE);
+                }
+            });
             mLoginBt.setClickable(true);
             showSnackBar(mLoginBt,"账户尚未注册",getMainColor());
         }
         if(root.getCode()==2)
         {
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    mProgressBar.setVisibility(View.GONE);
+                    mLoginBt.setVisibility(View.VISIBLE);
+                }
+            });
             mLoginBt.setClickable(true);
             showSnackBar(mLoginBt,"账户密码错误",getMainColor());
         }
@@ -181,11 +200,25 @@ public class LoginActivity extends BaseActivity<LoginPresenter> implements ILogi
     @Override
     public void failBecauseNotNetworkReturn(int code) {
         mLoginBt.setClickable(true);
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                mProgressBar.setVisibility(View.GONE);
+                mLoginBt.setVisibility(View.VISIBLE);
+            }
+        });
         showToast(getResources().getString(R.string.not_network));
     }
 
     public void failBecauseNullPointer() {
         mLoginBt.setClickable(true); //若登陆失败则将登录按钮重构设为可点击
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                mProgressBar.setVisibility(View.GONE);
+                mLoginBt.setVisibility(View.VISIBLE);
+            }
+        });
         Toast.makeText(this, "登录过程中出现了一些问题，如果您在使用过程中出现问题的话建议您重新登录", Toast.LENGTH_LONG).show();
     }
 }

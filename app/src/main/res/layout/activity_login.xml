@@ -111,6 +111,16 @@
             </LinearLayout>
         </LinearLayout>
 
+        <ProgressBar
+            android:visibility="gone"
+            android:id="@+id/progress_login"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="50dp"
+            android:layout_marginLeft="50dp"
+            android:layout_marginRight="50dp"
+            android:indeterminateTint="@color/icompetition_color" />
         <Button
             android:id="@+id/btn_login"
             android:layout_width="match_parent"
