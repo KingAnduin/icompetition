@@ -13,7 +13,6 @@ import android.widget.Button;
 import android.widget.GridLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.thinkpad.icompetition.R;
 import com.example.thinkpad.icompetition.model.entity.Interest.Interestroot;
@@ -67,7 +66,7 @@ public class InterstsSelectActivity extends BaseActivity<InterstsSelectActivityP
     private void findView() {
         relativelayout = findViewById(R.id.relativelayout);
         mToolbar = findViewById(R.id.toolbar_main);
-        mTitleTV = findViewById(R.id.toolbar_title);
+        mTitleTV = findViewById(R.id.tv_toolbar_title);
         mGridLayout = findViewById(R.id.gridlayout_interest);
         mToolbar.setNavigationIcon(R.mipmap.back);
         mTitleTV.setText("我的兴趣");

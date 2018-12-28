@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
-import android.view.KeyEvent;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -121,7 +120,7 @@ public class UserInforActivity extends BaseActivity<UserInforPresenter> implemen
         mUserHeadImageAIV = findViewById(R.id.aiv_user_headimage);
         mToolbar=findViewById(R.id.toolbar_main);
         mToolbar.setNavigationIcon(R.mipmap.back);
-        mToolbarTitleTV = findViewById(R.id.toolbar_title);
+        mToolbarTitleTV = findViewById(R.id.tv_toolbar_title);
         mToolbarTitleTV.setText("个人信息");
     }
 

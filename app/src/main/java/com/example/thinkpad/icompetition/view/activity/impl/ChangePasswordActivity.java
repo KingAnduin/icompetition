@@ -58,7 +58,7 @@ public class ChangePasswordActivity extends BaseActivity<ChangePasswordPresenter
 
     private void findView() {
         mToolbar = findViewById(R.id.toolbar_main);
-        mTitleTV = findViewById(R.id.toolbar_title);
+        mTitleTV = findViewById(R.id.tv_toolbar_title);
         mUserNumTV = findViewById(R.id.tv_user_num);
         mOldPasswordET = findViewById(R.id.et_old_password);
         mNewPasswordET = findViewById(R.id.et_new_password);

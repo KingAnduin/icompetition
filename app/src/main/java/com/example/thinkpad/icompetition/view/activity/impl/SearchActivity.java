@@ -91,6 +91,7 @@ public class SearchActivity extends BaseActivity<SearchActivityPresenter> implem
         mTablayout.setVisibility(View.GONE);
         mViewPager.setVisibility(View.INVISIBLE);
         mNotFoundLayout.setVisibility(View.GONE);
+        setSupportActionBar(mToolbar);
     }
 
     @Override

@@ -8,8 +8,9 @@ import android.support.annotation.Nullable;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.TextView;
 
 import com.example.thinkpad.icompetition.IcompetitionApplication;
 import com.example.thinkpad.icompetition.R;
@@ -40,7 +41,8 @@ public class MyCollectionActivity
     private RecyclerView mRecyclerView;
     private int mRecyclerViewCurrentY = 0;
     private int mRecyclerViewCurrentX = 0;
-
+    private Toolbar mToolbar;
+    private TextView mTitleTV;
 
     private Handler mHandler = new Handler();
     List<ExamRecordItemBean> mInfo;                         //详细信息
@@ -54,7 +56,6 @@ public class MyCollectionActivity
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_me_collection);
-
         init();
         initView();
         setViewListener();
@@ -76,13 +77,24 @@ public class MyCollectionActivity
     }
 
     public void initView(){
+        mTitleTV = findViewById(R.id.tv_toolbar_title);
+        mToolbar = findViewById(R.id.toolbar_main);
         mRecyclerView = findViewById(R.id.rc_me_collection_list);
         mSwipeRefreshLayout = findViewById(R.id.srl_me_collection_list);
         mSwipeRefreshLayout.setColorSchemeColors(Color.BLUE, Color.GREEN, Color.RED);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+        mTitleTV.setText(getString(R.string.collection));
+        mToolbar.setNavigationIcon(R.mipmap.back);
+        setSupportActionBar(mToolbar);
     }
 
     public void setViewListener() {
+        mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
         mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {

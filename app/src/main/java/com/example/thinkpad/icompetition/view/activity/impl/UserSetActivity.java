@@ -88,7 +88,7 @@ public class UserSetActivity extends BaseActivity<UserSetPresenter> implements V
         mUserNumTV=findViewById(R.id.tv_user_num);
         mExitBtn=findViewById(R.id.btn_set_exit);
         mToolbar=findViewById(R.id.toolbar_main);
-        mToolTitleTV=findViewById(R.id.toolbar_title);
+        mToolTitleTV=findViewById(R.id.tv_toolbar_title);
         mToolTitleTV.setText("通用设置");
         mToolbar.setNavigationIcon(R.mipmap.back);
         setSupportActionBar(mToolbar);
