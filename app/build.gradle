@@ -66,4 +66,5 @@ dependencies {
     //裁剪图片
     implementation(name: 'android-cropimage-1.1.2', ext: 'aar')
     implementation 'com.github.chenupt.android:dragtoplayout:1.2.1@aar'
+    implementation 'com.nightonke:boommenu:2.0.3'
 }

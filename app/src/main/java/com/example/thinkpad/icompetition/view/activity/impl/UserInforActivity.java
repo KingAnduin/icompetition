@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -100,6 +101,13 @@ public class UserInforActivity extends BaseActivity<UserInforPresenter> implemen
         mNameToEditInforIV.setOnClickListener(this);
         mSexToEditInforIV.setOnClickListener(this);
         mBirthdayToEditInforIV.setOnClickListener(this);
+    }
+
+    @Override
+    public void onBackPressed() {
+        //super.onBackPressed();
+        setResult(200);
+        finish();
     }
 
     private void findView() {

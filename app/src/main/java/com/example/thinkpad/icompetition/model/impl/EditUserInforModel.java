@@ -59,10 +59,10 @@ public class EditUserInforModel extends BaseModel implements IBaseModel,IEditUse
             }
         };
         if(haveHeadImage){
-            mNetworkInterface.submitUserInfor(callback,bean.getUser_name(),bean.getUser_sex(),bean.getUser_birthday(),bean.getUser_interest(),bean.getUser_headimage());
+            mNetworkInterface.submitUserInfor(callback,bean.getUser_name(),bean.getUser_sex(),bean.getUser_birthday(),bean.getUser_headimage());
         }
         else {
-            mNetworkInterface.submitUserInforWithoutHeadImage(callback, bean.getUser_name(), bean.getUser_sex(), bean.getUser_birthday(), bean.getUser_interest());
+            mNetworkInterface.submitUserInforWithoutHeadImage(callback, bean.getUser_name(), bean.getUser_sex(), bean.getUser_birthday());
         }
     }
     @Override

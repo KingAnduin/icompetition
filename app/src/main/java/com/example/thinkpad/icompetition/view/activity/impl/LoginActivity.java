@@ -1,6 +1,8 @@
 package com.example.thinkpad.icompetition.view.activity.impl;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.View;
@@ -166,6 +168,11 @@ public class LoginActivity extends BaseActivity<LoginPresenter> implements ILogi
     //请求返回用户数据的回调
     @Override
     public void getUserInforReturn(UserInforRoot root) {
+        SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences("user_login",Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString("user_login_num",String.valueOf(root.getData().getUser_num()));
+        editor.putString("user_login_pwd",mUserPassWordEt.getText().toString());
+        editor.commit();
         startActivity(new Intent(LoginActivity.this,MainActivity.class));
         //Log.d("LYactivity", "count"+((IcompetitionApplication) ActivityManager.getActivityManager() );
         finish();

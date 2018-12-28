@@ -34,6 +34,10 @@ public class NetworkInterfaces {
     private static final String ADD_CONCERN ="/api/focus/add"; //添加关注
     private static final String DELETE_CONCERN ="/api/focus/delete"; //删除关注
     private static final String PAGING_QUERY_COLLECTION = "/api/collections/bypage";//分页查询收藏
+    private static final String INTERESTS_ADD = "/api/interests/add";//添加兴趣
+    private static final String INTERESTS_DELETE = "/api/interests/delete";//删除兴趣
+    private static final String INTERESTS_TYPE ="/api/types";//兴趣类别
+    private static final String INTERESTS_USER = "/api/interests/bypage";//用户的兴趣
 
     /**
      * 用户注册
@@ -121,15 +125,13 @@ public class NetworkInterfaces {
      * @param userName 用户姓名
      * @param userSex 用户性别
      * @param userBirthday 用户生日
-     * @param interest 用户兴趣
      * @param headImage 用户头像
      */
-    public void submitUserInfor(Callback callback,String userName,String userSex,String userBirthday,String interest,String headImage){
+    public void submitUserInfor(Callback callback,String userName,String userSex,String userBirthday,String headImage){
         ArrayMap<String,String> param = new ArrayMap<>();
         param.put("user_name",userName);
         param.put("user_sex",userSex);
         param.put("user_birthday",userBirthday);
-        param.put("user_interest",interest);
         param.put("user_headimage",headImage);
         new NetworkRequest(param,SERVER_HOST + SUBMIT_USERINFOR,callback).sendRequest();
     }
@@ -141,14 +143,12 @@ public class NetworkInterfaces {
      * @param userName 用户姓名
      * @param userSex 用户性别
      * @param userBirthday 用户生日
-     * @param interest 用户兴趣
      */
-    public void submitUserInforWithoutHeadImage(Callback callback,String userName,String userSex,String userBirthday,String interest){
+    public void submitUserInforWithoutHeadImage(Callback callback,String userName,String userSex,String userBirthday){
         ArrayMap<String,String> param = new ArrayMap<>();
         param.put("user_name",userName);
         param.put("user_sex",userSex);
         param.put("user_birthday",userBirthday);
-        param.put("user_interest",interest);
         new NetworkRequest(param,SERVER_HOST + SUBMIT_USERINFOR,callback).sendRequest();
     }
 
@@ -261,7 +261,49 @@ public class NetworkInterfaces {
         param.put("pageSize", String.valueOf(page_size));
         param.put("usernum", userNum);
         new NetworkRequest(param, SERVER_HOST + PAGING_QUERY_COLLECTION, callback).sendRequest();
-
     }
 
+    /**
+     * 获取兴趣类别
+     * @param callback .
+     */
+    public void interestsType(Callback callback){
+        ArrayMap<String, String > param = new ArrayMap<>();
+        new NetworkRequest(param, SERVER_HOST + INTERESTS_TYPE, callback).sendRequest();
+    }
+
+    /**
+     * 添加兴趣
+     * @param callback .
+     * @param typename 添加兴趣的类名
+     */
+    public void addInterest(Callback callback,String typename){
+        ArrayMap<String, String > param = new ArrayMap<>();
+        param.put("typename", typename);
+        new NetworkRequest(param, SERVER_HOST + INTERESTS_ADD, callback).sendRequest();
+    }
+
+    /**
+     * 删除兴趣
+     * @param callback .
+     * @param typename 删除兴趣的类名
+     */
+    public void deleteInterest(Callback callback,String typename){
+        ArrayMap<String, String > param = new ArrayMap<>();
+        param.put("typename", String.valueOf(typename));
+        new NetworkRequest(param, SERVER_HOST + INTERESTS_DELETE, callback).sendRequest();
+    }
+
+    /**
+     * 获取用户兴趣
+     * @param callback .
+     * @param page_no 请求页数
+     * @param page_size 每页条数
+     */
+    public void userInterests(Callback callback, int page_no, int page_size){
+        ArrayMap<String, String > param = new ArrayMap<>();
+        param.put("page", String.valueOf(page_no));
+        param.put("pageSize", String.valueOf(page_size));
+        new NetworkRequest(param, SERVER_HOST + INTERESTS_USER, callback).sendRequest();
+    }
 }

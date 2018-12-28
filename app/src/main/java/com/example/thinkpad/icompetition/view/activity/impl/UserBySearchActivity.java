@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.example.thinkpad.icompetition.IcompetitionApplication;
 import com.example.thinkpad.icompetition.R;
 import com.example.thinkpad.icompetition.model.entity.search.IsConcernRoot;
 import com.example.thinkpad.icompetition.model.entity.search.UsersBean;
@@ -119,6 +120,7 @@ public class UserBySearchActivity extends BaseActivity<UserBySearchPresenter> im
     private void getIsConcern(String other_num) {
         mProgressBar.setVisibility(View.VISIBLE);
         if(NetWorkHelper.isNetworkAvailable(this)) {
+            mConcernBtn.setClickable(false);
             mPresenter.getIsConcern(other_num);
         }else {
             showSnackBar(mConcernBtn,getString(R.string.not_have_network),getMainColor());
@@ -138,7 +140,27 @@ public class UserBySearchActivity extends BaseActivity<UserBySearchPresenter> im
 
     @Override
     public void failBecauseNotNetworkReturn(int code) {
-        showSnackBar(mConcernBtn, getString(R.string.not_network), getMainColor());
+        //在这里加入一种特殊情况：用户未登录
+        if(((IcompetitionApplication)getApplication()).getToken()==null||((IcompetitionApplication)getApplication()).getToken().equals("")){
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    mConcernBtn.setClickable(true);
+                    mProgressBar.setVisibility(View.GONE);
+                    mConcernBtn.setText(getString(R.string.concern_not_concern));
+                    mConcernBtn.setBackground(getResources().getDrawable(R.drawable.background_loginbt));
+                    showSnackBar(mConcernBtn,"还未登录，暂时不能关注", getMainColor());
+                }
+            });
+        } else {
+            showSnackBar(mConcernBtn, getString(R.string.not_network), getMainColor());
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    mConcernBtn.setClickable(true);
+                }
+            });
+        }
     }
 
     @Override
@@ -150,7 +172,13 @@ public class UserBySearchActivity extends BaseActivity<UserBySearchPresenter> im
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.btn_user_concern:
-                changeConcernState();
+                if(((IcompetitionApplication)getApplication()).getToken()==null||((IcompetitionApplication)getApplication()).getToken().equals("")){
+                    intent = new Intent(UserBySearchActivity.this,LoginActivity.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                    startActivity(intent);
+                }else {
+                    changeConcernState();
+                }
                 break;
         }
     }
@@ -174,6 +202,7 @@ public class UserBySearchActivity extends BaseActivity<UserBySearchPresenter> im
                     mConcernBtn.setText("");
                 }
             });
+            mConcernBtn.setClickable(false);
             mPresenter.deleteConcern(other_num);
         }else {
             showSnackBar(mConcernBtn,getString(R.string.not_have_network),getMainColor());
@@ -189,6 +218,7 @@ public class UserBySearchActivity extends BaseActivity<UserBySearchPresenter> im
                     mConcernBtn.setText("");
                 }
             });
+            mConcernBtn.setClickable(false);
             mPresenter.addConcern(other_num);
         }else {
             showSnackBar(mConcernBtn,getString(R.string.not_have_network),getMainColor());
@@ -201,6 +231,7 @@ public class UserBySearchActivity extends BaseActivity<UserBySearchPresenter> im
             runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
+                    mConcernBtn.setClickable(true);
                     mProgressBar.setVisibility(View.GONE);
                     if (root.getData().equals(getString(R.string.concern_is_concern))) {
                         mConcernBtn.setText(root.getData());
@@ -222,6 +253,7 @@ public class UserBySearchActivity extends BaseActivity<UserBySearchPresenter> im
             runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
+                    mConcernBtn.setClickable(true);
                     mProgressBar.setVisibility(View.GONE);
                     mConcernBtn.setText(getString(R.string.concern_not_concern));
                     mConcernBtn.setBackground(getResources().getDrawable(R.drawable.background_loginbt));
@@ -233,6 +265,7 @@ public class UserBySearchActivity extends BaseActivity<UserBySearchPresenter> im
             runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
+                    mConcernBtn.setClickable(true);
                     mProgressBar.setVisibility(View.GONE);
                     mConcernBtn.setText(getString(R.string.concern_is_concern));
                     mConcernBtn.setBackground(getResources().getDrawable(R.drawable.background_is_concern));
@@ -248,6 +281,7 @@ public class UserBySearchActivity extends BaseActivity<UserBySearchPresenter> im
             runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
+                    mConcernBtn.setClickable(true);
                     mProgressBar.setVisibility(View.GONE);
                     mConcernBtn.setText(getString(R.string.concern_not_concern));
                     mConcernBtn.setBackground(getResources().getDrawable(R.drawable.background_loginbt));
@@ -259,6 +293,7 @@ public class UserBySearchActivity extends BaseActivity<UserBySearchPresenter> im
             runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
+                    mConcernBtn.setClickable(true);
                     mProgressBar.setVisibility(View.GONE);
                     mConcernBtn.setText(getString(R.string.concern_is_concern));
                     mConcernBtn.setBackground(getResources().getDrawable(R.drawable.background_is_concern));
