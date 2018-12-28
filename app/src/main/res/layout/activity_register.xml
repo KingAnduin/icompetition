@@ -108,9 +108,7 @@
                     android:textCursorDrawable="@null"
                     android:textSize="15sp" />
             </LinearLayout>
-
         </LinearLayout>
-
         <Button
             android:id="@+id/btn_register"
             android:layout_width="match_parent"
