@@ -68,7 +68,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     }
 
     private void findView() {
-        mToolbarTitleTV = findViewById(R.id.toolbar_title);
+        mToolbarTitleTV = findViewById(R.id.tv_toolbar_title);
         mCompetitionLayout = findViewById(R.id.layout_competion);
         mMeLayout = findViewById(R.id.layout_me);
         mToolbar = findViewById(R.id.toolbar_main);

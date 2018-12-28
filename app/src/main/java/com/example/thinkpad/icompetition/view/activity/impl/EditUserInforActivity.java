@@ -132,7 +132,7 @@ public class EditUserInforActivity extends BaseActivity<EditUserInforPresenter> 
     }
 
     private void findView() {
-        mTitleTV=findViewById(R.id.toolbar_title);
+        mTitleTV=findViewById(R.id.tv_toolbar_title);
         mToolbar = findViewById(R.id.toolbar_main);
         mUserHeadImageAIV=findViewById(R.id.aiv_edit_headimage);
         mUserNameET=findViewById(R.id.et_edit_name);

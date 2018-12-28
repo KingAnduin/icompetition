@@ -6,6 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:minHeight="?attr/actionBarSize"
+    android:fitsSystemWindows="true"
     app:title=" "
     android:background="#00b7ee"
     app:titleMarginStart="10dp"
@@ -13,7 +14,7 @@
     app:titleTextColor="#fff"
     app:theme="@style/ToolbarTheme">
     <TextView
-        android:id="@+id/toolbar_title"
+        android:id="@+id/tv_toolbar_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text=" "
