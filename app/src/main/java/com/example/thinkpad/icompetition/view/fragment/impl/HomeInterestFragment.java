@@ -76,11 +76,14 @@ public class HomeInterestFragment
         mDaoSession=((IcompetitionApplication)getApplication()).getDaoSession();
         UserInforBeanDao userInforBeanDao = mDaoSession.getUserInforBeanDao();
         List<UserInforBean> list = userInforBeanDao.loadAll();
-        if(list.get(0)!=null) {
-            mUserBean = list.get(0);
-        }
+        String token = ((IcompetitionApplication)getApplication()).getToken();
+        if( token != null && !token.equals("")){
+            if(list.get(0)!=null) {
+                mUserBean = list.get(0);
+            }
 
-        userInterest = mUserBean.getUser_interest();
+            userInterest = mUserBean.getUser_interest();
+        }
     }
 
     public void initView() {
@@ -142,8 +145,8 @@ public class HomeInterestFragment
      */
     public void refreshData() {
         //更新用户兴趣
-        Log.d("hjg", "init: "+mUserBean.getUser_interest());
-        userInterest = mUserBean.getUser_interest();
+        initFocus();
+        Log.d("hjg", "refreshData: " + userInterest);
         mNoMoreData = false;
         mCurrentPage = 1;
         mInfo = null;

@@ -10,6 +10,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.text.TextPaint;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.webkit.WebView;
@@ -18,6 +19,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.example.thinkpad.icompetition.IcompetitionApplication;
 import com.example.thinkpad.icompetition.R;
 import com.example.thinkpad.icompetition.model.entity.collection.CollectionRoot;
 import com.example.thinkpad.icompetition.model.entity.collection.IsCollectionRoot;
@@ -26,6 +28,7 @@ import com.example.thinkpad.icompetition.model.entity.focus.MyFocusRoot;
 import com.example.thinkpad.icompetition.model.entity.search.IsConcernRoot;
 import com.example.thinkpad.icompetition.model.entity.user.UserInforBean;
 import com.example.thinkpad.icompetition.presenter.impl.CompetitionInfoPresenter;
+import com.example.thinkpad.icompetition.util.ShowReturnLoginUtil;
 import com.example.thinkpad.icompetition.view.activity.i.IBaseActivity;
 import com.example.thinkpad.icompetition.view.activity.i.ICompetitionActivity;
 import com.example.thinkpad.icompetition.view.widget.AsyncImageView;
@@ -63,6 +66,7 @@ public class CompetitionInfoActivity
     private ImageView mShareIv;                         //分享按钮
     private Button mGoToWebBtn;                         //前往官网报名按钮
 
+    private ShowReturnLoginUtil showReturnLoginUtil;
     private Boolean mIsCollection = Boolean.FALSE;      //是否已经收藏
     private Boolean mIsAttention = Boolean.FALSE;       //是否已经关注
 
@@ -79,7 +83,10 @@ public class CompetitionInfoActivity
     }
 
 
-
+    private void initReturnLoginDialog() {
+        showReturnLoginUtil = new ShowReturnLoginUtil(this);
+        showReturnLoginUtil.show();
+    }
 
     private void initBar() {
         mToolbar=findViewById(R.id.toolbar_main);
@@ -133,6 +140,7 @@ public class CompetitionInfoActivity
     }
 
     private void setDate() {
+
         if(mItemBean != null){
 
             String title = mItemBean.getCom_title();
@@ -165,8 +173,15 @@ public class CompetitionInfoActivity
             mExamTimeTv.setText(examTime);
             mPublishNameTv.setText(publishName);
             mUrlTv.setText(url);
-            mPresenter.getIsCollection(mItemBean.getCom_id());
-            mPresenter.getIsFocus(mItemBean.getCom_publisher());
+
+            if(!TextUtils.isEmpty(((IcompetitionApplication)getApplication()).getToken())){
+                mPresenter.getIsCollection(mItemBean.getCom_id());
+                mPresenter.getIsFocus(mItemBean.getCom_publisher());
+            }else {
+                changeIcon(1, Boolean.FALSE);
+                changeIcon(2, Boolean.FALSE);
+            }
+
 
         }else {
             finish();
@@ -185,20 +200,29 @@ public class CompetitionInfoActivity
 
             //关注
             case R.id.com_info_attention:
-                if(mIsAttention){
-                    mPresenter.cancelCollection(mItemBean.getCom_publisher());
+                if(!TextUtils.isEmpty(((IcompetitionApplication)getApplication()).getToken())){
+                    if(mIsAttention){
+                        mPresenter.cancelFocus(mItemBean.getCom_publisher());
+                    }else {
+                        mPresenter.addFocus(mItemBean.getCom_publisher());
+                    }
                 }else {
-                    mPresenter.addFocus(mItemBean.getCom_publisher());
+                    //因为没有登陆所以回到登陆界面
+                    initReturnLoginDialog();
                 }
                 break;
 
             //收藏
             case R.id.com_info_collection:
-                if(mIsCollection){
-                    mPresenter.cancelCollection(mItemBean.getCom_id());
+                if(!TextUtils.isEmpty(((IcompetitionApplication)getApplication()).getToken())){
+                    if(mIsCollection){
+                        mPresenter.cancelCollection(mItemBean.getCom_id());
+                    }else {
+                        mPresenter.addCollection("",mItemBean.getCom_id());
+                    }
                 }else {
-
-                    mPresenter.addCollection("",mItemBean.getCom_id());
+                    //因为没有登陆所以回到登陆界面
+                    initReturnLoginDialog();
                 }
                 break;
 
@@ -291,6 +315,7 @@ public class CompetitionInfoActivity
     @Override
     public void getIsAttentionResponse(IsConcernRoot root) {
         if(root.getCode() == 200){
+
             if (root.getData().equals("已关注")){
                 mIsAttention = Boolean.TRUE;
             }else {

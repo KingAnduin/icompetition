@@ -10,6 +10,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.TextView;
 
 import com.example.thinkpad.icompetition.IcompetitionApplication;
 import com.example.thinkpad.icompetition.R;
@@ -39,6 +40,7 @@ public class MyFocusActivity
     private SwipeRefreshLayout mSwipeRefreshLayout;
     private RecyclerView mRecyclerView;
     private Toolbar mToolbar;
+    private TextView mTitleTv;
     private int mRecyclerViewCurrentY = 0;
     private int mRecyclerViewCurrentX = 0;
 
@@ -82,10 +84,13 @@ public class MyFocusActivity
     public void initView(){
         mRecyclerView = findViewById(R.id.rc_me_focus_list);
         mToolbar = findViewById(R.id.toolbar_main);
+        mTitleTv = findViewById(R.id.tv_toolbar_title);
+        mTitleTv.setText(R.string.my_focus_title);
         mSwipeRefreshLayout = findViewById(R.id.srl_me_focus_list);
         mSwipeRefreshLayout.setColorSchemeColors(Color.BLUE, Color.GREEN, Color.RED);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
         mToolbar.setNavigationIcon(R.mipmap.back);
+
         setSupportActionBar(mToolbar);
     }
 
@@ -96,7 +101,12 @@ public class MyFocusActivity
                 refreshData();
             }
         });
-
+        mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
         mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
