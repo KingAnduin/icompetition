@@ -10,6 +10,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.text.TextPaint;
+import android.util.Log;
 import android.view.View;
 import android.webkit.WebView;
 import android.widget.Button;
@@ -21,6 +22,8 @@ import com.example.thinkpad.icompetition.R;
 import com.example.thinkpad.icompetition.model.entity.collection.CollectionRoot;
 import com.example.thinkpad.icompetition.model.entity.collection.IsCollectionRoot;
 import com.example.thinkpad.icompetition.model.entity.exam.ExamRecordItemBean;
+import com.example.thinkpad.icompetition.model.entity.focus.MyFocusRoot;
+import com.example.thinkpad.icompetition.model.entity.search.IsConcernRoot;
 import com.example.thinkpad.icompetition.model.entity.user.UserInforBean;
 import com.example.thinkpad.icompetition.presenter.impl.CompetitionInfoPresenter;
 import com.example.thinkpad.icompetition.view.activity.i.IBaseActivity;
@@ -69,8 +72,6 @@ public class CompetitionInfoActivity
         setContentView(R.layout.activity_competition_infor);
         Intent intent = getIntent();
         mItemBean = (ExamRecordItemBean) intent.getSerializableExtra("item");
-        //TODO
-        //mUserBean = (UserInforBean) intent.getSerializableExtra("user");
         initBar();
         findView();
         setViewListener();
@@ -135,7 +136,8 @@ public class CompetitionInfoActivity
         if(mItemBean != null){
 
             String title = mItemBean.getCom_title();
-            String organizer = mItemBean.getCom_sponsor();
+            String organizer = mItemBean.getCom_sponsor().substring(1, mItemBean.getCom_sponsor().length());
+            organizer = organizer.replace(" ", "\n");
             String signUpStart = mItemBean.getCom_signupstart();
             String signUpEnd = mItemBean.getCom_signupend();
             String signUpTime = signUpStart + " -- " + signUpEnd;
@@ -164,6 +166,7 @@ public class CompetitionInfoActivity
             mPublishNameTv.setText(publishName);
             mUrlTv.setText(url);
             mPresenter.getIsCollection(mItemBean.getCom_id());
+            mPresenter.getIsFocus(mItemBean.getCom_publisher());
 
         }else {
             finish();
@@ -182,7 +185,11 @@ public class CompetitionInfoActivity
 
             //关注
             case R.id.com_info_attention:
-                showSnackBar(mPublishHeadIv, "还没写", getMainColor());
+                if(mIsAttention){
+                    mPresenter.cancelCollection(mItemBean.getCom_publisher());
+                }else {
+                    mPresenter.addFocus(mItemBean.getCom_publisher());
+                }
                 break;
 
             //收藏
@@ -260,19 +267,41 @@ public class CompetitionInfoActivity
     }
 
     @Override
-    public void addAttentionResponse() {
-
+    public void addAttentionResponse(MyFocusRoot root) {
+        if(root.getCode() == 200){
+            mIsAttention = Boolean.TRUE;
+            changeIcon(2, Boolean.TRUE);
+        }else {
+            showSnackBar(mAttentionIv, getResources().getString(R.string.request_fail) + root.getMsg(), getMainColor());
+        }
     }
 
     @Override
-    public void cancelAttentionResponse() {
-
+    public void cancelAttentionResponse(MyFocusRoot root) {
+        if(root.getCode() == 200){
+            mIsAttention = Boolean.FALSE;
+            changeIcon(2, Boolean.FALSE);
+        }else if(root.getCode() == 1){
+            showSnackBar(mAttentionIv, "信息错误", getMainColor());
+        }else{
+            showSnackBar(mAttentionIv, getResources().getString(R.string.request_fail) + root.getMsg(), getMainColor());
+        }
     }
 
     @Override
-    public void getIsAttentionResponse() {
-
+    public void getIsAttentionResponse(IsConcernRoot root) {
+        if(root.getCode() == 200){
+            if (root.getData().equals("已关注")){
+                mIsAttention = Boolean.TRUE;
+            }else {
+                mIsAttention = Boolean.FALSE;
+            }
+            changeIcon(2, mIsAttention);
+        }else {
+            showSnackBar(mAttentionIv, getResources().getString(R.string.request_fail) + root.getMsg(), getMainColor());
+        }
     }
+
 
     //动态改变图标
     public void changeIcon(int type, boolean status){

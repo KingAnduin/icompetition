@@ -3,8 +3,7 @@ package com.example.thinkpad.icompetition.presenter.impl;
 import android.os.Handler;
 import android.os.Message;
 
-import com.example.thinkpad.icompetition.model.entity.search.IsConcernRoot;
-import com.example.thinkpad.icompetition.model.event.IsConcernEvent;
+import com.example.thinkpad.icompetition.model.event.FocusEvent;
 import com.example.thinkpad.icompetition.model.impl.UserBySearchModel;
 import com.example.thinkpad.icompetition.presenter.i.IUserBySearchPresenter;
 import com.example.thinkpad.icompetition.view.activity.impl.UserBySearchActivity;
@@ -22,23 +21,23 @@ public class UserBySearchPresenter extends BasePresenter<UserBySearchActivity,Us
     @Override
     protected void eventReceive(Message msg) {
         switch (msg.what){
-            case IsConcernEvent.GET_ISCONCERN_OK:
-                mView.getConcernReturn(((IsConcernEvent)msg.obj).getRoot());
+            case FocusEvent.GET_ISCONCERN_OK:
+                mView.getConcernReturn(((FocusEvent)msg.obj).getRoot());
                 break;
-            case IsConcernEvent.GET_ISCONCERN_FAIL:
+            case FocusEvent.GET_ISCONCERN_FAIL:
                 mView.failBecauseNotNetworkReturn(msg.what);
                 break;
-            case IsConcernEvent.ADD_CONCERN_OK:
-                mView.getAddConcernReturn(((IsConcernEvent)msg.obj).getRoot());
+            case FocusEvent.ADD_CONCERN_OK:
+                mView.getAddConcernReturn(((FocusEvent)msg.obj).getRoot());
                 break;
-            case IsConcernEvent.ADD_CONCERN_FAIL:
+            case FocusEvent.ADD_CONCERN_FAIL:
                 mView.failBecauseNotNetworkReturn(msg.what);
                 break;
 
-            case IsConcernEvent.DELETE_CONCERN_OK:
-                mView.getDeleteConcernReturn(((IsConcernEvent)msg.obj).getRoot());
+            case FocusEvent.DELETE_CONCERN_OK:
+                mView.getDeleteConcernReturn(((FocusEvent)msg.obj).getRoot());
                 break;
-            case IsConcernEvent.DELETE_CONCERN_FAIL:
+            case FocusEvent.DELETE_CONCERN_FAIL:
                 mView.failBecauseNotNetworkReturn(msg.what);
                 break;
         }

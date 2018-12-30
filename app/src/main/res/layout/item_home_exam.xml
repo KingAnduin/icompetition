@@ -87,17 +87,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"
             android:text="@string/item_home_list_level"
             android:textSize="@dimen/fontSizeExtraSmall"/>
-
-        <TextView
-            android:id="@+id/tv_item_home_list_organizer"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:layout_marginBottom="16dp"
-            android:text="@string/item_home_list_organizer"
-            android:textSize="@dimen/fontSizeExtraSmall" />
 
 
     </LinearLayout>

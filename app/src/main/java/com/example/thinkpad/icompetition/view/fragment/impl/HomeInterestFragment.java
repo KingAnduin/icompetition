@@ -8,13 +8,16 @@ import android.support.annotation.Nullable;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.thinkpad.icompetition.IcompetitionApplication;
 import com.example.thinkpad.icompetition.R;
 import com.example.thinkpad.icompetition.model.entity.exam.ExamRecordItemBean;
 import com.example.thinkpad.icompetition.model.entity.exam.ExamRecordRoot;
+import com.example.thinkpad.icompetition.model.entity.user.UserInforBean;
 import com.example.thinkpad.icompetition.view.activity.i.IBaseActivity;
 import com.example.thinkpad.icompetition.view.activity.impl.CompetitionInfoActivity;
 import com.example.thinkpad.icompetition.view.adapter.HomeInterestAdapter;
@@ -24,6 +27,10 @@ import com.example.thinkpad.icompetition.presenter.impl.HomeInterestFragmentPres
 import java.util.ArrayList;
 import java.util.List;
 
+import greendao.gen.DaoSession;
+import greendao.gen.UserInforBeanDao;
+
+import static com.example.thinkpad.icompetition.IcompetitionApplication.getApplication;
 
 
 public class HomeInterestFragment
@@ -40,8 +47,11 @@ public class HomeInterestFragment
     List<ExamRecordItemBean> mInfo;                         //详细信息
     private int mCurrentPage = 1;                           //页数
     private final int page_size = 10;                       //每页信息数
-    private String userInterest = "数学建模";                  //用户兴趣
+    private String userInterest = "";                       //用户兴趣
     private boolean mNoMoreData = false;
+    private DaoSession mDaoSession;
+    private UserInforBean mUserBean;                        //用户信息
+
 
     @Nullable
     @Override
@@ -50,6 +60,7 @@ public class HomeInterestFragment
         if (mPresenter == null)
             mPresenter = getPresenter();
 
+        initFocus();
         initView();
         setViewListener();
         return rootView;
@@ -59,6 +70,17 @@ public class HomeInterestFragment
     public void onStart() {
         super.onStart();
         refreshData();
+    }
+
+    public void initFocus(){
+        mDaoSession=((IcompetitionApplication)getApplication()).getDaoSession();
+        UserInforBeanDao userInforBeanDao = mDaoSession.getUserInforBeanDao();
+        List<UserInforBean> list = userInforBeanDao.loadAll();
+        if(list.get(0)!=null) {
+            mUserBean = list.get(0);
+        }
+
+        userInterest = mUserBean.getUser_interest();
     }
 
     public void initView() {
@@ -119,6 +141,9 @@ public class HomeInterestFragment
      * 刷新数据
      */
     public void refreshData() {
+        //更新用户兴趣
+        Log.d("hjg", "init: "+mUserBean.getUser_interest());
+        userInterest = mUserBean.getUser_interest();
         mNoMoreData = false;
         mCurrentPage = 1;
         mInfo = null;

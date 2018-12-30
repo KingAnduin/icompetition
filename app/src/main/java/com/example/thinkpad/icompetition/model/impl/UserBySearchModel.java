@@ -3,9 +3,8 @@ package com.example.thinkpad.icompetition.model.impl;
 import android.os.Handler;
 
 import com.example.thinkpad.icompetition.model.entity.search.IsConcernRoot;
-import com.example.thinkpad.icompetition.model.event.IsConcernEvent;
+import com.example.thinkpad.icompetition.model.event.FocusEvent;
 import com.example.thinkpad.icompetition.model.i.IUserBySearchModel;
-import com.example.thinkpad.icompetition.model.impl.BaseModel;
 import com.example.thinkpad.icompetition.network.CallbackIntercept;
 import com.example.thinkpad.icompetition.network.NetworkInterfaces;
 import com.google.gson.Gson;
@@ -30,21 +29,21 @@ public class UserBySearchModel extends BaseModel implements IUserBySearchModel {
             public void onSuccess(Call call, String jsonBody) {
                 Gson gson = new Gson();
                 IsConcernRoot root = gson.fromJson(jsonBody,IsConcernRoot.class);
-                IsConcernEvent event = new IsConcernEvent();
+                FocusEvent event = new FocusEvent();
                 if(root!=null){
                     event.setRoot(root);
-                    event.setWhat(IsConcernEvent.GET_ISCONCERN_OK);
+                    event.setWhat(FocusEvent.GET_ISCONCERN_OK);
                     postEvent(event);
                 }else {
-                    event.setWhat(IsConcernEvent.GET_ISCONCERN_FAIL);
+                    event.setWhat(FocusEvent.GET_ISCONCERN_FAIL);
                     postEvent(event);
                 }
             }
 
             @Override
             public void onFail(Call call, Exception e) {
-                IsConcernEvent event = new IsConcernEvent();
-                event.setWhat(IsConcernEvent.GET_ISCONCERN_FAIL);
+                FocusEvent event = new FocusEvent();
+                event.setWhat(FocusEvent.GET_ISCONCERN_FAIL);
                 postEvent(event);
             }
         };
@@ -58,21 +57,21 @@ public class UserBySearchModel extends BaseModel implements IUserBySearchModel {
             public void onSuccess(Call call, String jsonBody) {
                 Gson gson = new Gson();
                 IsConcernRoot root = gson.fromJson(jsonBody,IsConcernRoot.class);
-                IsConcernEvent event = new IsConcernEvent();
+                FocusEvent event = new FocusEvent();
                 if(root!=null){
                     event.setRoot(root);
-                    event.setWhat(IsConcernEvent.ADD_CONCERN_OK);
+                    event.setWhat(FocusEvent.ADD_CONCERN_OK);
                     postEvent(event);
                 }else {
-                    event.setWhat(IsConcernEvent.ADD_CONCERN_FAIL);
+                    event.setWhat(FocusEvent.ADD_CONCERN_FAIL);
                     postEvent(event);
                 }
             }
 
             @Override
             public void onFail(Call call, Exception e) {
-                IsConcernEvent event = new IsConcernEvent();
-                event.setWhat(IsConcernEvent.ADD_CONCERN_FAIL);
+                FocusEvent event = new FocusEvent();
+                event.setWhat(FocusEvent.ADD_CONCERN_FAIL);
                 postEvent(event);
             }
         };
@@ -86,21 +85,21 @@ public class UserBySearchModel extends BaseModel implements IUserBySearchModel {
             public void onSuccess(Call call, String jsonBody) {
                 Gson gson = new Gson();
                 IsConcernRoot root = gson.fromJson(jsonBody,IsConcernRoot.class);
-                IsConcernEvent event = new IsConcernEvent();
+                FocusEvent event = new FocusEvent();
                 if(root!=null){
                     event.setRoot(root);
-                    event.setWhat(IsConcernEvent.DELETE_CONCERN_OK);
+                    event.setWhat(FocusEvent.DELETE_CONCERN_OK);
                     postEvent(event);
                 }else {
-                    event.setWhat(IsConcernEvent.DELETE_CONCERN_FAIL);
+                    event.setWhat(FocusEvent.DELETE_CONCERN_FAIL);
                     postEvent(event);
                 }
             }
 
             @Override
             public void onFail(Call call, Exception e) {
-                IsConcernEvent event = new IsConcernEvent();
-                event.setWhat(IsConcernEvent.DELETE_CONCERN_FAIL);
+                FocusEvent event = new FocusEvent();
+                event.setWhat(FocusEvent.DELETE_CONCERN_FAIL);
                 postEvent(event);
             }
         };

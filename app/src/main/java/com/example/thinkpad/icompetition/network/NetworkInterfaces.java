@@ -38,6 +38,7 @@ public class NetworkInterfaces {
     private static final String INTERESTS_DELETE = "/api/interests/delete";//删除兴趣
     private static final String INTERESTS_TYPE ="/api/types";//兴趣类别
     private static final String INTERESTS_USER = "/api/interests/bypage";//用户的兴趣
+    private static final String PAGING_QUERY_FOCUS = "/api/focus/bypage"; //获取关注分页
 
     /**
      * 用户注册
@@ -306,4 +307,21 @@ public class NetworkInterfaces {
         param.put("pageSize", String.valueOf(page_size));
         new NetworkRequest(param, SERVER_HOST + INTERESTS_USER, callback).sendRequest();
     }
+
+
+    /**
+     * 分页获取用户关注
+     * @param callback .
+     * @param page_no 页码
+     * @param page_size 页面大小
+     * @param userNum 用户账号
+     */
+    public void queryByPageFocus(Callback callback, int page_no, int page_size, String userNum){
+        ArrayMap<String, String> param = new ArrayMap<>();
+        param.put("page", String.valueOf(page_no));
+        param.put("pageSize", String.valueOf(page_size));
+        param.put("master", userNum);
+        new NetworkRequest(param, SERVER_HOST + PAGING_QUERY_FOCUS, callback).sendRequest();
+    }
+
 }

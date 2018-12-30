@@ -5,6 +5,7 @@ import android.graphics.Rect;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -220,6 +221,7 @@ public class InterstsSelectActivity extends BaseActivity<InterstsSelectActivityP
         if (root.getCode()==200){
             String interests = "";
             userInterestList=root.getData();
+            //Log.d("hjg", "getUserInterestReturn: " + root.getData());
             testSelected = new int[userInterestList.size()];
             for(int i=0;i<userInterestList.size();i++){
                 if(i!=userInterestList.size()-1){

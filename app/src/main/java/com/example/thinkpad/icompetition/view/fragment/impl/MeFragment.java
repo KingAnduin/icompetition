@@ -19,6 +19,7 @@ import com.example.thinkpad.icompetition.model.entity.user.UserInforBean;
 import com.example.thinkpad.icompetition.view.activity.impl.InterstsSelectActivity;
 import com.example.thinkpad.icompetition.view.activity.impl.LoginActivity;
 import com.example.thinkpad.icompetition.view.activity.impl.MyCollectionActivity;
+import com.example.thinkpad.icompetition.view.activity.impl.MyFocusActivity;
 import com.example.thinkpad.icompetition.view.activity.impl.UserInforActivity;
 import com.example.thinkpad.icompetition.view.activity.impl.UserSetActivity;
 import com.example.thinkpad.icompetition.view.widget.AsyncImageView;
@@ -150,7 +151,12 @@ public class MeFragment extends Fragment implements View.OnClickListener{
                 }
                 break;
             case R.id.ll_me_attention:
-
+                if(!TextUtils.isEmpty(((IcompetitionApplication)getActivity().getApplication()).getToken())){
+                    startActivity(new Intent(getActivity(), MyFocusActivity.class));
+                }else {
+                    startActivity(new Intent(getActivity(),LoginActivity.class));
+                    getActivity().finish();//因为没有登陆所以回到登陆界面
+                }
                 break;
             case R.id.ll_me_collection:
                 if(!TextUtils.isEmpty(((IcompetitionApplication)getActivity().getApplication()).getToken())){

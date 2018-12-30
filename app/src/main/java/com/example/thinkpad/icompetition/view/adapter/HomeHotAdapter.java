@@ -131,7 +131,7 @@ public class HomeHotAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         private TextView mTitleTv;              //比赛标题
         private TextView mStartTimeTv;          //报名时间
         private TextView mExamTimeTv;           //比赛时间
-        private TextView mOrganizerTv;          //主办方
+        //private TextView mOrganizerTv;          //主办方
 
         public BodyViewHolder(View itemView) {
             super(itemView);
@@ -148,7 +148,7 @@ public class HomeHotAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
             tp.setFakeBoldText(true);
             mStartTimeTv = itemView.findViewById(R.id.tv_item_home_list_start_time);
             mExamTimeTv = itemView.findViewById(R.id.tv_item_home_list_exam_time);
-            mOrganizerTv = itemView.findViewById(R.id.tv_item_home_list_organizer);
+            //mOrganizerTv = itemView.findViewById(R.id.tv_item_home_list_organizer);
         }
 
         //填写数据
@@ -185,7 +185,7 @@ public class HomeHotAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
             mTitleTv.setText(itemBean.getCom_title());
             mStartTimeTv.setText(formatSpannableString(mContext, mContext.getString(R.string.item_home_list_time_sign_up), signUpTime));
             mExamTimeTv.setText(formatSpannableString(mContext, mContext.getString(R.string.item_home_list_time_exam), examTime));
-            mOrganizerTv.setText(formatSpannableString(mContext, mContext.getString(R.string.item_home_list_organizer), itemBean.getCom_sponsor()));
+            //mOrganizerTv.setText(formatSpannableString(mContext, mContext.getString(R.string.item_home_list_organizer), itemBean.getCom_sponsor()));
 
 
         }

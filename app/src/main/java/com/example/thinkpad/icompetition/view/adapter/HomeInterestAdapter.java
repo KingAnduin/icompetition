@@ -9,7 +9,6 @@ import android.text.SpannableString;
 import android.text.Spanned;
 import android.text.TextPaint;
 import android.text.style.ForegroundColorSpan;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -135,7 +134,7 @@ public class HomeInterestAdapter
         private TextView mTitleTv;              //比赛标题
         private TextView mStartTimeTv;          //报名时间
         private TextView mExamTimeTv;           //比赛时间
-        private TextView mOrganizerTv;          //主办方
+        //private TextView mOrganizerTv;          //主办方
 
         public BodyViewHolder(View itemView) {
             super(itemView);
@@ -152,7 +151,7 @@ public class HomeInterestAdapter
             tp.setFakeBoldText(true);
             mStartTimeTv = itemView.findViewById(R.id.tv_item_home_list_start_time);
             mExamTimeTv = itemView.findViewById(R.id.tv_item_home_list_exam_time);
-            mOrganizerTv = itemView.findViewById(R.id.tv_item_home_list_organizer);
+            //mOrganizerTv = itemView.findViewById(R.id.tv_item_home_list_organizer);
         }
 
         //填写数据
@@ -170,7 +169,6 @@ public class HomeInterestAdapter
             Date curDate = new Date(System.currentTimeMillis());
             String curDates = format.format(curDate);
             DateCount dateCount = new DateCount();
-            Log.d("hjg", "setDate: "+curDates + "  "+signUpEnd[0]);
             Long counts = dateCount.count(curDates, signUpEnd[0], "yyyy.MM.dd");
             if(counts > 0){
                 mIsStartTv.setText(R.string.item_home_list_is_start);
@@ -191,7 +189,7 @@ public class HomeInterestAdapter
             mTitleTv.setText(itemBean.getCom_title());
             mStartTimeTv.setText(formatSpannableString(mContext, mContext.getString(R.string.item_home_list_time_sign_up), signUpTime));
             mExamTimeTv.setText(formatSpannableString(mContext, mContext.getString(R.string.item_home_list_time_exam), examTime));
-            mOrganizerTv.setText(formatSpannableString(mContext, mContext.getString(R.string.item_home_list_organizer), itemBean.getCom_sponsor()));
+            //mOrganizerTv.setText(formatSpannableString(mContext, mContext.getString(R.string.item_home_list_organizer), itemBean.getCom_sponsor()));
 
         }
 

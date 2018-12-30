@@ -5,7 +5,10 @@ import android.util.Log;
 
 import com.example.thinkpad.icompetition.model.entity.collection.CollectionRoot;
 import com.example.thinkpad.icompetition.model.entity.collection.IsCollectionRoot;
+import com.example.thinkpad.icompetition.model.entity.focus.MyFocusRoot;
+import com.example.thinkpad.icompetition.model.entity.search.IsConcernRoot;
 import com.example.thinkpad.icompetition.model.event.CompetitionInfoEvent;
+import com.example.thinkpad.icompetition.model.event.FocusEvent;
 import com.example.thinkpad.icompetition.model.i.IBaseModel;
 import com.example.thinkpad.icompetition.model.i.ICompetitionModel;
 import com.example.thinkpad.icompetition.network.CallbackIntercept;
@@ -35,7 +38,7 @@ public class CompetitionModel extends BaseModel implements IBaseModel,ICompetiti
                 if(root != null ){
                     CompetitionInfoEvent event = new CompetitionInfoEvent();
                     event.setIsCollectionRoot(root);
-                    event.setWhat(CompetitionInfoEvent.IS_OK);
+                    event.setWhat(CompetitionInfoEvent.COLLECTION_IS_OK);
                     postEvent(event);
                 }
             }
@@ -43,7 +46,7 @@ public class CompetitionModel extends BaseModel implements IBaseModel,ICompetiti
             @Override
             public void onFail(Call call, Exception e) {
                 CompetitionInfoEvent event = new CompetitionInfoEvent();
-                event.setWhat(CompetitionInfoEvent.IS_FAIL);
+                event.setWhat(CompetitionInfoEvent.COLLECTION_IS_FAIL);
                 postEvent(event);
             }
         };
@@ -55,13 +58,12 @@ public class CompetitionModel extends BaseModel implements IBaseModel,ICompetiti
         Callback callback = new CallbackIntercept() {
             @Override
             public void onSuccess(Call call, String jsonBody) {
-                Log.d("hjg", "onSuccess: "+jsonBody);
                 Gson gson = new Gson();
                 CollectionRoot root = gson.fromJson(jsonBody, CollectionRoot.class);
                 if(root != null ){
                     CompetitionInfoEvent event = new CompetitionInfoEvent();
                     event.setRoot(root);
-                    event.setWhat(CompetitionInfoEvent.ADD_OK);
+                    event.setWhat(CompetitionInfoEvent.COLLECTION_ADD_OK);
                     postEvent(event);
                 }
             }
@@ -69,7 +71,7 @@ public class CompetitionModel extends BaseModel implements IBaseModel,ICompetiti
             @Override
             public void onFail(Call call, Exception e) {
                 CompetitionInfoEvent event = new CompetitionInfoEvent();
-                event.setWhat(CompetitionInfoEvent.ADD_FAIL);
+                event.setWhat(CompetitionInfoEvent.COLLECTION_ADD_FAIL);
                 postEvent(event);
             }
         };
@@ -88,7 +90,7 @@ public class CompetitionModel extends BaseModel implements IBaseModel,ICompetiti
                 if(root != null ){
                     CompetitionInfoEvent event = new CompetitionInfoEvent();
                     event.setRoot(root);
-                    event.setWhat(CompetitionInfoEvent.CANCEL_OK);
+                    event.setWhat(CompetitionInfoEvent.COLLECTION_CANCEL_OK);
                     postEvent(event);
                 }
             }
@@ -96,11 +98,88 @@ public class CompetitionModel extends BaseModel implements IBaseModel,ICompetiti
             @Override
             public void onFail(Call call, Exception e) {
                 CompetitionInfoEvent event = new CompetitionInfoEvent();
-                event.setWhat(CompetitionInfoEvent.CANCEL_FAIL);
+                event.setWhat(CompetitionInfoEvent.COLLECTION_CANCEL_FAIL);
                 postEvent(event);
             }
         };
 
         mNetworkInterface.cancleCollection(callback, com_id);
+    }
+
+    @Override
+    public void getIsFocus(String other_num) {
+        Callback callback = new CallbackIntercept() {
+            @Override
+            public void onSuccess(Call call, String jsonBody) {
+                Gson gson = new Gson();
+                IsConcernRoot root = gson.fromJson(jsonBody, IsConcernRoot.class);
+                if(root != null ){
+                    FocusEvent event = new FocusEvent();
+                    event.setRoot(root);
+                    event.setWhat(FocusEvent.GET_ISCONCERN_OK);
+                    postEvent(event);
+                }
+            }
+
+            @Override
+            public void onFail(Call call, Exception e) {
+                FocusEvent event = new FocusEvent();
+                event.setWhat(FocusEvent.GET_ISCONCERN_FAIL);
+                postEvent(event);
+            }
+        };
+        mNetworkInterface.getIsConcern(callback, other_num);
+    }
+
+    @Override
+    public void addFocus(String other_num) {
+        Callback callback = new CallbackIntercept() {
+            @Override
+            public void onSuccess(Call call, String jsonBody) {
+                Gson gson = new Gson();
+                MyFocusRoot root = gson.fromJson(jsonBody, MyFocusRoot.class);
+                if(root != null ){
+                    FocusEvent event = new FocusEvent();
+                    event.setMyFocusRoot(root);
+                    event.setWhat(FocusEvent.ADD_CONCERN_OK);
+                    postEvent(event);
+                }
+            }
+
+            @Override
+            public void onFail(Call call, Exception e) {
+                FocusEvent event = new FocusEvent();
+                event.setWhat(FocusEvent.ADD_CONCERN_FAIL);
+                postEvent(event);
+            }
+        };
+
+        mNetworkInterface.addConcern(callback, other_num);
+    }
+
+    @Override
+    public void cancelFocus(String other_num) {
+        Callback callback = new CallbackIntercept() {
+            @Override
+            public void onSuccess(Call call, String jsonBody) {
+                Gson gson = new Gson();
+                MyFocusRoot root = gson.fromJson(jsonBody, MyFocusRoot.class);
+                if(root != null ){
+                    FocusEvent event = new FocusEvent();
+                    event.setMyFocusRoot(root);
+                    event.setWhat(FocusEvent.DELETE_CONCERN_OK);
+                    postEvent(event);
+                }
+            }
+
+            @Override
+            public void onFail(Call call, Exception e) {
+                FocusEvent event = new FocusEvent();
+                event.setWhat(FocusEvent.DELETE_CONCERN_FAIL);
+                postEvent(event);
+            }
+        };
+
+        mNetworkInterface.deleteConcern(callback, other_num);
     }
 }
