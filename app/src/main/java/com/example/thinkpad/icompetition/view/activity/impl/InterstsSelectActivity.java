@@ -102,7 +102,7 @@ public class InterstsSelectActivity extends BaseActivity<InterstsSelectActivityP
                     })
                     .textSize(12)
                     .imageRect(new Rect(Util.dp2px(20), Util.dp2px(20), Util.dp2px(60), Util.dp2px(60)))
-                    .normalImageRes(R.mipmap.ic_me_editor)
+                    .normalImageRes(R.mipmap.ic_interest)
                     .normalText(typeList.get(i+start)));
         }
         boomMenuButton.addBuilder(new TextOutsideCircleButton.Builder()
@@ -115,7 +115,7 @@ public class InterstsSelectActivity extends BaseActivity<InterstsSelectActivityP
                 })
                 .textSize(12)
                 .imageRect(new Rect(Util.dp2px(20), Util.dp2px(20), Util.dp2px(60), Util.dp2px(60)))
-                .normalImageRes(R.mipmap.ic_me_editor)
+                .normalImageRes(R.mipmap.ic_change)
                 .normalText("换一批"));
         boomMenuButton.setLayoutParams(lp);
         relativelayout.addView(boomMenuButton);
