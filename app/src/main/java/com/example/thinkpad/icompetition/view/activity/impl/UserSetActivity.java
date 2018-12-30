@@ -7,6 +7,7 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.support.v7.widget.Toolbar;
 
@@ -25,6 +26,7 @@ import greendao.gen.UserInforBeanDao;
  * created by a’su's
  */
 public class UserSetActivity extends BaseActivity<UserSetPresenter> implements View.OnClickListener, IBaseActivity {
+    private LinearLayout mChangePasswordLayout;
     private TextView mRoleIdTV;
     private TextView mUserNumTV;
     private Toolbar mToolbar;
@@ -32,7 +34,6 @@ public class UserSetActivity extends BaseActivity<UserSetPresenter> implements V
     private Button mExitBtn;
     private DaoSession mDaoSession;
     private UserInforBean mUserBean;
-    private ImageView mChangeScreat;
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -79,11 +80,11 @@ public class UserSetActivity extends BaseActivity<UserSetPresenter> implements V
             }
         });
         mExitBtn.setOnClickListener(this);
-        mChangeScreat.setOnClickListener(this);
+        mChangePasswordLayout.setOnClickListener(this);
     }
 
     private void findView() {
-        mChangeScreat = findViewById(R.id.iv_change_screat);
+        mChangePasswordLayout = findViewById(R.id.layout_change_password);
         mRoleIdTV = findViewById(R.id.tv_role_id);
         mUserNumTV=findViewById(R.id.tv_user_num);
         mExitBtn=findViewById(R.id.btn_set_exit);
@@ -104,7 +105,7 @@ public class UserSetActivity extends BaseActivity<UserSetPresenter> implements V
                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent);
                 break;
-            case R.id.iv_change_screat:
+            case R.id.layout_change_password:
                 intent = new Intent(UserSetActivity.this,ChangePasswordActivity.class);
                 intent.putExtra("user_num",mUserNumTV.getText().toString());
                 startActivity(intent);

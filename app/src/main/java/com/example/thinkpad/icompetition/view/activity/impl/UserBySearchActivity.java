@@ -16,6 +16,7 @@ import com.example.thinkpad.icompetition.model.entity.search.IsConcernRoot;
 import com.example.thinkpad.icompetition.model.entity.search.UsersBean;
 import com.example.thinkpad.icompetition.presenter.impl.UserBySearchPresenter;
 import com.example.thinkpad.icompetition.util.NetWorkHelper;
+import com.example.thinkpad.icompetition.util.ShowReturnLoginUtil;
 import com.example.thinkpad.icompetition.view.activity.i.IUserBySearchActivity;
 import com.example.thinkpad.icompetition.view.widget.AsyncImageView;
 
@@ -173,9 +174,8 @@ public class UserBySearchActivity extends BaseActivity<UserBySearchPresenter> im
         switch (v.getId()) {
             case R.id.btn_user_concern:
                 if(((IcompetitionApplication)getApplication()).getToken()==null||((IcompetitionApplication)getApplication()).getToken().equals("")){
-                    intent = new Intent(UserBySearchActivity.this,LoginActivity.class);
-                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-                    startActivity(intent);
+                    ShowReturnLoginUtil showReturnLoginUtil = new ShowReturnLoginUtil(this);
+                    showReturnLoginUtil.show();//因为没有登陆所以回到登陆界面
                 }else {
                     changeConcernState();
                 }

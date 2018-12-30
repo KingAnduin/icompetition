@@ -186,11 +186,12 @@ public class InterstsSelectActivity extends BaseActivity<InterstsSelectActivityP
                     }
                 }
             });
+
             button.setText(userInterestList.get(i));
             button.setTextColor(getResources().getColor(R.color.white));
             GridLayout.LayoutParams lp = new GridLayout.LayoutParams(GridLayout.spec(i/2),GridLayout.spec(i%2));
             lp.height =dip2px(this,80);
-            lp.width = dip2px(this,80);
+            lp.width = dip2px(this,80); 
             if (i%2==0){
                 lp.setMargins(0,dip2px(this,10),dip2px(this,60),0);
                 button.setLayoutParams(lp);

@@ -7,6 +7,7 @@ import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.thinkpad.icompetition.IcompetitionApplication;
@@ -30,6 +31,10 @@ import io.rong.imageloader.core.display.FadeInBitmapDisplayer;
  * created by a’su's
  */
 public class UserInforActivity extends BaseActivity<UserInforPresenter> implements IBaseActivity,IUserInforActivity,View.OnClickListener {
+    private LinearLayout mHeadImageLayout;
+    private LinearLayout mNameLayout;
+    private LinearLayout mSexLayout;
+    private LinearLayout mBirthdayLayout;
     private DisplayImageOptions options;
     private TextView mToolbarTitleTV;
     private TextView mUserNameTV;
@@ -39,10 +44,6 @@ public class UserInforActivity extends BaseActivity<UserInforPresenter> implemen
     private Toolbar mToolbar;
     private DaoSession mDaoSession;
     private UserInforBean mUserBean;
-    private ImageView mHeadImageToEditInforIV;
-    private ImageView mNameToEditInforIV;
-    private ImageView mSexToEditInforIV;
-    private ImageView mBirthdayToEditInforIV;
     private ImageLoader imageLoader = ImageLoader.getInstance();
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -96,10 +97,10 @@ public class UserInforActivity extends BaseActivity<UserInforPresenter> implemen
                 finish();
             }
         });
-        mHeadImageToEditInforIV.setOnClickListener(this);
-        mNameToEditInforIV.setOnClickListener(this);
-        mSexToEditInforIV.setOnClickListener(this);
-        mBirthdayToEditInforIV.setOnClickListener(this);
+        mHeadImageLayout.setOnClickListener(this);
+        mNameLayout.setOnClickListener(this);
+        mSexLayout.setOnClickListener(this);
+        mBirthdayLayout.setOnClickListener(this);
     }
 
     @Override
@@ -110,10 +111,10 @@ public class UserInforActivity extends BaseActivity<UserInforPresenter> implemen
     }
 
     private void findView() {
-        mHeadImageToEditInforIV=findViewById(R.id.iv_headimage_toeditinfor);
-        mNameToEditInforIV=findViewById(R.id.iv_name_toeditinfor);
-        mSexToEditInforIV=findViewById(R.id.iv_sex_toeditinfor);
-        mBirthdayToEditInforIV=findViewById(R.id.iv_birthday_toeditinfor);
+        mHeadImageLayout=findViewById(R.id.layout_headimage);
+        mNameLayout=findViewById(R.id.layout_name);
+        mSexLayout=findViewById(R.id.layout_sex);
+        mBirthdayLayout=findViewById(R.id.layout_birthday);
         mUserNameTV=findViewById(R.id.tv_user_name);
         mUserSexTV=findViewById(R.id.tv_user_sex);
         mUserBirthday=findViewById(R.id.tv_user_birthday);
@@ -148,16 +149,16 @@ public class UserInforActivity extends BaseActivity<UserInforPresenter> implemen
         Intent intent = new Intent(UserInforActivity.this,EditUserInforActivity.class);
         intent.putExtra("userinfor",mUserBean);
         switch (v.getId()){
-            case R.id.iv_headimage_toeditinfor:
+            case R.id.layout_headimage:
                 startActivityForResult(intent,50);
                 break;
-            case R.id.iv_name_toeditinfor:
+            case R.id.layout_name:
                 startActivityForResult(intent,50);
                 break;
-            case R.id.iv_sex_toeditinfor:
+            case R.id.layout_sex:
                 startActivityForResult(intent,50);
                 break;
-            case R.id.iv_birthday_toeditinfor:
+            case R.id.layout_birthday:
                 startActivityForResult(intent,50);
                 break;
         }

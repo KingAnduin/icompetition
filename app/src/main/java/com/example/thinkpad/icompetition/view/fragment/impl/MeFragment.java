@@ -16,6 +16,7 @@ import android.widget.Toast;
 import com.example.thinkpad.icompetition.IcompetitionApplication;
 import com.example.thinkpad.icompetition.R;
 import com.example.thinkpad.icompetition.model.entity.user.UserInforBean;
+import com.example.thinkpad.icompetition.util.ShowReturnLoginUtil;
 import com.example.thinkpad.icompetition.view.activity.impl.InterstsSelectActivity;
 import com.example.thinkpad.icompetition.view.activity.impl.LoginActivity;
 import com.example.thinkpad.icompetition.view.activity.impl.MyCollectionActivity;
@@ -52,16 +53,22 @@ public class MeFragment extends Fragment implements View.OnClickListener{
     private LinearLayout mUserCollectionLl;
     private LinearLayout mUserInterestLl;
     private LinearLayout mUserAttentionLl;
+    private ShowReturnLoginUtil showReturnLoginUtil;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         view=inflater.inflate(R.layout.fragment_me,container,false);
         findView();
+        initReturnLoginDialog();
         setListener();
         initDisplayImageOptions();
         judgeUserByToken();
         return view;
+    }
+
+    private void initReturnLoginDialog() {
+        showReturnLoginUtil = new ShowReturnLoginUtil(getActivity());
     }
 
     private void judgeUserByToken(){
@@ -138,40 +145,35 @@ public class MeFragment extends Fragment implements View.OnClickListener{
                 if(!TextUtils.isEmpty(((IcompetitionApplication)getActivity().getApplication()).getToken())){
                     startActivityForResult(new Intent(getActivity(), UserInforActivity.class), 100);
                 }else {
-                    startActivity(new Intent(getActivity(),LoginActivity.class));
-                    getActivity().finish();//因为没有登陆所以回到登陆界面
+                    showReturnLoginUtil.show();//因为没有登陆所以回到登陆界面
                 }
                 break;
             case R.id.iv_me_set:
                 if(!TextUtils.isEmpty(((IcompetitionApplication)getActivity().getApplication()).getToken())){
                     startActivity(new Intent(getActivity(), UserSetActivity.class));
                 }else {
-                    startActivity(new Intent(getActivity(),LoginActivity.class));
-                    getActivity().finish();//因为没有登陆所以回到登陆界面
+                    showReturnLoginUtil.show();//因为没有登陆所以回到登陆界面
                 }
                 break;
             case R.id.ll_me_attention:
                 if(!TextUtils.isEmpty(((IcompetitionApplication)getActivity().getApplication()).getToken())){
                     startActivity(new Intent(getActivity(), MyFocusActivity.class));
                 }else {
-                    startActivity(new Intent(getActivity(),LoginActivity.class));
-                    getActivity().finish();//因为没有登陆所以回到登陆界面
+                    showReturnLoginUtil.show();//因为没有登陆所以回到登陆界面
                 }
                 break;
             case R.id.ll_me_collection:
                 if(!TextUtils.isEmpty(((IcompetitionApplication)getActivity().getApplication()).getToken())){
                     startActivity(new Intent(getActivity(), MyCollectionActivity.class));
                 }else {
-                    startActivity(new Intent(getActivity(),LoginActivity.class));
-                    getActivity().finish();//因为没有登陆所以回到登陆界面
+                    showReturnLoginUtil.show();//因为没有登陆所以回到登陆界面
                 }
                 break;
             case R.id.ll_me_interest:
                 if(!TextUtils.isEmpty(((IcompetitionApplication)getActivity().getApplication()).getToken())){
                     startActivity(new Intent(getActivity(),InterstsSelectActivity.class));
                 }else {
-                    startActivity(new Intent(getActivity(),LoginActivity.class));
-                    getActivity().finish();//因为没有登陆所以回到登陆界面
+                    showReturnLoginUtil.show();//因为没有登陆所以回到登陆界面
                 }
                 break;
         }
