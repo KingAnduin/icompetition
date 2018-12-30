@@ -14,8 +14,10 @@ import android.widget.GridLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.example.thinkpad.icompetition.IcompetitionApplication;
 import com.example.thinkpad.icompetition.R;
 import com.example.thinkpad.icompetition.model.entity.Interest.Interestroot;
+import com.example.thinkpad.icompetition.model.entity.user.UserInforBean;
 import com.example.thinkpad.icompetition.presenter.impl.InterstsSelectActivityPresenter;
 import com.example.thinkpad.icompetition.util.NetWorkHelper;
 import com.example.thinkpad.icompetition.view.activity.i.IInterstsSelectActivity;
@@ -29,6 +31,10 @@ import com.nightonke.boommenu.Util;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import greendao.GreenDaoHelper;
+import greendao.gen.DaoSession;
+import greendao.gen.UserInforBeanDao;
 
 public class InterstsSelectActivity extends BaseActivity<InterstsSelectActivityPresenter> implements IInterstsSelectActivity {
     private Toolbar mToolbar;
@@ -212,8 +218,23 @@ public class InterstsSelectActivity extends BaseActivity<InterstsSelectActivityP
     @Override
     public void getUserInterestReturn(Interestroot root) {
         if (root.getCode()==200){
+            String interests = "";
             userInterestList=root.getData();
             testSelected = new int[userInterestList.size()];
+            for(int i=0;i<userInterestList.size();i++){
+                if(i!=userInterestList.size()-1){
+                    interests += userInterestList.get(i)+" ";
+                }
+                else {
+                    interests += userInterestList.get(i);
+                }
+            }
+            DaoSession daoSession = ((IcompetitionApplication)getApplication()).getDaoSession();
+            UserInforBeanDao userInforBeanDao = daoSession.getUserInforBeanDao();
+            List<UserInforBean> userInforBeanList = userInforBeanDao.loadAll();
+            UserInforBean userInforBean = userInforBeanList.get(0);
+            userInforBean.setUser_interest(interests);
+            daoSession.update(userInforBean);
             drawInterests();
         }else {
             showSnackBar(mToolbar,root.getMsg(),getMainColor());
