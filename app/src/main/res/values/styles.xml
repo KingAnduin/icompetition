@@ -16,10 +16,5 @@
         <item name="actionMenuTextColor">@color/background_white_FF</item> <!--颜色-->
         <item name="android:textSize">14sp</item> <!--字体大小-->
     </style>
-    ---------------------
-    作者：木大白易
-    来源：CSDN
-    原文：https://blog.csdn.net/aiynmimi/article/details/68491608
-    版权声明：本文为博主原创文章，转载请附上博文链接！
 
 </resources>
