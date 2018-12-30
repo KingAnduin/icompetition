@@ -9,6 +9,8 @@
     <color name="white">#fff</color>
     <color name="toolbar">#00b7ee</color>
     <color name="boomHighLight">#80FFFFFF</color>
+    <color name="app_theme">#D97D54</color>
+    <color name="interest_selected">#2682ab</color>
 
 
     <color name="background_white_FA">#FFFAFAFA</color>     <!--用于底层以上的背景-->

@@ -88,7 +88,7 @@ public class InterstsSelectActivity extends BaseActivity<InterstsSelectActivityP
         lp.setMargins(0,0,dip2px(this,20),dip2px(this,20));
         final BoomMenuButton boomMenuButton = new BoomMenuButton(this);
         boomMenuButton.setButtonEnum(ButtonEnum.TextOutsideCircle);
-        boomMenuButton.setNormalColor(getResources().getColor(R.color.toolbar));
+        boomMenuButton.setNormalColor(getResources().getColor(R.color.app_theme));
         boomMenuButton.setHighlightedColor(getResources().getColor(R.color.boomHighLight));
         if(typeList.size()-start-1>8){
             setBoomMenuType(boomMenuButton,9);
@@ -172,23 +172,24 @@ public class InterstsSelectActivity extends BaseActivity<InterstsSelectActivityP
     private void drawInterests() {
         for (int i = 0; i< userInterestList.size(); i++){
             final Button button = new Button(this);
-            button.setBackground(getDrawable(R.drawable.circle_blue));
+            button.setBackground(getDrawable(R.drawable.background_interest_circle));
             final int finalI = i;
             button.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     if(testSelected[finalI]==0) {
                         testSelected[finalI]=1;
-                        button.setBackground(getDrawable(R.drawable.circle_yellow));
+                        button.setTextColor(getResources().getColor(R.color.white));
+                        button.setBackground(getDrawable(R.drawable.background_interest_selected_circle));
                     }else {
                         testSelected[finalI]=0;
-                        button.setBackground(getDrawable(R.drawable.circle_blue));
+                        button.setTextColor(getResources().getColor(R.color.app_theme));
+                        button.setBackground(getDrawable(R.drawable.background_interest_circle));
                     }
                 }
             });
-
+            button.setTextColor(getResources().getColor(R.color.app_theme));
             button.setText(userInterestList.get(i));
-            button.setTextColor(getResources().getColor(R.color.white));
             GridLayout.LayoutParams lp = new GridLayout.LayoutParams(GridLayout.spec(i/2),GridLayout.spec(i%2));
             lp.height =dip2px(this,80);
             lp.width = dip2px(this,80); 

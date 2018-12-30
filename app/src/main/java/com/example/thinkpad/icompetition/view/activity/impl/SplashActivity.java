@@ -22,13 +22,11 @@ import java.util.TimerTask;
 public class SplashActivity extends BaseActivity{
     private Timer timer;
     private TimerTask timerTask;
-    private ImageView imageView;
     private boolean isStartMainActivity=false;
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
-        imageView=findViewById(R.id.splash_bg);
         timerTask=new TimerTask() {
             @Override
             public void run() {
