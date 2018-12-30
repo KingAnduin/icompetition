@@ -69,7 +69,7 @@ public class LoginActivity extends BaseActivity<LoginPresenter> implements ILogi
         mLoginBt =findViewById(R.id.btn_login);
         mImageView=findViewById(R.id.bg_login);
         mRegisterTV=findViewById(R.id.tv_register);
-        loadBackground();
+        //loadBackground();
     }
 
     //Glide高斯模糊加载背景图

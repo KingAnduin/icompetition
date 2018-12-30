@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
     android:orientation="vertical"
-    android:background="@drawable/loginbackground"
+    android:background="#334856"
     android:gravity="center_vertical">
     <LinearLayout
         android:layout_centerVertical="true"
@@ -21,8 +21,18 @@
                 android:layout_gravity="center_horizontal"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@mipmap/ic_login_text" />
+                android:background="@mipmap/logo_login" />
         </LinearLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="40dp"
+            android:layout_gravity="center"
+            android:text="i Competition"
+            android:textStyle="bold"
+            android:textColor="#fff"
+            android:textSize="36sp"/>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -131,14 +141,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/register_haveuser"
-                android:textColor="@color/font_black_primary"/>
+                android:textColor="#D97D54"/>
             <TextView
                 android:id="@+id/tv_register_tologin"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
                 android:text="@string/register_gotologin"
-                android:textColor="#1296db"/>
+                android:textColor="#D97D54"/>
         </LinearLayout>
     </LinearLayout>
 </LinearLayout>

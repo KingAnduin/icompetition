@@ -119,7 +119,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
-                android:textSize="@dimen/fontSizeLarge"
+                android:textSize="@dimen/fontSizeMedium"
                 android:text="@string/competition_info_url"/>
 
             <TextView
@@ -143,7 +143,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="10dp"
-                    android:textColor="#1296db"
                     android:text="@string/competition_info_publish"/>
                 <View
                     android:layout_width="match_parent"

@@ -4,10 +4,10 @@
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
     <color name="main_bottom_tab_textcolor_normal">#999999</color>
-    <color name="main_bottom_tab_textcolor_selected">#1296db</color>
-    <color name="icompetition_color">#1296db</color>
+    <color name="main_bottom_tab_textcolor_selected">#D97D54</color>
+    <color name="icompetition_color">#D97D54</color>
     <color name="white">#fff</color>
-    <color name="toolbar">#00b7ee</color>
+    <color name="toolbar">#D97D54</color>
     <color name="boomHighLight">#80FFFFFF</color>
     <color name="app_theme">#D97D54</color>
     <color name="interest_selected">#2682ab</color>
