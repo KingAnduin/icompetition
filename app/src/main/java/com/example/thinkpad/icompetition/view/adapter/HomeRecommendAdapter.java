@@ -40,7 +40,7 @@ public class HomeRecommendAdapter
     private List<ExamRecordItemBean> mExamRecordInfo;                   //信息
     private boolean mNoMoreData = false;                                //数据是否加载完毕
     private docItemClickListener itemClickListener;                     //item监听器
-    private int mPosition;                                              //用于记录哪一个item被点击
+    private int mPosition = 1;                                          //用于记录哪一个item被点击
 
     public HomeRecommendAdapter(Context context, List<ExamRecordItemBean> info){
         mContext = context;

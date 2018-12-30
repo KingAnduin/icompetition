@@ -5,18 +5,15 @@
     android:id="@+id/cv_item_home_hot"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginStart="8dp"
-    android:layout_marginTop="8dp"
-    android:layout_marginEnd="8dp"
-    app:cardBackgroundColor="@color/background_white_FA"
-    app:cardCornerRadius="2dp"
-    app:cardElevation="2dp">
+    app:cardBackgroundColor="@color/background_white_FA">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
         android:orientation="horizontal">
 
         <TextView
@@ -26,28 +23,36 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:textSize="@dimen/fontSizeMedium"
+            android:textColor="#ff9900"
             android:text="1"/>
 
         <TextView
             android:id="@+id/tv_item_home_hot_title"
-            android:layout_weight="4"
+            android:layout_weight="5"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:textSize="@dimen/fontSizeMedium"
+            android:textSize="@dimen/fontSizeSmall"
             android:textColor="@color/font_black_primary"
             android:text="有哪些常见的道德绑架 有哪些常见的道德绑架 有哪些常见的道德绑架 有哪些常见的道德绑架"/>
 
         <ImageView
             android:id="@+id/iv_item_home_hot_photo"
-            android:layout_weight="2"
-            android:layout_width="96dp"
-            android:layout_height="96dp"
-            android:layout_marginStart="10dp"
+            android:layout_weight="3"
+            android:layout_width="0dp"
+            android:layout_height="66dp"
+            android:layout_marginStart="5dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginTop="8dp"
             android:src="@drawable/infor"
             tools:ignore="ContentDescription"/>
 
 
     </LinearLayout>
+
+    <View
+        android:layout_height="1px"
+        android:layout_width="match_parent"
+        android:background="#C9C9C9" />
 
 </android.support.v7.widget.CardView>

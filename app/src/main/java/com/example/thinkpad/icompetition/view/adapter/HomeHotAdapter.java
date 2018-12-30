@@ -82,7 +82,7 @@ public class HomeHotAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         if(viewType == FOOT){
             return new HomeHotAdapter.FootViewHolder(mLayoutInflater.inflate(R.layout.item_typefoot, parent, false));
         }
-        return new HomeHotAdapter.BodyViewHolder(mLayoutInflater.inflate(R.layout.item_home_exam, parent, false));
+        return new HomeHotAdapter.BodyViewHolder(mLayoutInflater.inflate(R.layout.item_home_hot, parent, false));
 
     }
 
@@ -125,83 +125,38 @@ public class HomeHotAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
      */
     public class BodyViewHolder extends RecyclerView.ViewHolder{
         private CardView mItemCv;
-        private ImageView mPhotoIv;
-        private TextView mIsStartTv;            //正在报名 / 报名结束
-        private TextView mDeadlineTv;           //离报名截止时间
+        private ImageView mPhotoIv;             //比赛图片
         private TextView mTitleTv;              //比赛标题
-        private TextView mStartTimeTv;          //报名时间
-        private TextView mExamTimeTv;           //比赛时间
-        //private TextView mOrganizerTv;          //主办方
+        private TextView mRankTv;               //名次
 
         public BodyViewHolder(View itemView) {
             super(itemView);
-            mItemCv = itemView.findViewById(R.id.cv_item_home_list);
-            mPhotoIv = itemView.findViewById(R.id.iv_item_home_list_photo);
-            mIsStartTv = itemView.findViewById(R.id.tv_item_home_list_is_start);
-            //字体加粗
-            TextPaint tp1 = mIsStartTv.getPaint();
-            tp1.setFakeBoldText(true);
-            mDeadlineTv = itemView.findViewById(R.id.tv_item_home_list_deadline);
-            mTitleTv = itemView.findViewById(R.id.tv_item_home_list_title);
+            mItemCv = itemView.findViewById(R.id.cv_item_home_hot);
+            mPhotoIv = itemView.findViewById(R.id.iv_item_home_hot_photo);
+            mTitleTv = itemView.findViewById(R.id.tv_item_home_hot_title);
+            mRankTv = itemView.findViewById(R.id.tv_item_home_hot_num);
             //字体加粗
             TextPaint tp = mTitleTv.getPaint();
             tp.setFakeBoldText(true);
-            mStartTimeTv = itemView.findViewById(R.id.tv_item_home_list_start_time);
-            mExamTimeTv = itemView.findViewById(R.id.tv_item_home_list_exam_time);
-            //mOrganizerTv = itemView.findViewById(R.id.tv_item_home_list_organizer);
         }
 
         //填写数据
         public void setDate(int position){
             ExamRecordItemBean itemBean = mExamRecordInfo.get(position);
-            String[] signUpStart = itemBean.getCom_signupstart().split(" ");
-            String[] signUpEnd = itemBean.getCom_signupend().split(" ");
-            String signUpTime = signUpStart[0] + " -- " + signUpEnd[0];
-            String[] examStart = itemBean.getCom_starttime().split(" ");
-            String[] examEnd = itemBean.getCom_endtime().split(" ");
-            String examTime = examStart[0] + " -- " + examEnd[0];
 
             //设置字体颜色
-            SimpleDateFormat format = new SimpleDateFormat("yyyy.MM.dd");
-            Date curDate = new Date(System.currentTimeMillis());
-            String curDates = format.format(curDate);
-            DateCount dateCount = new DateCount();
-            Long counts = dateCount.count(curDates, signUpEnd[0], "yyyy.MM.dd");
-            if(counts > 0){
-                mIsStartTv.setText(R.string.item_home_list_is_start);
-                mIsStartTv.setTextColor(Color.GREEN);
-                mDeadlineTv.setText(formatSpannableString(mContext, mContext.getString(R.string.item_home_list_deadline), String.valueOf(counts)));
-            }else {
-                mIsStartTv.setText(R.string.item_home_list_started);
-                mIsStartTv.setTextColor(Color.RED);
-                mDeadlineTv.setText(R.string.item_home_list_is_end);
+            mPosition = position + 1;
+            mRankTv.setText(String.valueOf(mPosition));
+            if(mPosition <= 3){
+                mRankTv.setTextColor(Color.RED);
             }
-
             //加载图片
             String imageUrl = itemBean.getCom_picture();
             if (!imageUrl.equals("")){
                 Glide.with(mContext).load(imageUrl).centerCrop().into(mPhotoIv);
             }
+
             mTitleTv.setText(itemBean.getCom_title());
-            mStartTimeTv.setText(formatSpannableString(mContext, mContext.getString(R.string.item_home_list_time_sign_up), signUpTime));
-            mExamTimeTv.setText(formatSpannableString(mContext, mContext.getString(R.string.item_home_list_time_exam), examTime));
-            //mOrganizerTv.setText(formatSpannableString(mContext, mContext.getString(R.string.item_home_list_organizer), itemBean.getCom_sponsor()));
-
-
-        }
-
-        private SpannableString formatSpannableString(Context context, String title, String content) {
-            if (content == null) {
-                content = "";
-            }
-            SpannableString result = new SpannableString(String.format(title, content));
-            ForegroundColorSpan contentSpan = new ForegroundColorSpan(
-                    ContextCompat.getColor(context, R.color.font_black_primary));
-            result.setSpan(contentSpan,
-                    result.length() - content.length(),
-                    result.length(),
-                    Spanned.SPAN_EXCLUSIVE_INCLUSIVE);
-            return result;
         }
 
     }
