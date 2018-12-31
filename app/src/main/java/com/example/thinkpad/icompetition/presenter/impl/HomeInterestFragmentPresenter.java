@@ -36,7 +36,7 @@ public class HomeInterestFragmentPresenter
                     mView.PagingQueryHomeInterestResponse(event.getRoot());
                     break;
                 case HomeInterestEvent.GET_TYPE_FAIL:
-                    mView.showErrorMsg(event.getRoot());
+                    mView.failBecauseNotNetworkReturn(what);
                     //mView.failBecauseNotNetworkReturn(what);
                     break;
             }

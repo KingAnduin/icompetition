@@ -2,6 +2,7 @@ package com.example.thinkpad.icompetition.view.fragment.impl;
 
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.NonNull;
@@ -76,7 +77,7 @@ public abstract class BaseFragment<P extends BaseFragmentPresenter> extends Frag
      */
     public void showSnackBar(View view, String str)
     {
-        int backgroundColor = -10046724;
+        int backgroundColor = Color.parseColor("#D97D54");
         Snackbar snackbar= Snackbar.make(view, str, Snackbar.LENGTH_SHORT);
         setSnackbarColor(snackbar,backgroundColor);
         snackbar.show();

@@ -196,7 +196,7 @@ public abstract class BaseActivity<T extends BasePresenter & IBasePresenter>
      * @return 主题色
      */
     public int getMainColor(){
-        int mainColor = Color.parseColor("#00b7ee");
+        int mainColor = Color.parseColor("#D97D54");
         return mainColor;
     }
 
