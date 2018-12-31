@@ -202,7 +202,6 @@ public class SearchResultAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             Date curDate = new Date(System.currentTimeMillis());
             String curDates = format.format(curDate);
             DateCount dateCount = new DateCount();
-            Log.d("hjg", "setDate: "+curDates + "  "+signUpEnd[0]);
             Long counts = dateCount.count(curDates, signUpEnd[0], "yyyy.MM.dd");
             if(counts > 0){
                 mDeadlineTv.setText(formatSpannableString(context, context.getString(R.string.item_home_list_deadline), String.valueOf(counts)));

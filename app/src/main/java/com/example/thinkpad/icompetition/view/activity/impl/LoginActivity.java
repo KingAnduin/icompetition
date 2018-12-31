@@ -193,7 +193,6 @@ public class LoginActivity extends BaseActivity<LoginPresenter> implements ILogi
         editor.putString("user_login_pwd",mUserPassWordEt.getText().toString());
         editor.commit();
         startActivity(new Intent(LoginActivity.this,MainActivity.class));
-        //Log.d("LYactivity", "count"+((IcompetitionApplication) ActivityManager.getActivityManager() );
         finish();
     }
 

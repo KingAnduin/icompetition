@@ -33,7 +33,6 @@ public class HomeInterestModel extends BaseFragmentModel<HomeInterestEvent> impl
                 HomeInterestEvent event = new HomeInterestEvent();
                 Gson gson = new Gson();
                 ExamRecordRoot recordRoot = gson.fromJson(jsonBody, ExamRecordRoot.class);
-                Log.d("hjg", "onSuccess: " + recordRoot);
                 if(recordRoot!=null && recordRoot.getCode() != 0){
                     event.setWhat(HomeInterestEvent.GET_TYPE_OK);
                     event.setRoot(recordRoot);

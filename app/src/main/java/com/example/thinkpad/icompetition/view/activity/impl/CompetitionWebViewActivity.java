@@ -38,7 +38,6 @@ public class CompetitionWebViewActivity extends AppCompatActivity {
 
     private void initView(){
         progressBar= findViewById(R.id.progressbar);//进度条
-        Log.d("hjg", "initView: "+url);
         webView = findViewById(R.id.webview);
         webView.loadUrl(url);
         webView.setWebChromeClient(webChromeClient);

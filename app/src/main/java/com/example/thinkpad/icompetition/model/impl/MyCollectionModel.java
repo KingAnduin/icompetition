@@ -30,7 +30,6 @@ public class MyCollectionModel extends BaseModel
         Callback callback = new CallbackIntercept() {
             @Override
             public void onSuccess(Call call, String jsonBody) {
-                //Log.d("hjg", "onSuccess: "+jsonBody);
                 Gson gson = new Gson();
                 ExamRecordRoot root = gson.fromJson(jsonBody, ExamRecordRoot.class);
                 if(root != null){

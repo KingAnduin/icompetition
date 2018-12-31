@@ -147,7 +147,6 @@ public class EditUserInforActivity extends BaseActivity<EditUserInforPresenter> 
     @Override
     public void getUserInforReturn(UserInforRoot root) {
         dismissDialog();
-        Log.d("ly", "本地用户数据修改成功");
         setResult(100);
         finish();//网络获取个人信息并存入数据库后将activity弹出栈
     }
@@ -254,7 +253,6 @@ public class EditUserInforActivity extends BaseActivity<EditUserInforPresenter> 
                     startPhotoZoom(croppedImage, tempUri); // 开始对图片进行裁剪处理
                     break;
                 case CHOOSE_PICTURE:
-                    Log.d("ql", "onActivityResult1: " + data.getData());
                     croppedImage = Uri.fromFile(croppedImageFile);
                     startPhotoZoom(croppedImage, data.getData()); // 开始对图片进行裁剪处理
                     break;

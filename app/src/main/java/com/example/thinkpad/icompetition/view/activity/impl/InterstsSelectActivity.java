@@ -223,7 +223,6 @@ public class InterstsSelectActivity extends BaseActivity<InterstsSelectActivityP
         if (root.getCode()==200){
             String interests = "";
             userInterestList=root.getData();
-            //Log.d("hjg", "getUserInterestReturn: " + root.getData());
             testSelected = new int[userInterestList.size()];
             for(int i=0;i<userInterestList.size();i++){
                 if(i!=userInterestList.size()-1){

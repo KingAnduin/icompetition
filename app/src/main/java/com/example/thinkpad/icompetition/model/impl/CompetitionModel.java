@@ -1,7 +1,6 @@
 package com.example.thinkpad.icompetition.model.impl;
 
 import android.os.Handler;
-import android.util.Log;
 
 import com.example.thinkpad.icompetition.model.entity.collection.CollectionRoot;
 import com.example.thinkpad.icompetition.model.entity.collection.IsCollectionRoot;

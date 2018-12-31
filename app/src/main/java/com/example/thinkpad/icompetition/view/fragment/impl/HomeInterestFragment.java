@@ -150,7 +150,6 @@ public class HomeInterestFragment
     public void refreshData() {
         //更新用户兴趣
         initFocus();
-        Log.d("hjg", "refreshData: " + userInterest);
         mNoMoreData = false;
         mCurrentPage = 1;
         mInfo = null;

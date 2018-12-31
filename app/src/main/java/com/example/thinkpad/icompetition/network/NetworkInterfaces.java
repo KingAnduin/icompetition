@@ -62,7 +62,6 @@ public class NetworkInterfaces {
      * @param user_pwd 密码
      */
     public void userLogIn(Callback callback, String user_num, String user_pwd){
-        //Log.d("hjg", "userLogIn: "+user_num+ "  " +user_pwd);
         ArrayMap<String, String> param = new ArrayMap<>();
         param.put("user_num", user_num);
         param.put("user_pwd", user_pwd);

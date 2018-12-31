@@ -54,7 +54,6 @@ public class LoginModel extends BaseModel implements ILoginModel {
         Callback callback = new CallbackIntercept() {
             @Override
             public void onSuccess(Call call, String jsonBody) {
-                Log.d("lyy", "onSuccess: "+jsonBody);
                 Gson gson = new Gson();
                 UserInforRoot root = gson.fromJson(jsonBody,UserInforRoot.class);
                 if(root!=null){

@@ -29,9 +29,7 @@ public class RegisterModel extends BaseModel implements IRegisterModel {
         Callback callback = new CallbackIntercept() {
             @Override
             public void onSuccess(Call call, String jsonBody) {
-                Log.d("hjg666", "onSuccess: "+jsonBody);
                 RegisterEvent event =new RegisterEvent();
-                Log.d("ly  ",jsonBody);
                 Gson gson = new Gson();
                 RegisterRoot root = gson.fromJson(jsonBody,RegisterRoot.class);
                 if(root!=null){
