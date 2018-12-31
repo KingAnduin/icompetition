@@ -3,6 +3,7 @@ package com.example.thinkpad.icompetition.view.activity.impl;
 import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.ResolveInfo;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -16,7 +17,9 @@ import android.view.View;
 import android.webkit.WebView;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.example.thinkpad.icompetition.IcompetitionApplication;
@@ -34,6 +37,8 @@ import com.example.thinkpad.icompetition.view.activity.i.IBaseActivity;
 import com.example.thinkpad.icompetition.view.activity.i.ICompetitionActivity;
 import com.example.thinkpad.icompetition.view.widget.AsyncImageView;
 import com.example.thinkpad.icompetition.view.widget.Share;
+
+import java.util.List;
 
 import io.rong.imageloader.core.DisplayImageOptions;
 import io.rong.imageloader.core.ImageLoader;
@@ -53,6 +58,7 @@ public class CompetitionInfoActivity
     private DisplayImageOptions options;
 
     private ExamRecordItemBean mItemBean;               //竞赛信息
+    private RelativeLayout mFatherRtl;
     private ImageView mExamPhotoIv;                    //比赛图片
     private TextView mTitleTv;                          //竞赛标题
     private TextView mOrganizerTv;                      //主办方
@@ -82,6 +88,10 @@ public class CompetitionInfoActivity
         setDate();
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+    }
 
     private void initReturnLoginDialog() {
         showReturnLoginUtil = new ShowReturnLoginUtil(this);
@@ -108,6 +118,7 @@ public class CompetitionInfoActivity
 
 
     private void findView() {
+        mFatherRtl = findViewById(R.id.rtl_competition);
         mExamPhotoIv = findViewById(R.id.com_info_photo);
         mTitleTv = findViewById(R.id.com_info_title);
         mOrganizerTv = findViewById(R.id.com_info_organizer);
@@ -259,7 +270,13 @@ public class CompetitionInfoActivity
                 Intent intents = new Intent();
                 intents.setData(Uri.parse(mUrlTv.getText().toString()));//Url 就是你要打开的网址
                 intents.setAction(Intent.ACTION_VIEW);
-                startActivity(intents); //启动浏览器
+                List<ResolveInfo> list = getPackageManager().queryIntentActivities(intents, 0);
+                if(list.size() > 0){
+                    startActivity(intents); //启动浏览器
+                }else {
+                    Toast.makeText(this, "未识别到浏览器", Toast.LENGTH_SHORT).show();
+                }
+
                 break;
 
 
@@ -293,6 +310,7 @@ public class CompetitionInfoActivity
     @Override
     public void addCollectionResponse(CollectionRoot root) {
         if(root.getCode() == 200){
+            Toast.makeText(this, "收藏成功", Toast.LENGTH_SHORT).show();
             mIsCollection = Boolean.TRUE;
             changeIcon(1, Boolean.TRUE);
         }else {
@@ -304,6 +322,7 @@ public class CompetitionInfoActivity
     @Override
     public void cancelCollectionResponse(CollectionRoot root) {
         if(root.getCode() == 200){
+            Toast.makeText(this, "已取消收藏", Toast.LENGTH_SHORT).show();
             mIsCollection = Boolean.FALSE;
             changeIcon(1, Boolean.FALSE);
         }else if(root.getCode() == 1){
@@ -318,6 +337,7 @@ public class CompetitionInfoActivity
         if(root.getCode() == 200){
             mIsAttention = Boolean.TRUE;
             changeIcon(2, Boolean.TRUE);
+            Toast.makeText(this, "关注成功", Toast.LENGTH_SHORT).show();
         }else {
             showSnackBar(mAttentionIv, getResources().getString(R.string.request_fail) + root.getMsg(), getMainColor());
         }
@@ -326,6 +346,7 @@ public class CompetitionInfoActivity
     @Override
     public void cancelAttentionResponse(MyFocusRoot root) {
         if(root.getCode() == 200){
+            Toast.makeText(this, "已取消关注", Toast.LENGTH_SHORT).show();
             mIsAttention = Boolean.FALSE;
             changeIcon(2, Boolean.FALSE);
         }else if(root.getCode() == 1){

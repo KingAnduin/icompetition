@@ -11,6 +11,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.example.thinkpad.icompetition.R;
 import com.example.thinkpad.icompetition.model.entity.exam.ExamRecordItemBean;
@@ -55,6 +56,7 @@ public class HomeRecommendFragment
 
         initView();
         setViewListener();
+        refreshData();
         return rootView;
 
     }
@@ -62,7 +64,7 @@ public class HomeRecommendFragment
     @Override
     public void onStart() {
         super.onStart();
-        refreshData();
+        //refreshData();
     }
 
     @Override
@@ -75,7 +77,9 @@ public class HomeRecommendFragment
         if(NetWorkHelper.isNetworkAvailable(getActivity())){
             mPresenter.getRecommendInfo(page_no, page_size);
         }else {
-            showSnackBar(mRecyclerView,getString(R.string.not_have_network));
+            Toast.makeText(getActivity(), getString(R.string.not_have_network), Toast.LENGTH_SHORT).show();
+            //showSnackBar(mRecyclerView,getString(R.string.not_have_network));
+
         }
     }
 

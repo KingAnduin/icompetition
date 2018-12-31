@@ -12,6 +12,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.example.thinkpad.icompetition.model.entity.exam.ExamRecordItemBean;
 import com.example.thinkpad.icompetition.model.entity.exam.ExamRecordRoot;
@@ -55,14 +56,17 @@ public class HomeHotsFragment extends BaseFragment<HomeHotsFragmentPresenter>
 
         initView();
         setViewListener();
+        refreshData();
         return rootView;
     }
 
     @Override
     public void onStart() {
         super.onStart();
-        refreshData();
+        //refreshData();
     }
+
+
 
     @Override
     protected HomeHotsFragmentPresenter getPresenter() {
@@ -74,7 +78,8 @@ public class HomeHotsFragment extends BaseFragment<HomeHotsFragmentPresenter>
         if(NetWorkHelper.isNetworkAvailable(getActivity())){
             mPresenter.getHotsInfo(page_no, page_size);
         }else{
-            showSnackBar(mRecyclerView,getString(R.string.not_have_network));
+            Toast.makeText(getActivity(), getString(R.string.not_have_network), Toast.LENGTH_SHORT).show();
+            //showSnackBar(mRecyclerView,getString(R.string.not_have_network));
         }
 
     }

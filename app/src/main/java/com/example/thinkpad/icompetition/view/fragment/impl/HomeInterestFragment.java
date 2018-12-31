@@ -13,6 +13,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import com.example.thinkpad.icompetition.IcompetitionApplication;
 import com.example.thinkpad.icompetition.R;
@@ -66,13 +67,14 @@ public class HomeInterestFragment
         initFocus();
         initView();
         setViewListener();
+        refreshData();
         return rootView;
     }
 
     @Override
     public void onStart() {
         super.onStart();
-        refreshData();
+        //refreshData();
     }
 
     //获取用户兴趣
@@ -208,7 +210,9 @@ public class HomeInterestFragment
         if(NetWorkHelper.isNetworkAvailable(getActivity())){
             mPresenter.getTypeInfo(page_no, page_size, type);
         }else {
-            showSnackBar(mRecyclerView,getString(R.string.not_have_network));
+            Toast.makeText(getActivity(), getString(R.string.not_have_network), Toast.LENGTH_SHORT).show();
+            //showSnackBar(mRecyclerView,getString(R.string.not_have_network));
+
         }
 
     }
