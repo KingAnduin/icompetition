@@ -61,6 +61,7 @@
     <string name="item_home_list_time_sign_up">报名时间&#160;&#160;&#160;&#160;&#160;&#160;%1$s</string>
     <string name="item_home_list_time_exam">考试时间&#160;&#160;&#160;&#160;&#160;&#160;%1$s</string>
     <string name="item_home_list_organizer">主办方&#160;&#160;&#160;&#160;&#160;&#160;%1$s</string>
+    <string name="item_home_list_type">类型&#160;&#160;&#160;&#160;&#160;&#160;%1$s</string>
     <string name="item_home_list_level">国家级比赛  全国参与</string>
 
     <!-- 竞赛详细信息 -->
