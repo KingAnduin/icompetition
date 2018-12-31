@@ -19,6 +19,7 @@ import com.example.thinkpad.icompetition.R;
 import com.example.thinkpad.icompetition.model.entity.exam.ExamRecordItemBean;
 import com.example.thinkpad.icompetition.model.entity.exam.ExamRecordRoot;
 import com.example.thinkpad.icompetition.model.entity.user.UserInforBean;
+import com.example.thinkpad.icompetition.util.NetWorkHelper;
 import com.example.thinkpad.icompetition.view.activity.i.IBaseActivity;
 import com.example.thinkpad.icompetition.view.activity.impl.CompetitionInfoActivity;
 import com.example.thinkpad.icompetition.view.adapter.HomeInterestAdapter;
@@ -200,20 +201,16 @@ public class HomeInterestFragment
         });
     }
 
-    /**
-     * 用于网络请求错误时打印信息
-     *
-     * @param root .
-     */
-    public void showErrorMsg(ExamRecordRoot root) {
-        showSnackBar(mRecyclerView, root.getMsg());
-    }
-
 
     //分页查询
     @Override
     public void getTypeInfo(int page_no, int page_size, String type) {
-        mPresenter.getTypeInfo(page_no, page_size, type);
+        if(NetWorkHelper.isNetworkAvailable(getActivity())){
+            mPresenter.getTypeInfo(page_no, page_size, type);
+        }else {
+            showSnackBar(mRecyclerView,getString(R.string.not_have_network));
+        }
+
     }
 
     //分页查询的回调

@@ -16,6 +16,7 @@ import com.example.thinkpad.icompetition.R;
 import com.example.thinkpad.icompetition.model.entity.exam.ExamRecordItemBean;
 import com.example.thinkpad.icompetition.model.entity.exam.ExamRecordRoot;
 import com.example.thinkpad.icompetition.presenter.impl.HomeRecommendFragmentPresenter;
+import com.example.thinkpad.icompetition.util.NetWorkHelper;
 import com.example.thinkpad.icompetition.view.activity.i.IBaseActivity;
 import com.example.thinkpad.icompetition.view.activity.impl.CompetitionInfoActivity;
 import com.example.thinkpad.icompetition.view.adapter.HomeRecommendAdapter;
@@ -71,7 +72,11 @@ public class HomeRecommendFragment
 
     @Override
     public void getExamInfo(int page_no, int page_size) {
-        mPresenter.getRecommendInfo(page_no, page_size);
+        if(NetWorkHelper.isNetworkAvailable(getActivity())){
+            mPresenter.getRecommendInfo(page_no, page_size);
+        }else {
+            showSnackBar(mRecyclerView,getString(R.string.not_have_network));
+        }
     }
 
 

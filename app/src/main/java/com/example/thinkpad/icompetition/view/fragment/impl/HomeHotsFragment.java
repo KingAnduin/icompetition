@@ -16,6 +16,7 @@ import android.view.ViewGroup;
 import com.example.thinkpad.icompetition.model.entity.exam.ExamRecordItemBean;
 import com.example.thinkpad.icompetition.model.entity.exam.ExamRecordRoot;
 import com.example.thinkpad.icompetition.presenter.impl.HomeHotsFragmentPresenter;
+import com.example.thinkpad.icompetition.util.NetWorkHelper;
 import com.example.thinkpad.icompetition.view.activity.i.IBaseActivity;
 import com.example.thinkpad.icompetition.R;
 import com.example.thinkpad.icompetition.view.activity.impl.CompetitionInfoActivity;
@@ -70,7 +71,12 @@ public class HomeHotsFragment extends BaseFragment<HomeHotsFragmentPresenter>
 
     @Override
     public void getExamInfo(int page_no, int page_size) {
-        mPresenter.getHotsInfo(page_no, page_size);
+        if(NetWorkHelper.isNetworkAvailable(getActivity())){
+            mPresenter.getHotsInfo(page_no, page_size);
+        }else{
+            showSnackBar(mRecyclerView,getString(R.string.not_have_network));
+        }
+
     }
 
     @Override

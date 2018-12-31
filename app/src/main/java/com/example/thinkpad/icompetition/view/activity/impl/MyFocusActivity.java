@@ -19,6 +19,7 @@ import com.example.thinkpad.icompetition.model.entity.focus.MyFocusRoot;
 import com.example.thinkpad.icompetition.model.entity.search.UsersBean;
 import com.example.thinkpad.icompetition.model.entity.user.UserInforBean;
 import com.example.thinkpad.icompetition.presenter.impl.MyFocusPresenter;
+import com.example.thinkpad.icompetition.util.NetWorkHelper;
 import com.example.thinkpad.icompetition.view.activity.i.IBaseActivity;
 import com.example.thinkpad.icompetition.view.activity.i.IMyFocusActivity;
 import com.example.thinkpad.icompetition.view.adapter.SearchResultAdapter;
@@ -182,7 +183,12 @@ public class MyFocusActivity
 
     @Override
     public void getFocusInfo(int page_no, int page_size, String userNum) {
-        mPresenter.queryByPage(page_no, page_size, userNum);
+        if(NetWorkHelper.isNetworkAvailable(this)){
+            mPresenter.queryByPage(page_no, page_size, userNum);
+        }else{
+            showSnackBar(mRecyclerView,getString(R.string.not_have_network),getMainColor());
+        }
+
     }
 
     @Override

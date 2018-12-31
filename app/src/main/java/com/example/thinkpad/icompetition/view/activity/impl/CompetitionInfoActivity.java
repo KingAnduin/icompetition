@@ -28,6 +28,7 @@ import com.example.thinkpad.icompetition.model.entity.focus.MyFocusRoot;
 import com.example.thinkpad.icompetition.model.entity.search.IsConcernRoot;
 import com.example.thinkpad.icompetition.model.entity.user.UserInforBean;
 import com.example.thinkpad.icompetition.presenter.impl.CompetitionInfoPresenter;
+import com.example.thinkpad.icompetition.util.NetWorkHelper;
 import com.example.thinkpad.icompetition.util.ShowReturnLoginUtil;
 import com.example.thinkpad.icompetition.view.activity.i.IBaseActivity;
 import com.example.thinkpad.icompetition.view.activity.i.ICompetitionActivity;
@@ -175,8 +176,12 @@ public class CompetitionInfoActivity
             mUrlTv.setText(url);
 
             if(!TextUtils.isEmpty(((IcompetitionApplication)getApplication()).getToken())){
-                mPresenter.getIsCollection(mItemBean.getCom_id());
-                mPresenter.getIsFocus(mItemBean.getCom_publisher());
+                if(NetWorkHelper.isNetworkAvailable(this)) {
+                    mPresenter.getIsCollection(mItemBean.getCom_id());
+                    mPresenter.getIsFocus(mItemBean.getCom_publisher());
+                }else{
+                    showSnackBar(mAttentionIv,getString(R.string.not_have_network),getMainColor());
+                }
             }else {
                 changeIcon(1, Boolean.FALSE);
                 changeIcon(2, Boolean.FALSE);
@@ -202,9 +207,18 @@ public class CompetitionInfoActivity
             case R.id.com_info_attention:
                 if(!TextUtils.isEmpty(((IcompetitionApplication)getApplication()).getToken())){
                     if(mIsAttention){
-                        mPresenter.cancelFocus(mItemBean.getCom_publisher());
+                        if(NetWorkHelper.isNetworkAvailable(this)){
+                            mPresenter.cancelFocus(mItemBean.getCom_publisher());
+                        }else {
+                            showSnackBar(mAttentionIv,getString(R.string.not_have_network),getMainColor());
+                        }
+
                     }else {
-                        mPresenter.addFocus(mItemBean.getCom_publisher());
+                        if(NetWorkHelper.isNetworkAvailable(this)){
+                            mPresenter.addFocus(mItemBean.getCom_publisher());
+                        }else {
+                            showSnackBar(mAttentionIv,getString(R.string.not_have_network),getMainColor());
+                        }
                     }
                 }else {
                     //因为没有登陆所以回到登陆界面
@@ -216,9 +230,19 @@ public class CompetitionInfoActivity
             case R.id.com_info_collection:
                 if(!TextUtils.isEmpty(((IcompetitionApplication)getApplication()).getToken())){
                     if(mIsCollection){
-                        mPresenter.cancelCollection(mItemBean.getCom_id());
+                        if(NetWorkHelper.isNetworkAvailable(this)){
+                            mPresenter.cancelCollection(mItemBean.getCom_id());
+                        }else {
+                            showSnackBar(mAttentionIv,getString(R.string.not_have_network),getMainColor());
+                        }
+
                     }else {
-                        mPresenter.addCollection("",mItemBean.getCom_id());
+                        if(NetWorkHelper.isNetworkAvailable(this)){
+                            mPresenter.addCollection("",mItemBean.getCom_id());
+                        }else {
+                            showSnackBar(mAttentionIv,getString(R.string.not_have_network),getMainColor());
+                        }
+
                     }
                 }else {
                     //因为没有登陆所以回到登陆界面

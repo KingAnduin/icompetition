@@ -18,6 +18,7 @@ import com.example.thinkpad.icompetition.model.entity.exam.ExamRecordItemBean;
 import com.example.thinkpad.icompetition.model.entity.exam.ExamRecordRoot;
 import com.example.thinkpad.icompetition.model.entity.user.UserInforBean;
 import com.example.thinkpad.icompetition.presenter.impl.MyCollectionPresenter;
+import com.example.thinkpad.icompetition.util.NetWorkHelper;
 import com.example.thinkpad.icompetition.view.activity.i.IBaseActivity;
 import com.example.thinkpad.icompetition.view.activity.i.IMyCollectionActivity;
 import com.example.thinkpad.icompetition.view.adapter.MyCollectionAdapter;
@@ -142,7 +143,12 @@ public class MyCollectionActivity
 
     @Override
     public void getCollectionInfo(String userNum, int page_no, int page_size) {
-        mPresenter.queryByPage(userNum, page_no, page_size);
+        if(NetWorkHelper.isNetworkAvailable(this)) {
+            mPresenter.queryByPage(userNum, page_no, page_size);
+        }else{
+            showSnackBar(mRecyclerView,getString(R.string.not_have_network),getMainColor());
+        }
+
     }
 
     @Override
