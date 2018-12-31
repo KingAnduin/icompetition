@@ -12,6 +12,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 
 import com.example.thinkpad.icompetition.IcompetitionApplication;
 import com.example.thinkpad.icompetition.R;
@@ -39,6 +40,7 @@ public class HomeInterestFragment
     private View rootView;
     private HomeInterestAdapter mAdapter = null;
     private SwipeRefreshLayout mSwipeRefreshLayout;
+    private LinearLayout notFindLl;
     private RecyclerView mRecyclerView;
     private int mRecyclerViewCurrentY = 0;
     private int mRecyclerViewCurrentX = 0;
@@ -56,7 +58,7 @@ public class HomeInterestFragment
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        rootView = inflater.inflate(R.layout.home_recommend_fragment, container, false);
+        rootView = inflater.inflate(R.layout.fragment_home_interest, container, false);
         if (mPresenter == null)
             mPresenter = getPresenter();
 
@@ -72,6 +74,7 @@ public class HomeInterestFragment
         refreshData();
     }
 
+    //获取用户兴趣
     public void initFocus(){
         mDaoSession=((IcompetitionApplication)getApplication()).getDaoSession();
         UserInforBeanDao userInforBeanDao = mDaoSession.getUserInforBeanDao();
@@ -87,8 +90,9 @@ public class HomeInterestFragment
     }
 
     public void initView() {
-        mRecyclerView = rootView.findViewById(R.id.rc_home_recommend_list);
-        mSwipeRefreshLayout = rootView.findViewById(R.id.srl_home_recommend_list);
+        notFindLl = rootView.findViewById(R.id.ll_home_interest_not_found);
+        mRecyclerView = rootView.findViewById(R.id.rc_home_interest_list);
+        mSwipeRefreshLayout = rootView.findViewById(R.id.srl_home_interest_list);
         mSwipeRefreshLayout.setColorSchemeColors(Color.BLUE, Color.GREEN, Color.RED);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
     }
@@ -226,6 +230,12 @@ public class HomeInterestFragment
                 mHandler.post(new Runnable() {
                     @Override
                     public void run() {
+                        if(mInfo.size() != 0){
+                            notFindLl.setVisibility(View.GONE);
+                        }else {
+                            notFindLl.setVisibility(View.VISIBLE);
+                        }
+
                         if (mSwipeRefreshLayout.isRefreshing()) {
                             mSwipeRefreshLayout.setRefreshing(false);
                         }

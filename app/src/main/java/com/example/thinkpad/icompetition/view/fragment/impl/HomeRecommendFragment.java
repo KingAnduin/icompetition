@@ -48,7 +48,7 @@ public class HomeRecommendFragment
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
-        rootView = inflater.inflate(R.layout.home_recommend_fragment, container, false);
+        rootView = inflater.inflate(R.layout.fragment_home_recommend, container, false);
         if (mPresenter == null)
             mPresenter = getPresenter();
 

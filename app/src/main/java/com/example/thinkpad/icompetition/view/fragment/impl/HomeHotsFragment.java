@@ -16,12 +16,10 @@ import android.view.ViewGroup;
 import com.example.thinkpad.icompetition.model.entity.exam.ExamRecordItemBean;
 import com.example.thinkpad.icompetition.model.entity.exam.ExamRecordRoot;
 import com.example.thinkpad.icompetition.presenter.impl.HomeHotsFragmentPresenter;
-import com.example.thinkpad.icompetition.presenter.impl.HomeRecommendFragmentPresenter;
 import com.example.thinkpad.icompetition.view.activity.i.IBaseActivity;
 import com.example.thinkpad.icompetition.R;
 import com.example.thinkpad.icompetition.view.activity.impl.CompetitionInfoActivity;
 import com.example.thinkpad.icompetition.view.adapter.HomeHotAdapter;
-import com.example.thinkpad.icompetition.view.adapter.HomeRecommendAdapter;
 import com.example.thinkpad.icompetition.view.fragment.i.IHomeHotsFragment;
 
 import java.util.ArrayList;
@@ -50,7 +48,7 @@ public class HomeHotsFragment extends BaseFragment<HomeHotsFragmentPresenter>
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
-        rootView=inflater.inflate(R.layout.home_hots_fragment,container,false);
+        rootView=inflater.inflate(R.layout.fragment_home_hots,container,false);
         if (mPresenter == null)
             mPresenter = getPresenter();
 
