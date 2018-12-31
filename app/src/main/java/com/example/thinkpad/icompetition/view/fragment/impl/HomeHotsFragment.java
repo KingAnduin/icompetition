@@ -217,7 +217,7 @@ public class HomeHotsFragment extends BaseFragment<HomeHotsFragmentPresenter>
         mAdapter.setItemClickListener(new HomeHotAdapter.docItemClickListener() {
             @Override
             public void onClick(int position) {
-                Intent intent = new Intent(getContext(), CompetitionInfoActivity.class);
+                Intent intent = new Intent(getActivity(), CompetitionInfoActivity.class);
                 Bundle bundle = new Bundle();
                 bundle.putSerializable("item", mInfo.get(position));
                 intent.putExtras(bundle);

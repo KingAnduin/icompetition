@@ -52,7 +52,6 @@ public class CompetitionInfoActivity
     private Toolbar mToolbar;
     private DisplayImageOptions options;
 
-    private UserInforBean mUserBean;                    //用户信息
     private ExamRecordItemBean mItemBean;               //竞赛信息
     private ImageView mExamPhotoIv;                    //比赛图片
     private TextView mTitleTv;                          //竞赛标题
