@@ -36,6 +36,12 @@ public class CompetitionWebViewActivity extends AppCompatActivity {
         initView();
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        webView.destroy();
+    }
+
     private void initView(){
         progressBar= findViewById(R.id.progressbar);//进度条
         webView = findViewById(R.id.webview);
