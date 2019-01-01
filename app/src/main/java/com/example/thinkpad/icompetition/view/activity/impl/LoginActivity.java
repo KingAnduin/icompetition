@@ -23,6 +23,9 @@ import com.example.thinkpad.icompetition.presenter.impl.LoginPresenter;
 import com.example.thinkpad.icompetition.util.NetWorkHelper;
 import com.example.thinkpad.icompetition.view.activity.i.ILoginActivity;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import jp.wasabeef.glide.transformations.BlurTransformation;
 
 /**
@@ -129,7 +132,17 @@ public class LoginActivity extends BaseActivity<LoginPresenter> implements ILogi
         }
     }
 
-    //判断用户是否输入了账户和密码
+    /**
+     * 校验手机号
+     */
+    public boolean isMobile(String mobile){
+        String regExp="^((13[0-9])|(15[^4])|(166)|(17[0-8])|(18[0-9])|(19[8-9])|(147,145))\\d{8}$";
+        Pattern pattern = Pattern.compile(regExp);
+        Matcher matcher=pattern.matcher(mobile);
+        return matcher.matches();
+    }
+
+    //判断用户是否输入了账户和密码以及账号合法性
     private boolean judgeUserNumAndPassword() {
         mLoginBt.setClickable(false);
         mUserNum = mUserNameEt.getText().toString();
@@ -138,13 +151,22 @@ public class LoginActivity extends BaseActivity<LoginPresenter> implements ILogi
             showSnackBar(mLoginBt,getResources().getString(R.string.login_user_null),getMainColor());
             mLoginBt.setClickable(true);
             return false;
+        }else {
+            if(mUserPassword.isEmpty()){
+                showSnackBar(mLoginBt,getResources().getString(R.string.login_password_null),getMainColor());
+                mLoginBt.setClickable(true);
+                return false;
+            }
+            else {
+                if (!isMobile(mUserNum)){
+                    showSnackBar(mLoginBt,getResources().getString(R.string.login_usernum_is_phone),getMainColor());
+                    mLoginBt.setClickable(true);
+                    return false;
+                }else {
+                    return true;
+                }
+            }
         }
-        if(mUserPassword.isEmpty()){
-            showSnackBar(mLoginBt,getResources().getString(R.string.login_password_null),getMainColor());
-            mLoginBt.setClickable(true);
-            return false;
-        }
-        return true;
     }
 
     private void getUserInfor(){

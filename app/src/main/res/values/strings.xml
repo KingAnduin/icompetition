@@ -13,6 +13,7 @@
     <!-- 登陆 -->
     <string name="login_user_null">请输入帐号</string>
     <string name="login_password_null">请输入密码</string>
+    <string name="login_usernum_is_phone">请输入合法的账户(提示:该账户为大陆手机号码！)</string>
 
     <!--注册-->
     <string name="register_userid">请输入注册手机号</string>

@@ -180,8 +180,8 @@ public class CompetitionInfoActivity
 
 
         }else {
-            finish();
             showSnackBar(mAttentionIv, "信息显示错误", getMainColor());
+            finish();
         }
     }
 
