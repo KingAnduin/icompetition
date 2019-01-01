@@ -99,6 +99,7 @@ public abstract class BaseActivity<T extends BasePresenter & IBasePresenter>
             if (!isFinish) {
                 ActivityManager.getActivityManager().popActivity();     //将销毁的activity出栈
             }
+            System.gc();
             super.onDestroy();
         }
 

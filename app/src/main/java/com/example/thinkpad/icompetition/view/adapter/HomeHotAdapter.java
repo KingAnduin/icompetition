@@ -115,7 +115,7 @@ public class HomeHotAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         if(position == mExamRecordInfo.size()){
             return FOOT;
         }
-        return position;
+        return 1;
     }
 
 

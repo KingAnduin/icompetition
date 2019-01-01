@@ -121,7 +121,7 @@ public class HomeInterestAdapter
         if(position == mExamRecordInfo.size()){
             return FOOT;
         }
-        return position;
+        return 1;
     }
 
 

@@ -111,7 +111,7 @@ public class MyCollectionAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         if(position == mExamRecordInfo.size()){
             return FOOT;
         }
-        return position;
+        return 1;
     }
 
     /**

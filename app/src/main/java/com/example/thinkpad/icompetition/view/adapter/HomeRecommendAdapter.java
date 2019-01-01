@@ -119,7 +119,7 @@ public class HomeRecommendAdapter
         if(position == mExamRecordInfo.size()){
             return FOOT;
         }
-        return position;
+        return 1;
     }
 
 
