@@ -1,20 +1,15 @@
 package com.example.thinkpad.icompetition.view.activity.impl;
 
-import android.content.ClipboardManager;
-import android.content.Context;
+
 import android.content.Intent;
 import android.content.pm.ResolveInfo;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.text.TextPaint;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
-import android.webkit.WebView;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -22,6 +17,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.example.thinkpad.icompetition.IcompetitionApplication;
 import com.example.thinkpad.icompetition.R;
 import com.example.thinkpad.icompetition.model.entity.collection.CollectionRoot;
@@ -29,7 +25,6 @@ import com.example.thinkpad.icompetition.model.entity.collection.IsCollectionRoo
 import com.example.thinkpad.icompetition.model.entity.exam.ExamRecordItemBean;
 import com.example.thinkpad.icompetition.model.entity.focus.MyFocusRoot;
 import com.example.thinkpad.icompetition.model.entity.search.IsConcernRoot;
-import com.example.thinkpad.icompetition.model.entity.user.UserInforBean;
 import com.example.thinkpad.icompetition.presenter.impl.CompetitionInfoPresenter;
 import com.example.thinkpad.icompetition.util.NetWorkHelper;
 import com.example.thinkpad.icompetition.util.ShowReturnLoginUtil;
@@ -40,11 +35,6 @@ import com.example.thinkpad.icompetition.view.widget.Share;
 
 import java.util.List;
 
-import io.rong.imageloader.core.DisplayImageOptions;
-import io.rong.imageloader.core.ImageLoader;
-import io.rong.imageloader.core.ImageLoaderConfiguration;
-import io.rong.imageloader.core.display.FadeInBitmapDisplayer;
-
 /**
  * Created by a'su's on 2018/7/12.
  * 竞赛详情界面
@@ -54,11 +44,8 @@ public class CompetitionInfoActivity
         extends BaseActivity<CompetitionInfoPresenter>
         implements IBaseActivity ,ICompetitionActivity, View.OnClickListener {
 
-    private Toolbar mToolbar;
-    private DisplayImageOptions options;
 
     private ExamRecordItemBean mItemBean;               //竞赛信息
-    private RelativeLayout mFatherRtl;
     private ImageView mExamPhotoIv;                    //比赛图片
     private TextView mTitleTv;                          //竞赛标题
     private TextView mOrganizerTv;                      //主办方
@@ -72,7 +59,6 @@ public class CompetitionInfoActivity
     private ImageView mShareIv;                         //分享按钮
     private Button mGoToWebBtn;                         //前往官网报名按钮
 
-    private ShowReturnLoginUtil showReturnLoginUtil;
     private Boolean mIsCollection = Boolean.FALSE;      //是否已经收藏
     private Boolean mIsAttention = Boolean.FALSE;       //是否已经关注
 
@@ -88,24 +74,19 @@ public class CompetitionInfoActivity
         setDate();
     }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-    }
-
     private void initReturnLoginDialog() {
-        showReturnLoginUtil = new ShowReturnLoginUtil(this);
+        ShowReturnLoginUtil showReturnLoginUtil = new ShowReturnLoginUtil(this);
         showReturnLoginUtil.show();
     }
 
     private void initBar() {
-        mToolbar=findViewById(R.id.toolbar_main);
+        Toolbar mToolbar = findViewById(R.id.toolbar_main);
         mToolbar.setTitle("竞赛信息");
         mToolbar.setNavigationIcon(R.mipmap.back);
         mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                finish();
+                CompetitionInfoActivity.this.finish();
             }
         });
     }
@@ -118,7 +99,7 @@ public class CompetitionInfoActivity
 
 
     private void findView() {
-        mFatherRtl = findViewById(R.id.rtl_competition);
+        RelativeLayout mFatherRtl = findViewById(R.id.rtl_competition);
         mExamPhotoIv = findViewById(R.id.com_info_photo);
         mTitleTv = findViewById(R.id.com_info_title);
         mOrganizerTv = findViewById(R.id.com_info_organizer);
@@ -131,14 +112,6 @@ public class CompetitionInfoActivity
         mShareIv = findViewById(R.id.com_info_share);
         mAttentionIv = findViewById(R.id.com_info_attention);
         mGoToWebBtn = findViewById(R.id.com_info_webView);
-        this.options = new DisplayImageOptions.Builder()
-                .showImageForEmptyUri(R.mipmap.ic_me_app)
-                .showImageOnFail(R.mipmap.ic_me_app)
-                .showImageOnLoading(R.mipmap.ic_me_app)
-                .displayer(new FadeInBitmapDisplayer(300))
-                .cacheInMemory(true)
-                .cacheOnDisk(true)
-                .build();
     }
 
 
@@ -170,10 +143,18 @@ public class CompetitionInfoActivity
             //加载图片
             String imageUrl = mItemBean.getCom_picture();
             if (!imageUrl.equals("")){
-                Glide.with(getApplication()).load(imageUrl).centerCrop().into(mExamPhotoIv);
-                ImageLoader imageLoader = ImageLoader.getInstance();
-                imageLoader.init(ImageLoaderConfiguration.createDefault(this));
-                imageLoader.displayImage(imageUrl,mPublishHeadIv,options);
+                Glide.with(this)
+                        .load(imageUrl)
+                        .skipMemoryCache(true)
+                        .diskCacheStrategy(DiskCacheStrategy.NONE)
+                        .centerCrop()
+                        .into(mExamPhotoIv);
+                Glide.with(this)
+                        .load(imageUrl)
+                        .skipMemoryCache(true)
+                        .diskCacheStrategy(DiskCacheStrategy.NONE)
+                        .centerCrop()
+                        .into(mPublishHeadIv);
             }
 
             mTitleTv.setText(title);
@@ -282,7 +263,7 @@ public class CompetitionInfoActivity
 
                 //WebView
             case R.id.com_info_webView:
-                Intent intent = new Intent(getApplicationContext(), CompetitionWebViewActivity.class);
+                Intent intent = new Intent(this, CompetitionWebViewActivity.class);
                 Bundle bundle = new Bundle();
                 bundle.putSerializable("url", mUrlTv.getText().toString());
                 intent.putExtras(bundle);

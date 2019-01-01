@@ -19,7 +19,6 @@
                 android:id="@+id/com_info_photo"
                 android:layout_width="match_parent"
                 android:layout_height="120dp"
-                android:background="@drawable/infor"
                 tools:ignore="ContentDescription" />
             <TextView
                 android:id="@+id/com_info_title"
@@ -149,8 +148,7 @@
                         android:id="@+id/com_info_publish_head"
                         android:layout_margin="10dp"
                         android:layout_width="40dp"
-                        android:layout_height="40dp"
-                        android:src="@mipmap/ic_news_listview_img_loading"/>
+                        android:layout_height="40dp" />
                     <TextView
                         android:id="@+id/com_info_publish_name"
                         android:layout_gravity="center_vertical"
