@@ -56,7 +56,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:text="牵手蓝天 你我同行 环保主题摄影比赛征稿"
             android:textColor="@color/font_black_primary"
             android:textSize="@dimen/fontSizeLarge" />
 
